@@ -15,6 +15,9 @@ class CreateAtividadesComplementaresTable extends Migration
     {
         Schema::create('atividades_complementares', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('descricao', 255);
+            $table->integer('CHAtividade');
+            $table->integer('CHItem');
             $table->timestamps();
         });
     }
