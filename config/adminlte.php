@@ -108,11 +108,30 @@ return [
     */
 
     'menu' => [
-        'MENU',
+        // 'MENU',
         [
             'text'        => 'Home',
             'url'         => 'admin',
-            'icon'        => 'home',
+            'icon'        => 'university',
+        ],
+
+        [
+            'text'        => 'Atividades Complementares',
+            'url'         => 'admin',
+            'icon'        => 'graduation-cap',
+            'submenu'     => [
+                [
+                    'text' => 'Incluir nova atividade',
+                    'url'  => 'admin',
+                    'icon' => 'plus-circle',
+                ],
+
+                [
+                    'text' => 'Listar atividades',
+                    'url'  => 'admin',
+                    'icon' => 'list-ul',
+                ]
+            ]
         ]
     ],
 
