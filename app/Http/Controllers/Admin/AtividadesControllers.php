@@ -7,5 +7,7 @@ use App\Http\Controllers\Controller;
 
 class AtividadesControllers extends Controller
 {
-    //
+    public function index(){
+        return view('admin.atividades.index');
+    }
 }
