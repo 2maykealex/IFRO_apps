@@ -121,15 +121,26 @@ return [
             'icon'        => 'graduation-cap',
             'submenu'     => [
                 [
-                    'text' => 'Incluir nova atividade',
+                    'text' => 'Atividades',
                     'url'  => 'admin',
                     'icon' => 'plus-circle',
-                ],
+                    'submenu' => [
+                        
+                            [
+                                'text' => 'Incluir nova atividade',
+                                'url'  => 'admin',
+                                'icon' => 'plus-circle',
+                            ],
 
-                [
-                    'text' => 'Listar atividades',
-                    'url'  => 'activity',
-                    'icon' => 'list-ul',
+                            [
+                                'text' => 'Listar atividades',
+                                'url'  => 'admin/activity',
+                                'icon' => 'list-ul',
+                            ]
+
+                                       
+                    ],
+
                 ]
             ]
         ]
