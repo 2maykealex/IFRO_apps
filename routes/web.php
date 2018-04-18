@@ -1,8 +1,9 @@
 <?php
 
-Route::group(['middleware' => ['auth'], 'namespace' => 'Admin'], function () {
+Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    $this->get('activities', 'ActivityController@index')->name('admin.activities');    
     $this->get('activity', 'ActivityController@index')->name('admin.activity');    
-    $this->get('admin', 'AdminController@index')->name('admin.home');    
+    $this->get('/', 'AdminController@index')->name('admin.home');    
 
 });
 
