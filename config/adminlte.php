@@ -134,7 +134,7 @@ return [
 
                             [
                                 'text' => 'Listar atividades',
-                                'url'  => 'admin/activity',
+                                'url'  => 'admin/activities',
                                 'icon' => 'list-ul',
                             ]
 
