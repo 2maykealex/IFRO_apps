@@ -128,7 +128,7 @@ return [
                         
                             [
                                 'text' => 'Incluir nova atividade',
-                                'url'  => 'admin',
+                                'url'  => 'admin/activity-new',
                                 'icon' => 'plus-circle',
                             ],
 
