@@ -125,6 +125,7 @@ return [
                         'text' => 'Incluir novo aluno',
                         'url'  => 'admin/activity-new',
                         'icon' => 'plus-circle',
+                        
                     ],
 
                     [
@@ -137,6 +138,9 @@ return [
             ],
 
         ],
+
+
+        
 
         [
             'text'        => 'Atividades Complementares',
