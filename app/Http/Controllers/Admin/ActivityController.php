@@ -21,7 +21,14 @@ class ActivityController extends Controller
         
         $dataForm = $request->all();
         
-        $activities->activityNew($dataForm);
+        $response = $activities->activityNew($dataForm);
+
+        if ($response['success'])
+            return redirect()->route('admin.activities')
+                             ->with('success', $response['message']);
+
+        return redirect()->back()
+                         ->with('error', $response['message']);
         
     }
 
