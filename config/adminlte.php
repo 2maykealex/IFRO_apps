@@ -114,6 +114,29 @@ return [
             'url'         => 'admin',
             'icon'        => 'university',
         ],
+        
+        [
+            'text' => 'Alunos',
+            'url'  => 'admin',
+            'icon' => 'plus-circle',
+            'submenu' => [
+                
+                    [
+                        'text' => 'Incluir novo aluno',
+                        'url'  => 'admin/activity-new',
+                        'icon' => 'plus-circle',
+                    ],
+
+                    [
+                        'text' => 'Listar alunos',
+                        'url'  => 'admin/activities',
+                        'icon' => 'list-ul',
+                    ]
+
+                               
+            ],
+
+        ],
 
         [
             'text'        => 'Atividades Complementares',
