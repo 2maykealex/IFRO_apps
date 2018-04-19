@@ -9,7 +9,6 @@ class Activity extends Model
     public $timestamps = false;
 
     public function activityNew($dados):Array {
-        //dd($this);
 
         $this->descricao    = $dados['descricao'];
         $this->CHAtividade  = $dados['ch_activity'];
