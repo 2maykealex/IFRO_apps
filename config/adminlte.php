@@ -118,7 +118,7 @@ return [
         [
             'text' => 'Alunos',
             'url'  => 'admin',
-            'icon' => 'plus-circle',
+            'icon' => 'user',
             'submenu' => [
                 
                     [
