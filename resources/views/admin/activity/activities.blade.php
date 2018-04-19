@@ -12,6 +12,7 @@
     <!-- <h2>Listando as atividades complementares</h2> -->
 
     <div class="box-body">
+        @include('admin.includes.alerts')
         <table class="table table-bordered table-hover table-responsive">
             <thead>
                 <tr>
