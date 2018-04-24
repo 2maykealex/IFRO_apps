@@ -123,14 +123,14 @@ return [
                 
                     [
                         'text' => 'Incluir novo aluno',
-                        'url'  => 'admin/activity-new',
+                        'url'  => '#',
                         'icon' => 'plus-circle',
                         
                     ],
 
                     [
                         'text' => 'Listar alunos',
-                        'url'  => 'admin/activities',
+                        'url'  => '#',
                         'icon' => 'list-ul',
                     ]
 
@@ -139,37 +139,51 @@ return [
 
         ],
 
-
-        
-
         [
-            'text'        => 'Atividades Complementares',
-            'url'         => 'admin',
-            'icon'        => 'graduation-cap',
-            'submenu'     => [
-                [
-                    'text' => 'Atividades',
-                    'url'  => 'admin',
-                    'icon' => 'plus-circle',
-                    'submenu' => [
+            'text' => 'Coordenadores',
+            'url'  => 'admin',
+            'icon' => 'user',
+            'submenu' => [
+                
+                    [
+                        'text' => 'Incluir novo Coordenador',
+                        'url'  => '#',
+                        'icon' => 'plus-circle',
                         
-                            [
-                                'text' => 'Incluir nova atividade',
-                                'url'  => 'admin/activity-new',
-                                'icon' => 'plus-circle',
-                            ],
-
-                            [
-                                'text' => 'Listar atividades',
-                                'url'  => 'admin/activities',
-                                'icon' => 'list-ul',
-                            ]
-
-                                       
                     ],
 
-                ]
-            ]
+                    [
+                        'text' => 'Listar Coordenadores',
+                        'url'  => '#',
+                        'icon' => 'list-ul',
+                    ]
+
+                               
+            ],
+
+        ],
+
+        [
+            'text' => 'Atividades Acadêmicas',
+            'url'  => 'admin',
+            'icon' => 'graduation-cap',
+            'submenu' => [
+                
+                    [
+                        'text' => 'Incluir nova atividade',
+                        'url'  => 'admin/activity-new',
+                        'icon' => 'plus-circle',
+                    ],
+
+                    [
+                        'text' => 'Listar atividades',
+                        'url'  => 'admin/activities',
+                        'icon' => 'list-ul',
+                    ]
+
+                               
+            ],
+
         ]
     ],
 
