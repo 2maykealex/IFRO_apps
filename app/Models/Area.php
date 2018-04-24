@@ -5,9 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Area extends Model
-{   #Area = Eixo tecnológico
-    
+{
     public $timestamps = false;
 
-    
+    public function courses(){
+        return $this->hasMany(Course::class);
+    }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 }
