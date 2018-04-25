@@ -171,7 +171,7 @@ return [
                 
                     [
                         'text' => 'Incluir novo Curso',
-                        'url'  => '#',
+                        'url'  => 'admin/course-new',
                         'icon' => 'plus-circle',
                         
                     ],
