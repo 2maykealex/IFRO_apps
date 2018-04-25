@@ -12,7 +12,7 @@ class Course extends Model
     protected $fillable = ['descricao'];
 
     public function area(){
-        return $this->hasOne(Area::class);
+        return $this->belongsTo(Area::class);
         
     }
 }
