@@ -29,7 +29,7 @@ class CourseTableSeeder extends Seeder
         ]);
 
         Course::create([
-            'area_id'     => 2,
+            'area_id'     => 1,
             'name' => 'Técnico em Finanças',
             'qtSem' => 3,
             'chCourse' => 1150 ,
