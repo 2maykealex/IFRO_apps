@@ -12,7 +12,4 @@ class Area extends Model
         return $this->hasMany(Course::class);
     }
 
-    public function course(){
-        return $this->belongsTo(Course::class);
-    }
 }
