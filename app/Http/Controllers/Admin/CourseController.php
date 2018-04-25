@@ -19,7 +19,10 @@ class CourseController extends Controller
     }
 
     public function newCourse(){
-        return view('admin.course.new');
+
+        $areas = Area::all();
+
+        return view('admin.course.new', compact('areas'));
     }
 
     public function courses(){
@@ -28,5 +31,20 @@ class CourseController extends Controller
         // dd($courses);
 
         return view('admin.course.courses', compact('courses'));
+    }
+
+    public function courseStore(Request $request, Course $course){
+        
+        $dataForm = $request->all();
+        
+        $response = $course->courseNew($dataForm);  #chamando metodo na model.
+
+        if ($response['success'])
+            return redirect()->route('admin.courses')
+                             ->with('success', $response['message']);
+
+        return redirect()->back()
+                         ->with('error', $response['message']);
+        
     }
 }
