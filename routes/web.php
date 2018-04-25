@@ -4,6 +4,10 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     $this->get('area-course', 'CourseController@areaCurso')->name('admin.area.course');    
     $this->get('courses-area', 'AreaController@courses')->name('admin.courses.area');    
+    
+    
+    $this->get('course-new', 'CourseController@newCourse')->name('admin.courses');    
+    $this->get('courses', 'CourseController@courses')->name('admin.courses');    
 
     $this->post('activity-store', 'ActivityController@activityStore')->name('admin.activity.store');    
     $this->get('activity-new', 'ActivityController@newActivity')->name('admin.activity.new');    
