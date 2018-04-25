@@ -164,6 +164,30 @@ return [
         ],
 
         [
+            'text' => 'Cursos',
+            'url'  => 'admin',
+            'icon' => 'user',
+            'submenu' => [
+                
+                    [
+                        'text' => 'Incluir novo Curso',
+                        'url'  => '#',
+                        'icon' => 'plus-circle',
+                        
+                    ],
+
+                    [
+                        'text' => 'Listar Cursos',
+                        'url'  => 'admin/courses',
+                        'icon' => 'list-ul',
+                    ]
+
+                               
+            ],
+
+        ],
+
+        [
             'text' => 'Atividades Acadêmicas',
             'url'  => 'admin',
             'icon' => 'graduation-cap',
