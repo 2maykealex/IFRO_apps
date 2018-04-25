@@ -17,4 +17,16 @@ class CourseController extends Controller
         dd($course->area);
         
     }
+
+    public function newCourse(){
+        return view('admin.course.new');
+    }
+
+    public function courses(){
+        $courses = Course::with('area')->get();
+
+        // dd($courses);
+
+        return view('admin.course.courses', compact('courses'));
+    }
 }
