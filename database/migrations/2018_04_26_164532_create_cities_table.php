@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Models\State;
 
 class CreateCitiesTable extends Migration
 {
@@ -15,7 +16,9 @@ class CreateCitiesTable extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->integer('state_id')->unsigned();
+            $table->foreign('state_id')->references('id')->on('states') ;
+            $table->string('name', 100);
         });
     }
 
