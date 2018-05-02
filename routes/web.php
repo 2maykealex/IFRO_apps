@@ -4,6 +4,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     $this->get('coordinators', 'CoordinatorController@coordinators')->name('admin.coordinators');    
     $this->get('coordinator', 'CoordinatorController@coordinator')->name('admin.coordinator');    
+    // $this->get('coord-course', 'CoordinatorController@course')->name('admin.coordinator.course');    
 
 
     $this->get('area-course', 'CourseController@areaCurso')->name('admin.area.course');    

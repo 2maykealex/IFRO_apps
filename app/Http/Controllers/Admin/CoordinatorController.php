@@ -17,14 +17,16 @@ class CoordinatorController extends Controller
         dd($coordinator);
     }
 
-    public function coordinators(){
-        $coordinators = Coordinator::with('people')->get();
+    public function coordinators(){ 
+        $coordinators = Coordinator::with(['people' , 'course'])->get();
 
-        foreach ($coordinators as $coordinator){
-            echo $coordinator->person->name.'<br>';
-            echo $coordinator->person->address.'<hr>';
-        }
-        
+        // dd($coordinators);
+        return view('admin.coordinator.coordinators', compact('coordinators') );
+    }
+
+    public function course(){ 
+        $coordinators = Coordinator::with(['people' , 'course'])->get();
+
         dd($coordinators);
     }
 }

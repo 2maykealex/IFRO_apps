@@ -10,6 +10,10 @@ class Coordinator extends Model
         return $this->morphOne(Person::class, 'personable');
     }
 
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
+
     public function people(){
         return $this->morphMany(Person::class, 'personable');
     }

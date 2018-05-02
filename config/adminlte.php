@@ -154,7 +154,7 @@ return [
 
                     [
                         'text' => 'Listar Coordenadores',
-                        'url'  => '#',
+                        'url'  => 'admin/coordinators',
                         'icon' => 'list-ul',
                     ]
 
