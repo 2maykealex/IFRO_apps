@@ -15,7 +15,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nome</th>
+                    <th>Nome do coordenador</th>
                     <th>Coordena o curso</th>
                     <th>Celular</th>
                     <th>Registro no IFRO</th>
