@@ -2,6 +2,8 @@
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
+    $this->get('student', 'StudentController@student')->name('admin.student');    
+
     $this->get('coordinators', 'CoordinatorController@coordinators')->name('admin.coordinators');    
     $this->get('coordinator', 'CoordinatorController@coordinator')->name('admin.coordinator');    
     // $this->get('coord-course', 'CoordinatorController@course')->name('admin.coordinator.course');    
