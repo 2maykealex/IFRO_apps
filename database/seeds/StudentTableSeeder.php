@@ -15,7 +15,7 @@ class StudentTableSeeder extends Seeder
         Student::create([
             'course_id'    => 2,
             'person_id'    => 1,
-            'registration' => 88833399922,
+            'registration' => 987654,
         ]);
     }
 }
