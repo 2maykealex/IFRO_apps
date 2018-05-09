@@ -18,7 +18,7 @@ class CoordinatorController extends Controller
     }
 
     public function coordinators(){ 
-        $coordinators = Coordinator::with(['people' , 'course'])->get();
+        $coordinators = Coordinator::with(['person' , 'course'])->get();
 
         // dd($coordinators);
         return view('admin.coordinator.coordinators', compact('coordinators') );
