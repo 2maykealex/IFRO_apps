@@ -1,7 +1,15 @@
 <?php
 
+Route::group(['middleware' => ['auth'], 'namespace' => 'Student', 'prefix' => 'student'], function () {
+
+    $this->get('profile', 'StudentController@profile')->name('student.profile');    
+
+}); 
+
+
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
+    $this->get('students', 'StudentController@students')->name('admin.students');    
     $this->get('student', 'StudentController@student')->name('admin.student');    
 
     $this->get('coordinators', 'CoordinatorController@coordinators')->name('admin.coordinators');    

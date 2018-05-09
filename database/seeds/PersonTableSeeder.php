@@ -50,5 +50,24 @@ class PersonTableSeeder extends Seeder
 
 
         ]);
+
+        Person::create([
+            'user_id'      => '3',
+            'name'         => 'Suziani da Silva Souza',
+
+
+            'address'      => 'Rua Jacy Paraná',
+            'number'       => '2742',
+            'complement'   => 'Cond. Chico Torres, Apto 205',
+            'neighborhood' => 'Roque',
+            'zipCode'      => '76804430',
+            
+            'city_id'      => 1,
+            
+            'tel'          => '',
+            'cel'          => '69992461190',
+
+
+        ]);
     }
 }

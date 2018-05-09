@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     public function person(){
-        return $this->morphOne(Person::class, 'personable');
+        return $this->belongsTo(Person::class);
     }
+
 
     public function course(){
         return $this->belongsTo(Course::class);

@@ -130,7 +130,31 @@ return [
 
                     [
                         'text' => 'Listar alunos',
+                        'url'  => 'admin/students',
+                        'icon' => 'list-ul',
+                    ]
+
+                               
+            ],
+        ],
+
+
+        [
+            'text' => 'Alunos',
+            'url'  => 'admin',
+            'icon' => 'user',
+            'submenu' => [
+                
+                    [
+                        'text' => 'Incluir novo aluno',
                         'url'  => '#',
+                        'icon' => 'plus-circle',
+                        
+                    ],
+
+                    [
+                        'text' => 'Listar alunos',
+                        'url'  => 'admin/students',
                         'icon' => 'list-ul',
                     ]
 
@@ -207,8 +231,48 @@ return [
 
                                
             ],
+            
 
-        ]
+        ],
+
+        [
+            'text' => 'Certificados',
+            'url'  => 'admin',
+            'icon' => 'user',
+            'submenu' => [
+                
+                    [
+                        'text' => 'Incluir novo certificado',
+                        'url'  => 'admin/course-new',
+                        'icon' => 'plus-circle',
+                        
+                    ],
+
+                    [
+                        'text' => 'Listar certificados pendentes',
+                        'url'  => 'admin/courses',
+                        'icon' => 'list-ul',
+                    ],
+
+                    [
+                        'text' => 'Listar certificados aceitos',
+                        'url'  => 'admin/courses',
+                        'icon' => 'list-ul',
+                    ],
+
+                    [
+                        'text' => 'Listar certificados recusados',
+                        'url'  => 'admin/courses',
+                        'icon' => 'list-ul',
+                    ]
+
+
+                               
+            ],
+
+        ],
+
+        
     ],
 
     /*
