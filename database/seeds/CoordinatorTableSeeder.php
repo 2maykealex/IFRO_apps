@@ -17,11 +17,5 @@ class CoordinatorTableSeeder extends Seeder
             'person_id'    => 1,
             'registration' => 123456789,
         ]);
-
-        Coordinator::create([
-            'course_id'    => 3,
-            'person_id'    => 2,
-            'registration' => 456738490,
-        ]);
     }
 }

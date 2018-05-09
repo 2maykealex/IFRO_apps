@@ -14,7 +14,7 @@ class StudentTableSeeder extends Seeder
     {
         Student::create([
             'course_id'    => 2,
-            'person_id'    => 1,
+            'person_id'    => 2,
             'registration' => 987654,
         ]);
     }

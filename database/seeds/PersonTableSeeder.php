@@ -14,8 +14,6 @@ class PersonTableSeeder extends Seeder
     {
         Person::create([
             'user_id'      => '1',
-            'personable_id' => '1',
-            'personable_type' => 'App\Models\Coordinator',
             'name'         => 'Mayke Alex Miranda Plaça',
 
 
@@ -36,8 +34,6 @@ class PersonTableSeeder extends Seeder
 
         Person::create([
             'user_id'      => '2',
-            'personable_id' => '2',
-            'personable_type' => 'App\Models\Coordinator',
             'name'         => 'Carlos',
 
 
