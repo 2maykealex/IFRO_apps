@@ -6,7 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    public function personable(){ 
-        return $this->morphTo();
-   }
+
 }
