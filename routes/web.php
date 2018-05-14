@@ -1,14 +1,19 @@
 <?php
 
-Route::group(['middleware' => ['auth'], 'namespace' => 'Student', 'prefix' => 'student'], function () {
+// Route::group(['middleware' => ['auth'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
 
-    $this->get('profile', 'StudentController@profile')->name('student.profile');    
+//     $this->get('profile', 'StudentController@profile')->name('student.profile');    
 
-}); 
+// }); 
+
 
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
+    $this->get('certificates', 'StudentController@certificates')->name('admin.student.certificates'); 
+
+    $this->post('certificate-store', 'StudentController@certificateStore')->name('admin.certificate.store');    
+    $this->get('student-upload', 'StudentController@uploadCertificate')->name('admin.student.uploadCertificate');    
     $this->get('students', 'StudentController@students')->name('admin.students');    
     $this->get('student', 'StudentController@student')->name('admin.student');    
 
