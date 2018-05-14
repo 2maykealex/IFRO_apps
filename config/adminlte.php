@@ -136,30 +136,6 @@ return [
 
                                
             ],
-        ],
-
-
-        [
-            'text' => 'Alunos',
-            'url'  => 'admin',
-            'icon' => 'user',
-            'submenu' => [
-                
-                    [
-                        'text' => 'Incluir novo aluno',
-                        'url'  => '#',
-                        'icon' => 'plus-circle',
-                        
-                    ],
-
-                    [
-                        'text' => 'Listar alunos',
-                        'url'  => 'admin/students',
-                        'icon' => 'list-ul',
-                    ]
-
-                               
-            ],
 
         ],
 
@@ -243,14 +219,14 @@ return [
                 
                     [
                         'text' => 'Incluir novo certificado',
-                        'url'  => 'admin/course-new',
+                        'url'  => 'admin/student-upload',
                         'icon' => 'plus-circle',
                         
                     ],
 
                     [
                         'text' => 'Listar certificados pendentes',
-                        'url'  => 'admin/courses',
+                        'url'  => 'admin/certificates',
                         'icon' => 'list-ul',
                     ],
 
