@@ -13,6 +13,10 @@ use App\User;
 class StudentController extends Controller
 {
 
+    public function newStudent(){
+        return view('admin.student.new');
+    }
+
     public function student(){
         $student = Student::find(1)::with(['person', 'course'])->get()->first();
 
