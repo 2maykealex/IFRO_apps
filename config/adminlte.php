@@ -123,7 +123,7 @@ return [
                 
                     [
                         'text' => 'Incluir novo aluno',
-                        'url'  => '#',
+                        'url'  => 'admin/student-new',
                         'icon' => 'plus-circle',
                         
                     ],
