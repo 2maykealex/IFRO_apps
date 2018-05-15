@@ -16,6 +16,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     $this->get('student-upload', 'StudentController@uploadCertificate')->name('admin.student.uploadCertificate');    
     $this->get('students', 'StudentController@students')->name('admin.students');    
     $this->get('student', 'StudentController@student')->name('admin.student');    
+    $this->get('student-new', 'StudentController@newStudent')->name('admin.student.new');
 
     $this->get('coordinators', 'CoordinatorController@coordinators')->name('admin.coordinators');    
     $this->get('coordinator', 'CoordinatorController@coordinator')->name('admin.coordinator');    
