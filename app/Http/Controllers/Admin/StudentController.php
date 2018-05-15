@@ -90,6 +90,11 @@ class StudentController extends Controller
 
         $person = Person::where('user_id', $user->id)->get()->first();
 
+        // $activities = Activity::all();
+
+        // $certificates = Certificate::all();        
+        
+        // $activities   = Certificate::with(['activity'])->get();        
         $certificates = Certificate::with(['activity'])->get();        
         
         $certificates = $certificates->where('person_id', $person->id);
