@@ -8,13 +8,16 @@ use App\Models\Student;
 use App\Models\Person;
 use App\Models\Activity;
 use App\Models\Certificate;
+use App\Models\Course;
 use App\User;
 
 class StudentController extends Controller
 {
 
     public function newStudent(){
-        return view('admin.student.new');
+
+        $courses = Course::with('area')->get();
+        return view('admin.student.new', compact('courses'));
     }
 
     public function student(){
