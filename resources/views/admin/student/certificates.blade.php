@@ -11,6 +11,7 @@
 @section('content')
     <div class="box-body">
         @include('admin.includes.alerts')
+          
         <table class="table table-bordered table-hover table-responsive">
             <thead>
                 <tr>
@@ -40,7 +41,15 @@
                 @endforelse
                 
             </tbody>
-        </table>    
+        </table>  
+
+
     </div>
+
+
+
     
 @stop
+
+
+
