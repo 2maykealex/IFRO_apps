@@ -13,7 +13,9 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     $this->get('certificates', 'StudentController@certificates')->name('admin.student.certificates'); 
 
     $this->post('certificate-store', 'StudentController@certificateStore')->name('admin.certificate.store');    
-    $this->get('student-upload', 'StudentController@uploadCertificate')->name('admin.student.uploadCertificate');    
+    $this->get('student-upload', 'StudentController@uploadCertificate')->name('admin.student.uploadCertificate'); 
+
+    $this->post('student-store', 'CourseController@studentStore')->name('admin.student.store');
     $this->get('students', 'StudentController@students')->name('admin.students');    
     $this->get('student', 'StudentController@student')->name('admin.student');    
     $this->get('student-new', 'StudentController@newStudent')->name('admin.student.new');
