@@ -14,7 +14,7 @@ class PersonTableSeeder extends Seeder
     {
         Person::create([
             'user_id'      => '1',
-            'name'         => 'Mayke Alex Miranda Plaça',
+            'name'         => 'Saulo',
 
 
             'address'      => 'Rua Jacy Paraná',
@@ -53,7 +53,7 @@ class PersonTableSeeder extends Seeder
 
         Person::create([
             'user_id'      => '3',
-            'name'         => 'Suziani da Silva Souza',
+            'name'         => 'Mayke Alex Miranda Plaça',
 
 
             'address'      => 'Rua Jacy Paraná',
