@@ -97,7 +97,7 @@ class StudentController extends Controller
 
         $person = Person::where('user_id', $user->id)->get()->first();
 
-        // $activities = Activity::all();
+        $activities = [];
 
         // $certificates = Certificate::all();        
         
@@ -106,11 +106,51 @@ class StudentController extends Controller
         
         $certificates = $certificates->where('person_id', $person->id);
 
-        // dd($certificates);
+        $personActivities = Certificate::where('person_id', $person->id)->get();
+
         
 
+        //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
+        $count = 0;
+        $lastId = 0;
 
-        return view('admin.student.certificates', compact(['person', 'certificates']));
+        foreach ($personActivities as $personActivity){
+            //dd($personActivity->description);
+            //dd($activities);
+
+            //if (!in_array($personActivity->activity->id, $activities)) {   //existe um valor no array
+
+                if ($lastId != $personActivity->activity->id){
+                    $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
+                    // $activities[$count] = array("id" => $personActivity->activity->id, "descricao" => $personActivity->activity->descricao);
+                }
+
+                $lastId = $personActivity->activity->id;
+                $count = $count + 1;
+            // }
+        }
+
+        // $count = 0;
+        // foreach ($personActivities as $personActivity){
+        //     //dd($personActivity->description);
+        //     //dd($activities);
+        //     if (!in_array($personActivity->activity->id, $activities)) {   //existe um valor no array
+        //         $activities[$count] = $personActivity->activity->id;
+                
+        //         $count = $count + 1;
+        //     }
+        // }
+
+        // dd($activities);
+
+        
+        $count = 0;
+        $soum  = 0;
+        $idActivity = $certificates[0]->activity_id;
+        // dd($nextActivity);
+
+
+        return view('admin.student.certificates', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 
     
