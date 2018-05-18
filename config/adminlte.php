@@ -232,16 +232,17 @@ return [
 
                     [
                         'text' => 'Listar certificados aceitos',
-                        'url'  => 'admin/courses',
+                        'url'  => 'admin/certificates-accepted',
                         'icon' => 'list-ul',
                     ],
 
                     [
                         'text' => 'Listar certificados recusados',
-                        'url'  => 'admin/courses',
+                        'url'  => 'admin/certificates-rejected',
                         'icon' => 'list-ul',
                     ]
 
+                    //FALTA AS VIEWS ACIMA
 
                                
             ],
