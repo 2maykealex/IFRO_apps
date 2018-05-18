@@ -34,9 +34,9 @@
                             <th>#</th>           
                             <th>Descrição:</th>      
                             <th>Link Validação:</th>      
-                            <th>Código:</th>      
-                            <th>Imagem:</th>
+                            <th>Código:</th>    
                             <th>CH Válidas:</th>      
+                            <th>Ações:</th>      
                         </tr>
                     </thead>
 
@@ -48,15 +48,22 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $certificate->id }}</td>
-                                    <td>{{ $certificate->description}}</td>       
+                                    <td style="width:400px;">{{ $certificate->description}}</td>       
                                     <td></td>       
                                     <td></td>       
-                                    <td>
-                                        <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
-                                            <img src="{{ url('storage/certificates/'.$certificate->image) }}" style="max-width: 50px;" >  
-                                        </a> 
-                                    </td>
+                                    
                                     <td>{{ $certificate->chCertificate}}</td>
+                                    <td>
+                                        
+                                        <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
+                                            <button class="btn btn-primary">Imagem</button>
+                                        </a>
+
+                                        <button class="btn btn-success">Aceitar</button>
+                                        <button class="btn btn-danger">Recusar</button>
+
+                                    
+                                    </td>
                                 </tr>
 
                                 <?php 
@@ -74,7 +81,6 @@
                         ?>
 
                         <tr>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
