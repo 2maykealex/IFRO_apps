@@ -106,9 +106,11 @@ class StudentController extends Controller
         
         $certificates = $certificates->where('person_id', $person->id);
 
-        $personActivities = Certificate::where('person_id', $person->id)->where('chCertificateValided', 0)->get();
+        $personActivities = Certificate::where('person_id', $person->id)->where('chCertificateValided', 0)
+                                                                        ->orderby('activity_id')
+                                                                        ->get();
 
-        
+                                                                        
 
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $count = 0;
@@ -123,6 +125,8 @@ class StudentController extends Controller
             $count = $count + 1;
         }
 
+
+        // $lastId = sort($lastId);
         // $count = 0;
         // foreach ($personActivities as $personActivity){
         //     //dd($personActivity->description);
@@ -134,7 +138,7 @@ class StudentController extends Controller
         //     }
         // }
 
-        // dd($activities);
+        // dd($activities );
 
         
         $count = 0;
