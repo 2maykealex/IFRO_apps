@@ -20,7 +20,7 @@
                 {!! csrf_field() !!}
 
                 <div class="form-group">
-                    <select name="activity_id" class="form-control">
+                    <select name="activity_id" class="form-control" required>
                         <option value="">--- Selecione a atividade ---</option>
                         @foreach ($activities as $activity)
                             <option value="{{ $activity->id }}">{{ $activity->descricao }}</option>
@@ -29,17 +29,17 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="description" placeholder="Descrição do certificado" class="form-control">
+                    <input type="text" name="description" placeholder="Descrição do certificado" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="chCertificate" placeholder="CH do certificado" class="form-control">
+                    <input type="text" name="chCertificate" placeholder="CH do certificado" class="form-control" required>
                 </div>
 
                 <input id="prodId" name="chCertificateValided" type="hidden" value="0"> <!-- 0 não validado -->
 
                 <div class="form-group">
-                    <input type="file" name="image" class="form-control">
+                    <input type="file" name="image" class="form-control" required>
                 </div>
 
                 <div class="form-group">
