@@ -143,7 +143,7 @@ class StudentController extends Controller
         
         $count = 0;
         $soum  = 0;
-        $idActivity = $certificates[0]->activity_id;
+        $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
         // dd($nextActivity);
 
 

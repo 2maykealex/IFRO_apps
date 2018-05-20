@@ -22,6 +22,8 @@ class CreateCertificatesTable extends Migration
             $table->string('description', 100)->nullable;
             $table->integer('chCertificate')->nullable;
             $table->integer('chCertificateValided')->nullable;
+            $table->string('linkValidation', 200)->nullable;
+            $table->string('validationCode', 30)->nullable;
             $table->string('image', 100)->nullable;
             $table->timestamps();
         });

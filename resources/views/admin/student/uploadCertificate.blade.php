@@ -23,7 +23,7 @@
                     <select name="activity_id" class="form-control" required>
                         <option value="">--- Selecione a atividade ---</option>
                         @foreach ($activities as $activity)
-                            <option value="{{ $activity->id }}">{{ $activity->descricao }}</option>
+                            <option value="{{ $activity->id }}">{{ $activity->id }} - {{ $activity->descricao }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -43,17 +43,20 @@
                 </div>
 
                 <div class="form-group">
+                    <input type="text" name="linkValidation" placeholder="Link da validação do certificado (opcional)" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="validationCode" placeholder="Código de validação do certificado (opcional)" class="form-control">
+                </div>
+
+                <div class="form-group">
                     <button type="submit" class="btn btn-success">Registrar</button>
                 </div>
             
-            
-            
             </form>
         
-        
         </div>
-    
-    
     
     </div>
 @stop

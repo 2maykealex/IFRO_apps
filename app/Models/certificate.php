@@ -24,6 +24,8 @@ class certificate extends Model
         $this->chCertificate         = $data['chCertificate'];
         $this->chCertificateValided  = $data['chCertificateValided'];
         $this->image                 = $data['image'];
+        $this->linkValidation        = $data['linkValidation'];
+        $this->validationCode        = $data['validationCode'];
 
         $certificate = $this->save();
 
