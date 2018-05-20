@@ -42,12 +42,16 @@
 
                     <tbody> 
 
+                        <?php
+                            $count = 1;
+                        ?>
+
                         @forelse ($certificates as $certificate)
 
                             @if ($certificate->activity_id == $key)
                                 <tr>
                                     <td></td>
-                                    <td>{{ $certificate->id }}</td>
+                                    <td>{{ $count }}</td>
                                     <td style="width:400px;">{{ $certificate->description}}</td>       
                                     <td></td>       
                                     <td></td>       
@@ -67,6 +71,7 @@
                                 </tr>
 
                                 <?php 
+                                    $count = $count + 1;
                                     $soum = $soum + $certificate->chCertificate;
                                     $idActivity = $certificate->activity_id; 
                                 ?>
@@ -76,9 +81,7 @@
                         @empty
                         @endforelse
 
-                        <?php
-                            $count = $count + 1;
-                        ?>
+                        
 
                         <tr>
                             <td></td>

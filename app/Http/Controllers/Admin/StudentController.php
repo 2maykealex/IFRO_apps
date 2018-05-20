@@ -102,12 +102,12 @@ class StudentController extends Controller
         // $certificates = Certificate::all();        
         
         // $activities   = Certificate::with(['activity'])->get();        
-        $certificates = Certificate::with(['activity'])->get();        
+        $certificates = Certificate::with(['activity'])->orderby('description')->get();        
         
         $certificates = $certificates->where('person_id', $person->id);
 
         $personActivities = Certificate::where('person_id', $person->id)->where('chCertificateValided', 0)
-                                                                        ->orderby('activity_id')
+                                                                        ->orderby('activity_id') 
                                                                         ->get();
 
                                                                         
