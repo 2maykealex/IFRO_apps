@@ -22,7 +22,7 @@ class certificate extends Model
         $this->activity_id           = $data['activity_id'];
         $this->description           = $data['description'];
         $this->chCertificate         = $data['chCertificate'];
-        $this->chCertificateValided  = $data['chCertificateValided'];
+        $this->certificateValided    = $data['certificateValided'];
         $this->image                 = $data['image'];
         $this->linkValidation        = $data['linkValidation'];
         $this->validationCode        = $data['validationCode'];

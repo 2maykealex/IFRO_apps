@@ -63,7 +63,9 @@
                                             <button class="btn btn-primary">Imagem</button>
                                         </a>
 
-                                        <button class="btn btn-success">Aceitar</button>
+                                        <a href="{{ route('admin.student.certificate.accept', $certificate->id) }}">
+                                            <button class="btn btn-success">Aceitar</button>
+                                        </a>
                                         <button class="btn btn-danger">Recusar</button>
 
                                     

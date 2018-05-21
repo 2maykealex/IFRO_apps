@@ -54,17 +54,44 @@ class StudentController extends Controller
         return view('admin.student.uploadCertificate', compact(['person', 'activities', 'value']));
     }
 
+    public function acceptCertificate($id){
+
+        $data = Certificate::where('id', $id)->get()->first();
+
+        $data->certificateValided = 2;
+    
+        //dd($data);
+
+        $data->save();
+
+        return redirect()->back()->with('success', 'Certificado foi aceito com sucesso!');
+
+    }
+    
+
     public function certificateStore(Request $request, Certificate $certificate){
 
-        $data = $request->all();    
+        $data = $request->all();
+
+        $activityData = $data['activity_id'];
+
+        //dd($activityData);
 
         $user = auth()->user();
 
         $person = Person::where('user_id', $user->id)->get()->first();
 
-        $data['person_id'] = $person->id;  //add no final de $data        
+        $data['person_id'] = $person->id;  //add no final de $data   
+        
+        $activity = Activity::where('id', $activityData)->get()->first();
 
-        // dd($data);
+        isset($data['linkValidation']) ?  : '';
+
+        isset($data['linkValidation']) ? $data['linkValidation'] : '';
+
+        if($data['chCertificate'] > $activity->CHAtividade ){  //verifica se as horas colocadas no certifado é maior que o permitido por item
+            $data['chCertificate'] = $activity->CHAtividade;   //caso seja maior, é colocado somente a hora máxima de uma atividade
+        }
 
         // $certificate = new Certificate;
         
@@ -106,7 +133,7 @@ class StudentController extends Controller
         
         $certificates = $certificates->where('person_id', $person->id);
 
-        $personActivities = Certificate::where('person_id', $person->id)->where('chCertificateValided', 0)
+        $personActivities = Certificate::where('person_id', $person->id)->where('certificateValided', 0)
                                                                         ->orderby('activity_id') 
                                                                         ->get();
 
@@ -124,22 +151,6 @@ class StudentController extends Controller
             $lastId = $personActivity->activity->id;
             $count = $count + 1;
         }
-
-
-        // $lastId = sort($lastId);
-        // $count = 0;
-        // foreach ($personActivities as $personActivity){
-        //     //dd($personActivity->description);
-        //     //dd($activities);
-        //     if (!in_array($personActivity->activity->id, $activities)) {   //existe um valor no array
-        //         $activities[$count] = $personActivity->activity->id;
-                
-        //         $count = $count + 1;
-        //     }
-        // }
-
-        // dd($activities );
-
         
         $count = 0;
         $soum  = 0;

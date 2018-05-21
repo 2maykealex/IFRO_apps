@@ -36,7 +36,7 @@
                     <input type="text" name="chCertificate" placeholder="CH do certificado" class="form-control" required>
                 </div>
 
-                <input id="prodId" name="chCertificateValided" type="hidden" value="0"> <!-- 0 não validado -->
+                <input id="prodId" name="certificateValided" type="hidden" value="0"> <!-- 0 não validado -->
 
                 <div class="form-group">
                     <input type="file" name="image" class="form-control" required>
