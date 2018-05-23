@@ -4,10 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Student;
+use App\Models\Person;
+use App\Models\Activity;
+use App\Models\Certificate;
+use App\Models\Course;
+use App\User;
 
 class CertificateController extends Controller
 {
-    public function uploadCertificate(){
+    public function upload(){
         $user = auth()->user();  //verificar para puxar Person e Student através do User Logado
 
         $person = Person::where('user_id', $user->id)->get()->first();
@@ -20,7 +26,7 @@ class CertificateController extends Controller
         
         // dd($person);
 
-        return view('admin.student.uploadCertificate', compact(['person', 'activities', 'value']));
+        return view('admin.certificate.upload', compact(['person', 'activities', 'value']));
     }
 
     public function validateCertificate($id, $value){
@@ -32,15 +38,12 @@ class CertificateController extends Controller
         $data->save();
 
         if ($value == 1){
-            return redirect()->route('admin.student.certificatesAccepted');
+            return redirect()->route('admin.certificate.accepted');
         }else if($value == 2){
-            return redirect()->route('admin.student.certificatesRejected');
+            return redirect()->route('admin.certificate.rejected');
         }
-        
-        
     }
     
-
     public function certificateStore(Request $request, Certificate $certificate){
 
         $data = $request->all();
@@ -86,7 +89,7 @@ class CertificateController extends Controller
         
         $update = $certificate->certificateNew($data);
 
-        return redirect()->route('admin.student.certificates')->with('success', 'Certificado carregado com sucesso!');
+        return redirect()->route('admin.certificates')->with('success', 'Certificado carregado com sucesso!');
         // return redirect()->back()->with('success', 'Certificado carregado com sucesso!');
 
     }
@@ -130,7 +133,7 @@ class CertificateController extends Controller
         // dd($nextActivity);
 
 
-        return view('admin.student.certificates', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+        return view('admin.certificate.certificates', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 
     public function certificatesAccepted(){
@@ -171,7 +174,7 @@ class CertificateController extends Controller
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
 
-        return view('admin.student.certificatesAccepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+        return view('admin.certificate.accepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 
     public function certificatesRejected(){
@@ -207,6 +210,6 @@ class CertificateController extends Controller
         $idActivity = $certificates[0]->activity_id;
 
 
-        return view('admin.student.certificatesRejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+        return view('admin.certificate.rejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 }
