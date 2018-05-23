@@ -54,15 +54,21 @@ class StudentController extends Controller
         return view('admin.student.uploadCertificate', compact(['person', 'activities', 'value']));
     }
 
-    public function acceptCertificate($id){
+    public function validateCertificate($id, $value){
 
         $data = Certificate::where('id', $id)->get()->first();
 
-        $data->certificateValided = 1;
+        $data->certificateValided = $value;
 
         $data->save();
+
+        if ($value == 1){
+            return redirect()->route('admin.student.certificatesAccepted');
+        }else if($value == 2){
+            return redirect()->route('admin.student.certificatesRejected');
+        }
         
-        return redirect()->route('admin.student.certificatesAccepted');
+        
     }
     
 
@@ -206,14 +212,11 @@ class StudentController extends Controller
 
         $activities = [];
 
-        // $certificates = Certificate::all();        
-        
-        // $activities   = Certificate::with(['activity'])->get();        
         $certificates = Certificate::with(['activity'])->get();        
         
         $certificates = $certificates->where('person_id', $person->id);
 
-        $personActivities = Certificate::where('person_id', $person->id)->where('chCertificateValided', 3)->get();
+        $personActivities = Certificate::where('person_id', $person->id)->where('certificateValided', 2)->get();
 
         
 
@@ -230,27 +233,12 @@ class StudentController extends Controller
             $count = $count + 1;
         }
 
-        // $count = 0;
-        // foreach ($personActivities as $personActivity){
-        //     //dd($personActivity->description);
-        //     //dd($activities);
-        //     if (!in_array($personActivity->activity->id, $activities)) {   //existe um valor no array
-        //         $activities[$count] = $personActivity->activity->id;
-                
-        //         $count = $count + 1;
-        //     }
-        // }
-
-        // dd($activities);
-
-        
         $count = 0;
         $soum  = 0;
         $idActivity = $certificates[0]->activity_id;
-        // dd($nextActivity);
 
 
-        return view('admin.student.certificates.rejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+        return view('admin.student.certificatesRejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 
     
