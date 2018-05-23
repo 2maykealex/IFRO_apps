@@ -11,12 +11,12 @@
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
 
-    $this->get('certificate/{id}/accept', 'StudentController@acceptCertificate')->name('admin.student.certificate.accept'); 
+    $this->get('certificate/{id}/{value}', 'StudentController@validateCertificate')->name('admin.student.validate.certificate'); 
 
 
     $this->get('certificates', 'StudentController@certificatesPending')->name('admin.student.certificates'); 
     $this->get('certificates-accepted', 'StudentController@certificatesAccepted')->name('admin.student.certificatesAccepted'); 
-    $this->get('certificates-rejected', 'StudentController@certificatesRejected')->name('admin.student.certificates.rejected'); 
+    $this->get('certificates-rejected', 'StudentController@certificatesRejected')->name('admin.student.certificatesRejected'); 
 
     $this->post('certificate-store', 'StudentController@certificateStore')->name('admin.certificate.store');    
     $this->get('student-upload', 'StudentController@uploadCertificate')->name('admin.student.uploadCertificate'); 
