@@ -15,7 +15,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
 
     $this->get('certificates', 'StudentController@certificatesPending')->name('admin.student.certificates'); 
-    $this->get('certificates-accepted', 'StudentController@certificatesAccepted')->name('admin.student.certificates.accepted'); 
+    $this->get('certificates-accepted', 'StudentController@certificatesAccepted')->name('admin.student.certificatesAccepted'); 
     $this->get('certificates-rejected', 'StudentController@certificatesRejected')->name('admin.student.certificates.rejected'); 
 
     $this->post('certificate-store', 'StudentController@certificateStore')->name('admin.certificate.store');    

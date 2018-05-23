@@ -58,13 +58,14 @@ class StudentController extends Controller
 
         $data = Certificate::where('id', $id)->get()->first();
 
-        $data->certificateValided = 2;
+        $data->certificateValided = 1;
     
         //dd($data);
 
         $data->save();
-
-        return redirect()->back()->with('success', 'Certificado foi aceito com sucesso!');
+        
+        return redirect()->route('admin.student.certificatesAccepted');
+        //FAZER REDIRECINAMENTO PARA A VIEW ACCEPTEDS
 
     }
     
@@ -161,113 +162,100 @@ class StudentController extends Controller
         return view('admin.student.certificates', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 
-    // public function certificatesAccepted(){
-    //     $user = auth()->user();
+    public function certificatesAccepted(){
+        $user = auth()->user();
 
-    //     $person = Person::where('user_id', $user->id)->get()->first();
+        $person = Person::where('user_id', $user->id)->get()->first();
 
-    //     $activities = [];
+        $activities = [];
 
-    //     // $certificates = Certificate::all();        
+        // $certificates = Certificate::all();        
         
-    //     // $activities   = Certificate::with(['activity'])->get();        
-    //     $certificates = Certificate::with(['activity'])->get();        
+        // $activities   = Certificate::with(['activity'])->get();        
+        $certificates = Certificate::with(['activity'])->orderby('description')->get();        
         
-    //     $certificates = $certificates->where('person_id', $person->id);
+        $certificates = $certificates->where('person_id', $person->id);
 
-    //     $personActivities = Certificate::where('person_id', $person->id)->where('chCertificateValided', 1)->get();
+        $personActivities = Certificate::where('person_id', $person->id)->where('certificateValided', 1)
+                                                                        ->orderby('activity_id') 
+                                                                        ->get();
+
+                                                                        
+
+        //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
+        $count = 0;
+        $lastId = 0;
+
+        foreach ($personActivities as $personActivity){
+            if ($lastId != $personActivity->activity->id){
+                $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
+            }
+
+            $lastId = $personActivity->activity->id;
+            $count = $count + 1;
+        }
+        
+        $count = 0;
+        $soum  = 0;
+        $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
+
+
+        return view('admin.student.certificatesAccepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+    }
+
+    public function certificatesRejected(){
+        $user = auth()->user();
+
+        $person = Person::where('user_id', $user->id)->get()->first();
+
+        $activities = [];
+
+        // $certificates = Certificate::all();        
+        
+        // $activities   = Certificate::with(['activity'])->get();        
+        $certificates = Certificate::with(['activity'])->get();        
+        
+        $certificates = $certificates->where('person_id', $person->id);
+
+        $personActivities = Certificate::where('person_id', $person->id)->where('chCertificateValided', 3)->get();
 
         
 
-    //     //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
-    //     $count = 0;
-    //     $lastId = 0;
+        //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
+        $count = 0;
+        $lastId = 0;
 
-    //     foreach ($personActivities as $personActivity){
-    //         if ($lastId != $personActivity->activity->id){
-    //             $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
-    //         }
+        foreach ($personActivities as $personActivity){
+            if ($lastId != $personActivity->activity->id){
+                $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
+            }
 
-    //         $lastId = $personActivity->activity->id;
-    //         $count = $count + 1;
-    //     }
+            $lastId = $personActivity->activity->id;
+            $count = $count + 1;
+        }
 
-    //     // $count = 0;
-    //     // foreach ($personActivities as $personActivity){
-    //     //     //dd($personActivity->description);
-    //     //     //dd($activities);
-    //     //     if (!in_array($personActivity->activity->id, $activities)) {   //existe um valor no array
-    //     //         $activities[$count] = $personActivity->activity->id;
+        // $count = 0;
+        // foreach ($personActivities as $personActivity){
+        //     //dd($personActivity->description);
+        //     //dd($activities);
+        //     if (!in_array($personActivity->activity->id, $activities)) {   //existe um valor no array
+        //         $activities[$count] = $personActivity->activity->id;
                 
-    //     //         $count = $count + 1;
-    //     //     }
-    //     // }
+        //         $count = $count + 1;
+        //     }
+        // }
 
-    //     // dd($activities);
-
-        
-    //     $count = 0;
-    //     $soum  = 0;
-    //     $idActivity = $certificates[0]->activity_id;
-    //     // dd($nextActivity);
-
-
-    //     return view('admin.student.certificates.accepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
-    // }
-
-    // public function certificatesRejected(){
-    //     $user = auth()->user();
-
-    //     $person = Person::where('user_id', $user->id)->get()->first();
-
-    //     $activities = [];
-
-    //     // $certificates = Certificate::all();        
-        
-    //     // $activities   = Certificate::with(['activity'])->get();        
-    //     $certificates = Certificate::with(['activity'])->get();        
-        
-    //     $certificates = $certificates->where('person_id', $person->id);
-
-    //     $personActivities = Certificate::where('person_id', $person->id)->where('chCertificateValided', 3)->get();
+        // dd($activities);
 
         
-
-    //     //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
-    //     $count = 0;
-    //     $lastId = 0;
-
-    //     foreach ($personActivities as $personActivity){
-    //         if ($lastId != $personActivity->activity->id){
-    //             $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
-    //         }
-
-    //         $lastId = $personActivity->activity->id;
-    //         $count = $count + 1;
-    //     }
-
-    //     // $count = 0;
-    //     // foreach ($personActivities as $personActivity){
-    //     //     //dd($personActivity->description);
-    //     //     //dd($activities);
-    //     //     if (!in_array($personActivity->activity->id, $activities)) {   //existe um valor no array
-    //     //         $activities[$count] = $personActivity->activity->id;
-                
-    //     //         $count = $count + 1;
-    //     //     }
-    //     // }
-
-    //     // dd($activities);
-
-        
-    //     $count = 0;
-    //     $soum  = 0;
-    //     $idActivity = $certificates[0]->activity_id;
-    //     // dd($nextActivity);
+        $count = 0;
+        $soum  = 0;
+        $idActivity = $certificates[0]->activity_id;
+        // dd($nextActivity);
 
 
-    //     return view('admin.student.certificates.rejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
-    // }
+        return view('admin.student.certificates.rejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+    }
 
     
 }
