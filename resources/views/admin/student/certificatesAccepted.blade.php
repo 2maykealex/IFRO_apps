@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Certificados enviados</h1>
+    <h1>Certificados aprovados</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         

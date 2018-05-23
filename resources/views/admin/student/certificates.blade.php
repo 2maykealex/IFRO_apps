@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Certificados enviados</h1>
+    <h1>Certificados pendentes de verificação</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         <li><a href="{{ route('admin.courses') }}">Lista de certificados de {{ $person->name }}</a></li>
@@ -63,10 +63,12 @@
                                             <button class="btn btn-primary">Imagem</button>
                                         </a>
 
-                                        <a href="{{ route('admin.student.certificate.accept', $certificate->id) }}">
+                                        <a href="{{ route('admin.student.validate.certificate', [$certificate->id, 1]) }}">
                                             <button class="btn btn-success">Aceitar</button>
                                         </a>
-                                        <button class="btn btn-danger">Recusar</button>
+                                        <a href="{{ route('admin.student.validate.certificate', [$certificate->id, 2]) }}">
+                                            <button class="btn btn-danger">Recusar</button>
+                                        </a>
 
                                     
                                     </td>
