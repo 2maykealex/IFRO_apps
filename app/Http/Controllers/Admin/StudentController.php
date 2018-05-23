@@ -59,14 +59,10 @@ class StudentController extends Controller
         $data = Certificate::where('id', $id)->get()->first();
 
         $data->certificateValided = 1;
-    
-        //dd($data);
 
         $data->save();
         
         return redirect()->route('admin.student.certificatesAccepted');
-        //FAZER REDIRECINAMENTO PARA A VIEW ACCEPTEDS
-
     }
     
 
