@@ -220,7 +220,7 @@ return [
                 
                     [
                         'text' => 'Incluir novo certificado',
-                        'url'  => 'admin/student-upload',
+                        'url'  => 'admin/certificate-upload',
                         'icon' => 'plus-circle',
                         
                     ],
