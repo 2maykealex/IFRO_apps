@@ -33,6 +33,7 @@
                             <th></th>
                             <th>#</th>           
                             <th>Descrição:</th>      
+                            <th>Validado em:</th>      
                             <th>Link Validação:</th>      
                             <th>Código:</th>    
                             <th>CH Válidas:</th>      
@@ -53,6 +54,7 @@
                                     <td></td>
                                     <td>{{ $count }}</td>
                                     <td style="width:400px;">{{ $certificate->description}}</td>       
+                                    <td>{{ $certificate->updated_at->format('d/m/Y')}}</td>       
                                     <td></td>       
                                     <td></td>       
                                     
