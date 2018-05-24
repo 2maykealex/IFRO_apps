@@ -1,10 +1,13 @@
 <?php
 
-// Route::group(['middleware' => ['auth'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
+Route::group(['middleware' => ['auth'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
 
-//     $this->get('profile', 'StudentController@profile')->name('student.profile');    
+    $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('site.certificate.validate'); 
+    $this->get('certificates', 'CertificateController@certificatesPending')->name('site.certificates'); 
 
-// }); 
+    $this->get('/', 'SiteController@index')->name('site.home');    
+
+}); 
 
 
 
@@ -12,12 +15,9 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
 
     $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('admin.certificate.validate'); 
-
-
     $this->get('certificates', 'CertificateController@certificatesPending')->name('admin.certificates'); 
     $this->get('certificates-accepted', 'CertificateController@certificatesAccepted')->name('admin.certificate.accepted'); 
     $this->get('certificates-rejected', 'CertificateController@certificatesRejected')->name('admin.certificate.rejected'); 
-
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('admin.certificate.store');    
     $this->get('certificate-upload', 'CertificateController@upload')->name('admin.certificate.upload'); 
 
