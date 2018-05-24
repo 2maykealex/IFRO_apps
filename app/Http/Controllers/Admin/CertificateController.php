@@ -23,8 +23,6 @@ class CertificateController extends Controller
         $student = Student::with(['person' , 'course'])->get();
 
         $value = 0;
-        
-        // dd($person);
 
         return view('admin.certificate.upload', compact(['person', 'activities', 'value']));
     }
@@ -142,10 +140,7 @@ class CertificateController extends Controller
         $person = Person::where('user_id', $user->id)->get()->first();
 
         $activities = [];
-
-        // $certificates = Certificate::all();        
-        
-        // $activities   = Certificate::with(['activity'])->get();        
+    
         $certificates = Certificate::with(['activity'])->orderby('description')->get();        
         
         $certificates = $certificates->where('person_id', $person->id);
@@ -153,9 +148,7 @@ class CertificateController extends Controller
         $personActivities = Certificate::where('person_id', $person->id)->where('certificateValided', 1)
                                                                         ->orderby('activity_id') 
                                                                         ->get();
-
                                                                         
-
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $count = 0;
         $lastId = 0;
@@ -189,8 +182,6 @@ class CertificateController extends Controller
         $certificates = $certificates->where('person_id', $person->id);
 
         $personActivities = Certificate::where('person_id', $person->id)->where('certificateValided', 2)->get();
-
-        
 
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $count = 0;
