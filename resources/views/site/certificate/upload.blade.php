@@ -1,22 +1,21 @@
-@extends('adminlte::page')
+@extends('adminlte::user')
 
 @section('content_header')
     <h1>Fazer upload de certificados</h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">Home</a></li>
-        <li><a href="{{ route('admin.activity.new') }}">Nova atividade</a></li>
+        
     </ol>
 @stop
 
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3>Cadastrar nova</h3>
+            <h3>Cadastrar novo</h3>
         </div>
 
         <div class="box-body">
             @include('admin.includes.alerts')
-            <form action="{{ route('admin.certificate.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('site.certificate.store') }}" method="post" enctype="multipart/form-data">
                 {!! csrf_field() !!}
 
                 <div class="form-group">

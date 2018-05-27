@@ -99,28 +99,21 @@ class CertificateController extends Controller
 
         $activities = [];
 
-        // $certificates = Certificate::all();        
+        $certificates = Certificate::with(['activity', 'person'])->orderby('description')->get();   
         
-        // $activities   = Certificate::with(['activity'])->get();        
-        $certificates = Certificate::with(['activity'])->orderby('description')->get();        
-        
-        $certificates = $certificates->where('person_id', $person->id);
+        //dd($certificates);
 
-        $personActivities = Certificate::where('person_id', $person->id)->where('certificateValided', 0)
-                                                                        ->orderby('activity_id') 
-                                                                        ->get();
-
-                                                                        
+        $personActivities = Certificate::where('certificateValided', 0)->orderby('activity_id') 
+                                                                       ->get();                                                                        
 
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $count = 0;
         $lastId = 0;
-
+        
         foreach ($personActivities as $personActivity){
             if ($lastId != $personActivity->activity->id){
                 $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
             }
-
             $lastId = $personActivity->activity->id;
             $count = $count + 1;
         }
@@ -128,9 +121,7 @@ class CertificateController extends Controller
         $count = 0;
         $soum  = 0;
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
-        // dd($nextActivity);
-
-
+        
         return view('admin.certificate.certificates', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 
@@ -141,15 +132,18 @@ class CertificateController extends Controller
 
         $activities = [];
     
-        $certificates = Certificate::with(['activity'])->orderby('description')->get();        
+        $certificates = Certificate::with(['activity', 'person'])->orderby('description')->get();        
         
-        $certificates = $certificates->where('person_id', $person->id);
+        $personActivities = Certificate::where('certificateValided', 1)->orderby('activity_id') 
+                                                                       ->get();
+                 
 
-        $personActivities = Certificate::where('person_id', $person->id)->where('certificateValided', 1)
-                                                                        ->orderby('activity_id') 
-                                                                        ->get();
-                                                                        
+
+
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
+        
+
+
         $count = 0;
         $lastId = 0;
 
@@ -178,10 +172,8 @@ class CertificateController extends Controller
         $activities = [];
 
         $certificates = Certificate::with(['activity'])->get();        
-        
-        $certificates = $certificates->where('person_id', $person->id);
 
-        $personActivities = Certificate::where('person_id', $person->id)->where('certificateValided', 2)->get();
+        $personActivities = Certificate::where('certificateValided', 2)->get();
 
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $count = 0;
@@ -198,7 +190,7 @@ class CertificateController extends Controller
 
         $count = 0;
         $soum  = 0;
-        $idActivity = $certificates[0]->activity_id;
+        $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
 
         return view('admin.certificate.rejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));

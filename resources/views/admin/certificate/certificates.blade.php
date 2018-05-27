@@ -4,7 +4,7 @@
     <h1>Certificados pendentes de verificação</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
-        <li><a href="{{ route('admin.courses') }}">Lista de certificados de {{ $person->name }}</a></li>
+        <li><a href="{{ route('admin.courses') }}">Lista de certificados dos Alunos</a></li>
     </ol>
 @stop
 
@@ -15,11 +15,12 @@
         <table class="table table-bordered table-hover table-responsive">
             <!-- Sem Tag de cabeçalho -->
             
+            <?php //dd($activities);?>
             
 
             @Foreach ($activities as $key => $activity)
                 
-                <?php $soum = 0; ?>
+                <?php $soum = 0;?>
 
                 <tbody>      
                     <tr>
@@ -32,10 +33,11 @@
                         <tr>                                
                             <th></th>
                             <th>#</th>           
-                            <th>Descrição:</th>      
-                            <th>Link Validação:</th>      
+                            <th>Aluno:</th>           
+                            <th>Curso:</th>      
+                            <th>Link:</th>      
                             <th>Código:</th>    
-                            <th>CH Válidas:</th>      
+                            <th>CH:</th>      
                             <th>Ações:</th>      
                         </tr>
                     </thead>
@@ -52,12 +54,24 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $count }}</td>
-                                    <td style="width:400px;">{{ $certificate->description}}</td>       
-                                    <td></td>       
-                                    <td></td>       
+                                    <td style="width:280px;">{{ $certificate->person->name }}</td>
+                                    <td style="width:310px;">{{ $certificate->description}}</td>   
+
+                                    <td style="width:70px;">
+                                        @if ($certificate->linkValidation != '')
+                                            <a href="{{ $certificate->linkValidation }}" target="_blank">acessar</a>
+                                        @endif
+                                    </td>   
+
+                                    <td> 
+                                        @if ($certificate->validationCode != '')
+                                            {{ $certificate->validationCode }}
+                                        @endif
+                                    </td>       
                                     
                                     <td>{{ $certificate->chCertificate}}</td>
-                                    <td>
+
+                                    <td style="width:240px;">
                                         
                                         <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
                                             <button class="btn btn-primary">Imagem</button>
@@ -80,22 +94,21 @@
                                     $idActivity = $certificate->activity_id; 
                                 ?>
                             @endif
-
-
                         @empty
                         @endforelse
-
-                        
-
                         <tr>
                             <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><strong>TOTAL DE HORAS</strong></td>
-                            <td><strong> <?php echo $soum.' Horas'?> </strong></td>
+                            <td></td>
+                            <td><strong>TOTAL</strong></td>
+                            
+                            
+                            <td><strong> <?php echo $soum?> </strong></td>
+                            <td><strong>HORAS</strong></td>
+                            
                         </tr>
-
                     </tbody>
                 </table>
                 <br>

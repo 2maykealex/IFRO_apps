@@ -2,10 +2,13 @@
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
 
-    $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('site.certificate.validate'); 
     $this->get('certificates', 'CertificateController@certificatesPending')->name('site.certificates'); 
+    $this->get('certificates-accepted', 'CertificateController@certificatesAccepted')->name('site.certificate.accepted'); 
+    $this->get('certificates-rejected', 'CertificateController@certificatesRejected')->name('site.certificate.rejected'); 
+    $this->post('certificate-store', 'CertificateController@certificateStore')->name('site.certificate.store');    
+    $this->get('certificate-upload', 'CertificateController@upload')->name('site.certificate.upload'); 
 
-    $this->get('/', 'SiteController@index')->name('site.home');    
+    $this->get('/', 'SiteController@home')->name('site.home');    
 
 }); 
 
@@ -48,5 +51,6 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
 
 $this->get('/', 'Site\SiteController@index');
+$this->get('/check-user', 'Site\SiteController@checkUser');
 
 Auth::routes();

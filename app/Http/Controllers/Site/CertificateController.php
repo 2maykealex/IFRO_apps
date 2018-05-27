@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Site;
 
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
@@ -12,8 +14,9 @@ use App\Models\Course;
 use App\User;
 
 class CertificateController extends Controller
-{
+{    
     public function upload(){
+        
         $user = auth()->user();  //verificar para puxar Person e Student através do User Logado
 
         $person = Person::where('user_id', $user->id)->get()->first();
@@ -24,22 +27,7 @@ class CertificateController extends Controller
 
         $value = 0;
 
-        return view('admin.certificate.upload', compact(['person', 'activities', 'value']));
-    }
-
-    public function validateCertificate($id, $value){
-
-        $data = Certificate::where('id', $id)->get()->first();
-
-        $data->certificateValided = $value;
-
-        $data->save();
-
-        if ($value == 1){
-            return redirect()->route('admin.certificate.accepted');
-        }else if($value == 2){
-            return redirect()->route('admin.certificate.rejected');
-        }
+        return view('site.certificate.upload', compact(['person', 'activities', 'value']));
     }
     
     public function certificateStore(Request $request, Certificate $certificate){
@@ -87,7 +75,7 @@ class CertificateController extends Controller
         
         $update = $certificate->certificateNew($data);
 
-        return redirect()->route('admin.certificates')->with('success', 'Certificado carregado com sucesso!');
+        return redirect()->route('site.certificates')->with('success', 'Certificado carregado com sucesso!');
         // return redirect()->back()->with('success', 'Certificado carregado com sucesso!');
 
     }
@@ -110,8 +98,6 @@ class CertificateController extends Controller
                                                                         ->orderby('activity_id') 
                                                                         ->get();
 
-                                                                        
-
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $count = 0;
         $lastId = 0;
@@ -129,7 +115,6 @@ class CertificateController extends Controller
         $soum  = 0;
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
         // dd($nextActivity);
-
 
         return view('site.certificate.certificates', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
@@ -167,7 +152,7 @@ class CertificateController extends Controller
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
 
-        return view('admin.certificate.accepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+        return view('site.certificate.accepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 
     public function certificatesRejected(){
@@ -198,9 +183,9 @@ class CertificateController extends Controller
 
         $count = 0;
         $soum  = 0;
-        $idActivity = $certificates[0]->activity_id;
+        $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
 
-        return view('admin.certificate.rejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+        return view('site.certificate.rejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
 }

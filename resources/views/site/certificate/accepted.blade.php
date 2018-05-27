@@ -1,9 +1,8 @@
-@extends('adminlte::page')
+@extends('adminlte::user')
 
 @section('content_header')
     <h1>Certificados aprovados</h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('site.home') }}">Home</a></li>
         
     </ol>
 @stop
