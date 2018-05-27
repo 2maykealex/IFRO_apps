@@ -25,7 +25,7 @@
                         <td><h4><strong>{{ $key.' - '.$activity}}</strong></h4></td>       
                     </tr>                    
                 </tbody>
-                
+
                 <table class="table table-bordered table-hover table-responsive">
                     <thead>
                         <tr>                                
@@ -64,7 +64,7 @@
                                             <button class="btn btn-primary">Imagem</button>
                                         </a>
 
-                                    </td>
+                                    </td>                                    
                                 </tr>
 
                                 <?php 
