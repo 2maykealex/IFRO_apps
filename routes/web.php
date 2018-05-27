@@ -49,7 +49,6 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
 });
 
-
 $this->get('/', 'Site\SiteController@index');
 $this->get('/check-user', 'Site\SiteController@checkUser');
 
