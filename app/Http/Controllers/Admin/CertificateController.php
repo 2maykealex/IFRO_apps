@@ -20,7 +20,7 @@ class CertificateController extends Controller
 
         $activities = Activity::all();
 
-        $student = Student::with(['person' , 'course'])->get();
+        $student = Student::with(['person'])->get();
 
         $value = 0;
 
@@ -34,7 +34,7 @@ class CertificateController extends Controller
         $data->certificateValided = $value;
         
         $data->save();
-        
+
         if ($value == 1){
             return redirect()->route('admin.certificate.accepted');
         }else if($value == 2){
