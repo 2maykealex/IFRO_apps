@@ -32,7 +32,7 @@
 
         <p style="text-align: center;">ATESTADO DE CONCLUSÃO DE ATIVIDADES ACADÊMICAS COMPLEMENTARES</p>
 
-        <p style="text-align: center;">Atesto que o aluna(o) {{ $person->name }}, matriculada(o) no Curso Superior de Tecnologia em Gestão Pública, _____período, turma_______, deste <i>Campus</i>, cumpriu a carga horária das Atividades Acadêmicas Complementares, com aproveitamento suficiente, conforme a seguinte programação</p>
+        <p style="text-align: center;">Atesto que o aluna(o) {{ $person->name }}, matriculada(o) no Curso {{ $person->course->name }}, _____período, turma_______, deste <i>Campus</i>, cumpriu a carga horária das Atividades Acadêmicas Complementares, com aproveitamento suficiente, conforme a seguinte programação</p>
         
         <br>
 
