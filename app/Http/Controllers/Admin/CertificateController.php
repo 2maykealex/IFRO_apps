@@ -92,6 +92,44 @@ class CertificateController extends Controller
 
     }
 
+    public function certificatesReport(){
+
+        // $user = auth()->user();
+
+        $person = Person::where('user_id', 3)->get()->first();
+
+        dd($person);
+
+        $activities = [];
+    
+        $certificates = Certificate::where('person_id',$person->id)->with(['activity', 'person'])->orderby('description')->get();        
+        
+        $personActivities = Certificate::where('certificateValided', 1)->orderby('activity_id') 
+                                                                       ->get();
+                 
+        $count = 0;
+        $lastId = 0;
+
+        foreach ($personActivities as $personActivity){
+            if ($lastId != $personActivity->activity->id){
+                $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
+            }
+
+            $lastId = $personActivity->activity->id;
+            $count = $count + 1;
+        }
+        
+        $count = 0;
+        $soum  = 0;
+        $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
+
+        // dd($activities);
+        return view('admin.certificate.certificatesReport', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+
+                                                                       
+        // return view('admin.certificate.certificatesReport', compact(['$certificates', '$personActivities','person']));
+    }
+
     public function certificatesPending(){
         $user = auth()->user();
 
@@ -100,8 +138,6 @@ class CertificateController extends Controller
         $activities = [];
 
         $certificates = Certificate::with(['activity', 'person'])->orderby('description')->get();   
-        
-        //dd($certificates);
 
         $personActivities = Certificate::where('certificateValided', 0)->orderby('activity_id') 
                                                                        ->get();                                                                        

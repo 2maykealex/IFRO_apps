@@ -2,6 +2,10 @@
 
 @section('content_header')
     <h1>Certificados aprovados</h1>
+    <a href="{{ route('admin.certificates.report') }}" >
+        <button class="btn btn-primary">Ver Relatório</button>
+    </a>
+
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         
