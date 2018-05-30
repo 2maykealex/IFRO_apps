@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Coordinator;
+use App\Models\Person;
 
 class CoordinatorController extends Controller
 {
@@ -18,9 +19,7 @@ class CoordinatorController extends Controller
     }
 
     public function coordinators(){ 
-        $coordinators = Coordinator::with(['person' , 'course'])->get();
-
-        // dd($coordinators);
+        $coordinators = Coordinator::with(['person'])->get();
         return view('admin.coordinator.coordinators', compact('coordinators') );
     }
 

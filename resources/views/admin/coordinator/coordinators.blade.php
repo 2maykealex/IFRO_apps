@@ -26,7 +26,7 @@
                 <tr>
                     <td>{{ $coordinator->person->id }}</td>
                     <td>{{ $coordinator->person->name}}</td>
-                    <td>{{ $coordinator->course->name}}</td>
+                    <td>{{ $coordinator->person->course->name}}</td>
                     <td>{{ $coordinator->person->cel }}</td>
                     <td>{{ $coordinator->registration }}</td>
                 </tr>

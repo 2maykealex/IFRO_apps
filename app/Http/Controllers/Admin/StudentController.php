@@ -21,7 +21,7 @@ class StudentController extends Controller
     }
 
     public function student(){
-        $student = Student::find(1)::with(['person', 'course'])->get()->first();
+        $student = Student::find(1)::with(['person'])->get()->first();
 
         // echo $student->person->name.'<br>';
         // echo $student->person->address.'<hr>';
@@ -30,7 +30,7 @@ class StudentController extends Controller
     }
 
     public function students(){ 
-        $students = Student::with(['person' , 'course'])->get();
+        $students = Student::with(['person'])->get();
 
         // dd($students);s
 
