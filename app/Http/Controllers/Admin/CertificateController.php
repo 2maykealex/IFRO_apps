@@ -32,9 +32,9 @@ class CertificateController extends Controller
         $data = Certificate::where('id', $id)->get()->first();
 
         $data->certificateValided = $value;
-
+        
         $data->save();
-
+        
         if ($value == 1){
             return redirect()->route('admin.certificate.accepted');
         }else if($value == 2){
@@ -107,6 +107,8 @@ class CertificateController extends Controller
                  
         $count = 0;
         $lastId = 0;
+        $color = '#D8D8D8';
+        $lastKey = 0;
 
         foreach ($personActivities as $personActivity){
             if ($lastId != $personActivity->activity->id){
@@ -122,7 +124,7 @@ class CertificateController extends Controller
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
         // dd($activities);
-        return view('admin.certificate.certificatesReport', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+        return view('admin.certificate.certificatesReport', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey']));
 
                                                                        
         // return view('admin.certificate.certificatesReport', compact(['$certificates', '$personActivities','person']));
@@ -135,8 +137,8 @@ class CertificateController extends Controller
 
         $activities = [];
 
-        $certificates = Certificate::with(['activity', 'person'])->orderby('description')->get();   
-
+        $certificates = Certificate::where('certificateValided', 0)->with(['activity', 'person'])->orderby('description')->get();   
+        
         $personActivities = Certificate::where('certificateValided', 0)->orderby('activity_id') 
                                                                        ->get();                                                                        
 

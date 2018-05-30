@@ -20,11 +20,9 @@
 
 @section('content')
     <div class="box-body">
-        @include('admin.includes.alerts')
-          
+        @include('admin.includes.alerts')        
         
-        
-        <img src="{{ url('storage/images/brasao.jpeg') }}" alt="" width="8%">
+        <p style="text-align:center;"><img src="{{ url('storage/images/brasao.jpeg') }}" alt="Brasão do Brasil" width="8%"></p>
 
         <p style="text-align: center;">MINISTÉRIO DA EDUCAÇÃO</p>
         <p style="text-align: center;">INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE RONDÔNIA</p>
@@ -38,21 +36,32 @@
 
 			
 
-<table class="table table-hover" style="">
+        <table class="table table-hover table-sm" style="">
 
             <tbody>
                  <tr class="row">
-                    <td class="">Item</td>
-                    <td class="" colspan="2">Atividades Acadêmicas Complementares  </td>
-                    <td class="">Local</td>
-                    <td class="">Período</td>
-                    <td class="">Carga Horária</td>
-                    <td class="" colspan="2">Visto do Aluno</td>
+                    <th class="">Item</th>
+                    <th class="" colspan="2">Atividades Acadêmicas Complementares  </th>
+                    <th class="">Local</th>
+                    <th class="">Período</th>
+                    <th class="">Carga Horária</th>
+                    <th class="" colspan="2">Visto do Aluno</th>
                 </tr>
+
                 @Foreach ($activities as $key => $activity)
+                   <?php 
+                        if ($color=='#D8D8D8'){
+                            $color = "000";
+                        } else {
+                            $color = "#D8D8D8";
+                        }
+                    ?>
+
                     @forelse ($certificates as $certificate)
+
+
                         @if ($certificate->activity_id == $key)
-                            <tr class="row">
+                            <tr class="row" style="background:{{ $color }};">
                                 <td class="">{{ $key }}</td>
                                 <td class="">{{ $certificate->description }}</td>
                                 <td class=""></td>
@@ -86,7 +95,7 @@
                     <td class="" colspan="2"></td>
             </tr>
             </tbody>
-    </table>
+         </table>
                <br>
 
                 <p>Porto Velho-RO, __ de ____ de 2018</p>
