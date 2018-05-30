@@ -26,7 +26,6 @@ class CertificateController extends Controller
 
         return view('admin.certificate.upload', compact(['person', 'activities', 'value']));
     }
-
     public function validateCertificate($id, $value){
 
         $data = Certificate::where('id', $id)->get()->first();
@@ -41,7 +40,6 @@ class CertificateController extends Controller
             return redirect()->route('admin.certificate.rejected');
         }
     }
-    
     public function certificateStore(Request $request, Certificate $certificate){
 
         $data = $request->all();
@@ -91,7 +89,6 @@ class CertificateController extends Controller
         // return redirect()->back()->with('success', 'Certificado carregado com sucesso!');
 
     }
-
     public function certificatesReport(){
 
         // $user = auth()->user();
@@ -129,7 +126,6 @@ class CertificateController extends Controller
                                                                        
         // return view('admin.certificate.certificatesReport', compact(['$certificates', '$personActivities','person']));
     }
-
     public function certificatesPending(){
         $user = auth()->user();
 
@@ -160,7 +156,6 @@ class CertificateController extends Controller
         
         return view('admin.certificate.certificates', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
-
     public function certificatesAccepted(){
         $user = auth()->user();
 
@@ -199,7 +194,6 @@ class CertificateController extends Controller
 
         return view('admin.certificate.accepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
-
     public function certificatesRejected(){
         $user = auth()->user();
 

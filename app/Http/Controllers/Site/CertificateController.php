@@ -29,7 +29,6 @@ class CertificateController extends Controller
 
         return view('site.certificate.upload', compact(['person', 'activities', 'value']));
     }
-    
     public function certificateStore(Request $request, Certificate $certificate){
 
         $data = $request->all();
@@ -79,7 +78,6 @@ class CertificateController extends Controller
         // return redirect()->back()->with('success', 'Certificado carregado com sucesso!');
 
     }
-
     public function certificatesPending(){
         $user = auth()->user();
 
@@ -115,7 +113,6 @@ class CertificateController extends Controller
 
         return view('site.certificate.certificates', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
-
     public function certificatesAccepted(){
         $user = auth()->user();
 
@@ -151,7 +148,6 @@ class CertificateController extends Controller
 
         return view('site.certificate.accepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }
-
     public function certificatesRejected(){
         $user = auth()->user();
 
