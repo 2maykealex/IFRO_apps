@@ -96,9 +96,7 @@ class CertificateController extends Controller
 
         // $user = auth()->user();
 
-        $person = Person::where('user_id', 3)->get()->first();
-
-        dd($person);
+        $person = Person::where('user_id', 3)->with('course')->get()->first();
 
         $activities = [];
     
