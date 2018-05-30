@@ -13,7 +13,9 @@ class PersonTableSeeder extends Seeder
     public function run()
     {
         Person::create([
-            'user_id'      => '1',
+            'user_id'      => 1,            
+            'course_id'    => 2,
+
             'name'         => 'Saulo',
 
 
@@ -33,7 +35,9 @@ class PersonTableSeeder extends Seeder
 
 
         Person::create([
-            'user_id'      => '2',
+            'user_id'      => 2,            
+            'course_id'    => 2,
+
             'name'         => 'Carlos',
 
 
@@ -52,7 +56,9 @@ class PersonTableSeeder extends Seeder
         ]);
 
         Person::create([
-            'user_id'      => '3',
+            'user_id'      => 3,            
+            'course_id'    => 2,
+            
             'name'         => 'Mayke Alex Miranda Plaça',
 
 

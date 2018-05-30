@@ -13,7 +13,6 @@ class CoordinatorTableSeeder extends Seeder
     public function run()
     {
         Coordinator::create([
-            'course_id'    => 2,
             'person_id'    => 1,
             'registration' => 123456789,
         ]);

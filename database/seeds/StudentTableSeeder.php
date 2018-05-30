@@ -13,13 +13,11 @@ class StudentTableSeeder extends Seeder
     public function run()
     {
         Student::create([
-            'course_id'    => 2,
             'person_id'    => 2,
             'registration' => 987654,
         ]);
 
         Student::create([
-            'course_id'    => 2,
             'person_id'    => 3,
             'registration' => 56784,
         ]);
