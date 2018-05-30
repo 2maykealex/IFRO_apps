@@ -23,7 +23,7 @@ class CertificateController extends Controller
 
         $activities = Activity::all();
 
-        $student = Student::with(['person' , 'course'])->get();
+        $student = Student::with(['person'])->get();
 
         $value = 0;
 
@@ -86,10 +86,7 @@ class CertificateController extends Controller
         $person = Person::where('user_id', $user->id)->get()->first();
 
         $activities = [];
-
-        // $certificates = Certificate::all();        
-        
-        // $activities   = Certificate::with(['activity'])->get();        
+           
         $certificates = Certificate::with(['activity'])->orderby('description')->get();        
         
         $certificates = $certificates->where('person_id', $person->id);
