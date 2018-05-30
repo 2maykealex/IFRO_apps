@@ -7,5 +7,8 @@ use App\Models\Course;
 
 class Person extends Model
 {
-
+    public function course(){
+        
+        return $this->hasOne(Course::class);
+    }
 }
