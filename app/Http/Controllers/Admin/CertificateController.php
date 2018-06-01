@@ -91,7 +91,9 @@ class CertificateController extends Controller
     }
     public function certificatesReport(){
 
-        // $user = auth()->user();
+        $userCoord = auth()->user();
+
+        $coordinator = Person::where('user_id', $userCoord->id)->with('course')->get()->first();
 
         $person = Person::where('user_id', 3)->with('course')->get()->first();
 
@@ -121,7 +123,7 @@ class CertificateController extends Controller
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
         // dd($activities);
-        return view('admin.certificate.certificatesReport', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey']));
+        return view('admin.certificate.certificatesReport', compact(['coordinator', 'person', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey']));
 
                                                                        
         // return view('admin.certificate.certificatesReport', compact(['$certificates', '$personActivities','person']));
@@ -190,7 +192,6 @@ class CertificateController extends Controller
         $count = 0;
         $soum  = 0;
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
-
 
         return view('admin.certificate.accepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
     }

@@ -1,10 +1,9 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Certificados aprovados</h1>
 
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">Home</a></li>
+        <li><a href="{{ route('admin.certificate.accepted') }}">Voltar</a></li>
         
     </ol>
 
@@ -27,25 +26,23 @@
         <p style="text-align: center;">MINISTÉRIO DA EDUCAÇÃO</p>
         <p style="text-align: center;">INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE RONDÔNIA</p>
         <p style="text-align: center;">CAMPUS ZONA NORTE</p>
-
         <p style="text-align: center;">ATESTADO DE CONCLUSÃO DE ATIVIDADES ACADÊMICAS COMPLEMENTARES</p>
-
-        <p style="text-align: center;">Atesto que o aluna(o) {{ $person->name }}, matriculada(o) no Curso {{ $person->course->name }}, _____período, turma_______, deste <i>Campus</i>, cumpriu a carga horária das Atividades Acadêmicas Complementares, com aproveitamento suficiente, conforme a seguinte programação</p>
+        <p style="text-align: center;">Atesto que o aluna(o) <strong> {{ $person->name }} </strong>, matriculada(o) no Curso <strong>{{ $person->course->name }} </strong>, {{ $person->course->qtSem }}º período, turma_______, deste <i>Campus</i>, cumpriu a carga horária das Atividades Acadêmicas Complementares, com aproveitamento suficiente, conforme a seguinte programação:</p>
         
         <br>
 
 			
 
-        <table class="table table-hover table-sm" style="">
+        <table class="table table-hover table-sm" style="" >
 
-            <tbody>
+            <tbody >
                  <tr class="row">
                     <th class="">Item</th>
                     <th class="" colspan="2">Atividades Acadêmicas Complementares  </th>
                     <th class="">Local</th>
                     <th class="">Período</th>
                     <th class="">Carga Horária</th>
-                    <th class="" colspan="2">Visto do Aluno</th>
+                    <!-- <th class="" colspan="2">Visto do Aluno</th> -->
                 </tr>
 
                 @Foreach ($activities as $key => $activity)
@@ -61,13 +58,14 @@
 
 
                         @if ($certificate->activity_id == $key)
-                            <tr class="row" style="background:{{ $color }};">
-                                <td class="">{{ $key }}</td>
-                                <td class="">{{ $certificate->description }}</td>
-                                <td class=""></td>
-                                <td class=""></td>
-                                <td class=""></td>
-                                <td class="">{{ $certificate->chCertificate }}</td>
+                            <tr class="row">                   <!-- style="background:{{ $color }};" -->
+                                <td>{{ $key }}</td>
+                                <td>{{ $certificate->description }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{ $certificate->chCertificate }}</td>
+                                <!-- <td></td> -->
                             </tr>
 
                             <?php 
@@ -97,15 +95,38 @@
             </tbody>
          </table>
                <br>
+               <br>
 
-                <p>Porto Velho-RO, __ de ____ de 2018</p>
-                <br>
+               <div class="row">
+               
+                        <div class="col-md-4">
+                        
+                        </div>
 
-                <p>_____________________________________________</p>
-    
+                        <div class="col-md-4">
+                        
+                        </div>
 
-                <p>EVERTON LUIZ CANDIDO LUIZ</p>
-                <p>Coordenador do Curso</p>
+                        <div class="col-md-4">
+                            <p style="text-align:right;">Porto Velho-RO, __ de ____ de 2018</p>
+                            <br>
+                            <br>
+                            <br>
+
+                            <p style="text-align:center;">_________________________________________________</p>
+                
+
+                            <p style="text-align:center;">{{ $coordinator->name }}</p>
+                            <p style="text-align:center;">Coordenador do Curso</p>
+                        </div>
+
+
+               
+               
+               
+               </div>
+
+                
           
 	
 
