@@ -1,5 +1,8 @@
 <?php
 
+$this->post('storeImport', 'ExcelController@studentStore')->name('student.import.store');
+$this->get('import-students', 'ExcelController@getImport')->name('admin.excel.getImport');
+
 Route::group(['middleware' => ['auth'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
 
     $this->get('certificates', 'CertificateController@certificatesPending')->name('site.certificates'); 
@@ -24,6 +27,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('admin.certificate.store');    
     $this->get('certificate-upload', 'CertificateController@upload')->name('admin.certificate.upload'); 
 
+    
+    
     $this->post('student-store', 'CourseController@studentStore')->name('admin.student.store');
     $this->get('students', 'StudentController@students')->name('admin.students');    
     $this->get('student', 'StudentController@student')->name('admin.student');    
