@@ -160,10 +160,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        /*Export to Excel*/
-
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-
     ],
 
     /*
