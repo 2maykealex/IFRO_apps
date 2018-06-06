@@ -9,13 +9,50 @@
 @stop
 
 @section('content')
+
+
+    <div class="row">
+    
+        <div class="col-md-1">
+            Aluno:
+        
+        </div>
+
+        <div class="col-md-10">        
+            <div class="form-group">
+                <select name="studentName" class="form-control" >
+                    @foreach ($students as $student)     
+                        @if ($student->person != null)               
+                            <option value="{{ $student->person->id }}">{{ $student->person->name }}</option>
+                        @endif
+                    @endforeach  
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <a href="">
+                <button class="btn btn-primary">
+                    Filtrar
+                </button>
+            </a>
+        </div>
+    
+    </div>
+    
+    
+
     <div class="box-body">
         @include('admin.includes.alerts')
+
+        
           
         <table class="table table-bordered table-hover table-responsive">
             <!-- Sem Tag de cabeçalho -->
             
             <?php //dd($activities);?>
+
+
             
 
             @Foreach ($activities as $key => $activity)

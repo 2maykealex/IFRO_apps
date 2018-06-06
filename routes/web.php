@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     
     
-    $this->post('student-store', 'CourseController@studentStore')->name('admin.student.store');
+    $this->post('student-store', 'StudentController@studentStore')->name('admin.student.store');
     $this->get('students', 'StudentController@students')->name('admin.students');    
     $this->get('student', 'StudentController@student')->name('admin.student');    
     $this->get('student-new', 'StudentController@newStudent')->name('admin.student.new');
