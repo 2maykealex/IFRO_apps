@@ -128,7 +128,17 @@ class CertificateController extends Controller
                                                                        
         // return view('admin.certificate.certificatesReport', compact(['$certificates', '$personActivities','person']));
     }
-    public function certificatesPending(){
+    public function listCertificates($status){
+        if ($status == 'pending'){
+            $valided = 0;
+        } else if ($status == 'accepted'){
+            $valided = 1;
+        } else if ($status == 'rejected' ){
+            $valided = 2;
+        }else{
+            return redirect()->back()->with('error', 'Este local não existe no sistema!');
+        }
+        
         $user = auth()->user();       
 
         $person = Person::where('user_id', $user->id)->get()->first();
@@ -141,14 +151,13 @@ class CertificateController extends Controller
         ->get()->sortBy('person.name');
 
         $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course) {
-                 $query->where('course_id', 2);
+                 $query->where('course_id', $course);
              } )
-             ->where('certificateValided', 0)
+             ->where('certificateValided', $valided)
              ->orderby('activity_id') 
              ->get();  
 
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
-        
         $activities = [];
         foreach ($certificates as $certificate){
             $activities[$certificate->activity->id] = $certificate->activity->descricao;
@@ -157,85 +166,18 @@ class CertificateController extends Controller
         $count = 0;
         $soum  = 0;
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
-        
-        return view('admin.certificate.certificates', compact(['activities', 'students', 'person', 'certificates', 'count','soum']));
-    }
-    public function certificatesAccepted(){
-        $user = auth()->user();
 
-        $person = Person::where('user_id', $user->id)->get()->first();
-
-        $course = $person->course_id;
-
-        $students = Student::with(['person' => function($q) use($course) {
-            $q->where('course_id', $course);
-        }])
-        ->get()->sortBy('person.name');
-
-
-        $activities = [];
-    
-        $certificates = Certificate::with(['activity', 'person' => function($q) use($course) {
-            $q->where('course_id', $course);
-        }])->orderby('description')->get();        
-        
-        $personActivities = Certificate::where('certificateValided', 1)->orderby('activity_id') 
-                                                                       ->get();
-                 
-
-
-
-        //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
-        
-
-
-        $count = 0;
-        $lastId = 0;
-
-        foreach ($personActivities as $personActivity){
-            if ($lastId != $personActivity->activity->id){
-                $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
-            }
-
-            $lastId = $personActivity->activity->id;
-            $count = $count + 1;
+        if ($valided == 0){
+            return view('admin.certificate.certificates', compact(['activities', 'students', 'person', 'certificates', 'count','soum']));
+        }else if ($valided == 1){
+            return view('admin.certificate.accepted', compact(['activities', 'students', 'person', 'certificates', 'count','soum']));
         }
-        
-        $count = 0;
-        $soum  = 0;
-        $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
-
-        return view('admin.certificate.accepted', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
-    }
-    public function certificatesRejected(){
-        $user = auth()->user();
-
-        $person = Person::where('user_id', $user->id)->get()->first();
-
-        $activities = [];
-
-        $certificates = Certificate::with(['activity'])->get();        
-
-        $personActivities = Certificate::where('certificateValided', 2)->get();
-
-        //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
-        $count = 0;
-        $lastId = 0;
-
-        foreach ($personActivities as $personActivity){
-            if ($lastId != $personActivity->activity->id){
-                $activities[$personActivity->activity->id] = $personActivity->activity->descricao;
-            }
-
-            $lastId = $personActivity->activity->id;
-            $count = $count + 1;
+        else if ($valided == 2){
+            return view('admin.certificate.rejected', compact(['activities', 'students', 'person', 'certificates', 'count','soum']));
         }
 
-        $count = 0;
-        $soum  = 0;
-        $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
-
-
-        return view('admin.certificate.rejected', compact(['person', 'certificates', 'activities', 'idActivity', 'count','soum']));
+        
+        
     }
+
 }

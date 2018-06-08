@@ -230,19 +230,19 @@ if(0 == 0){ //Checar a possibilidade de vir o tipo de usuário e preenchero o me
 
                         [
                             'text' => 'Listar certificados pendentes',
-                            'url'  => 'admin/certificates',
+                            'url'  => 'admin/certificates/pending',
                             'icon' => 'list-ul',
                         ],
 
                         [
                             'text' => 'Listar certificados aceitos',
-                            'url'  => 'admin/certificates-accepted',
+                            'url'  => 'admin/certificates/accepted',
                             'icon' => 'list-ul',
                         ],
 
                         [
                             'text' => 'Listar certificados recusados',
-                            'url'  => 'admin/certificates-rejected',
+                            'url'  => 'admin/certificates/rejected',
                             'icon' => 'list-ul',
                         ]
 
