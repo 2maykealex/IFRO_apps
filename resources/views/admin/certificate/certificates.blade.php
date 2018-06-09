@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-md-1">
-            <a href="">
+            <a href="">   <!-- /route(admin.certificates/pending) -->
                 <button class="btn btn-primary">
                     Filtrar
                 </button>
