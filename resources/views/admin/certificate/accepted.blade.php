@@ -1,16 +1,35 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Certificados aprovados</h1>
-    
-    <a href="{{ route('admin.certificates.report') }}" >
-        <button class="btn btn-primary">Ver Relatório</button>
-    </a>
+
 
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         
     </ol>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Certificados aprovados</h1>    
+            
+        </div>
+
+        <div class="col-md-2">
+            <div class="row">
+            <br>
+
+            <a href="{{ route('admin.certificates.report') }}">
+                <button class="btn btn-primary">Ver Relatório</button>
+            </a>   
+            
+            </div>
+
+                 
+        </div>  
+    </div>
+    
+
+
 @stop
 
 @section('content')
