@@ -128,7 +128,7 @@ class CertificateController extends Controller
                                                                        
         // return view('admin.certificate.certificatesReport', compact(['$certificates', '$personActivities','person']));
     }
-    public function listCertificates($status){
+    public function listCertificates($status, $id = 0){
         if ($status == 'pending'){
             $valided = 0;
         } else if ($status == 'accepted'){
@@ -138,7 +138,7 @@ class CertificateController extends Controller
         }else{
             return redirect()->back()->with('error', 'Este local não existe no sistema!');
         }
-        
+
         $user = auth()->user();       
 
         $person = Person::where('user_id', $user->id)->get()->first();
@@ -150,12 +150,26 @@ class CertificateController extends Controller
         }])
         ->get()->sortBy('person.name');
 
-        $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course) {
-                 $query->where('course_id', $course);
-             } )
-             ->where('certificateValided', $valided)
-             ->orderby('activity_id') 
-             ->get();  
+
+        if ($id == 0){
+            $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course) {
+                $query->where('course_id', $course);
+            } )
+            ->where('certificateValided', $valided)
+            ->orderby('activity_id') 
+            ->get();  
+
+        } else {
+            $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course, $id) {
+                $query->where('course_id', $course)
+                      ->where('id',$id);
+            } )
+            ->where('certificateValided', $valided)
+            ->orderby('activity_id') 
+            ->get();  
+        }
+
+        
 
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $activities = [];
