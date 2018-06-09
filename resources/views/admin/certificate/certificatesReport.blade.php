@@ -3,7 +3,7 @@
 @section('content_header')
 
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.certificate.accepted') }}">Voltar</a></li>
+        <li><a href="{{ URL::previous()  }}">Voltar</a></li>
         
     </ol>
 
