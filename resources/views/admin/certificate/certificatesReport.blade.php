@@ -3,8 +3,7 @@
 @section('content_header')
 
     <ol class="breadcrumb">
-        <li><a href="{{ URL::previous()  }}">Voltar</a></li>
-        
+        <li><a href="{{ URL::previous() }}">Voltar</a></li>
     </ol>
 
     <script>
@@ -30,8 +29,6 @@
         <p style="text-align: center;">Atesto que o aluna(o) <strong> {{ $person->name }} </strong>, matriculada(o) no Curso <strong>{{ $person->course->name }} </strong>, {{ $person->course->qtSem }}º período, turma_______, deste <i>Campus</i>, cumpriu a carga horária das Atividades Acadêmicas Complementares, com aproveitamento suficiente, conforme a seguinte programação:</p>
         
         <br>
-
-			
 
         <table class="table table-hover table-sm" style="" >
 
@@ -118,22 +115,10 @@
 
                             <p style="text-align:center;">{{ $coordinator->name }}</p>
                             <p style="text-align:center;">Coordenador do Curso</p>
-                        </div>
-
-
-               
-               
+                        </div>     
                
                </div>
 
-                
-          
-	
-
-
-
-
-         
     </div>    
 @stop
 
