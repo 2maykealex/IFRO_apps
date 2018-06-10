@@ -6,6 +6,35 @@
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         <li><a href="{{ route('admin.courses') }}">Lista de certificados dos Alunos</a></li>
     </ol>
+
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    
+    <script>
+        $(document).ready(function(e) {
+            $("body").delegate("#studentName", "change", function(data){
+
+                //Pegando o valor do select
+                var valor = $(this).val();
+
+                // alert(valor);
+                
+                //Enviando o valor do meu select para ser processado e
+                //retornar as informações que eu preciso
+
+                window.location = "/admin/certificates/pending/"+valor
+            });
+
+        });
+    </script>
+
+    <!-- <script type="text/javascript">
+        
+        var e = document.getElementById("studentName");
+        var itemSelecionado = e.options[e.selectedIndex].value;
+    
+    </script> -->
+    
 @stop
 
 @section('content')
@@ -20,7 +49,7 @@
 
         <div class="col-md-10">        
             <div class="form-group">
-                <select name="studentName" class="form-control" >
+                <select name="studentName" class="form-control" id="studentName" >
                     @foreach ($students as $student)     
                         @if ($student->person != null)               
                             <option value="{{ $student->person->id }}">{{ $student->person->name }}</option>
