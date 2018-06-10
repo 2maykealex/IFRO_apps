@@ -17,34 +17,20 @@
                 //Pegando o valor do select
                 var valor = $(this).val();
 
-                // alert(valor);
-                
-                //Enviando o valor do meu select para ser processado e
-                //retornar as informações que eu preciso
-
                 window.location = "/admin/certificates/pending/"+valor
             });
 
         });
     </script>
-
-    <!-- <script type="text/javascript">
-        
-        var e = document.getElementById("studentName");
-        var itemSelecionado = e.options[e.selectedIndex].value;
-    
-    </script> -->
     
 @stop
 
 @section('content')
 
-
     <div class="row">
     
         <div class="col-md-1">
-            Aluno:
-        
+            Aluno:        
         </div>
 
         <div class="col-md-10">        
@@ -66,23 +52,13 @@
                 </button>
             </a>
         </div>
-    
     </div>
     
-    
-
     <div class="box-body">
         @include('admin.includes.alerts')
-
-        
           
         <table class="table table-bordered table-hover table-responsive">
             <!-- Sem Tag de cabeçalho -->
-            
-            <?php //dd($activities);?>
-
-
-            
 
             @Foreach ($activities as $key => $activity)
                 
@@ -149,8 +125,6 @@
                                         <a href="{{ route('admin.certificate.validate', [$certificate->id, 2]) }}">
                                             <button class="btn btn-danger">Recusar</button>
                                         </a>
-
-                                    
                                     </td>
                                 </tr>
 
@@ -169,7 +143,6 @@
                             <td></td>
                             <td></td>
                             <td><strong>TOTAL</strong></td>
-                            
                             
                             <td><strong> <?php echo $soum?> </strong></td>
                             <td><strong>HORAS</strong></td>
