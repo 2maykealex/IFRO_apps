@@ -32,7 +32,8 @@
                         <tr>                                
                             <th></th>
                             <th>#</th>           
-                            <th>Descrição:</th>      
+                            <th>Aluno:</th>           
+                            <th>Curso:</th>      
                             <th>Validado em:</th>      
                             <th>Link Validação:</th>      
                             <th>Código:</th>    
@@ -53,6 +54,7 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $count }}</td>
+                                    <td style="width:280px;">{{ $certificate->person->name }}</td>
                                     <td style="width:400px;">{{ $certificate->description}}</td> 
                                     <td>{{ $certificate->updated_at->format('d/m/Y')}}</td>         
                                     <td></td>       
@@ -89,8 +91,14 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td><strong>TOTAL DE HORAS</strong></td>
-                            <td><strong> <?php echo $soum.' Horas'?> </strong></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>TOTAL</strong></td>
+                            
+                            
+                            <td><strong> <?php echo $soum?> </strong></td>
+                            <td><strong>HORAS</strong></td>
+                            
                         </tr>
 
                     </tbody>
