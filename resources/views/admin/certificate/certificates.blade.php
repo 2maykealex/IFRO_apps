@@ -21,7 +21,9 @@
             });
 
         });
-    </script>
+    </script>          
+    
+    <!-- //selecionar item do select após a filtragem -->
     
 @stop
 
