@@ -35,11 +35,9 @@ class CertificateController extends Controller
         $data->save();
 
         if ($value == 1){
-            // return redirect()->route('admin.certificate.accepted');
             return redirect()->route('admin.certificates', ['accepted', ''])->with('success', 'Certificado validado com sucesso!');
         }else if($value == 2){
             return redirect()->route('admin.certificates', ['rejected', ''])->with('error', 'Certificado validado com sucesso!');
-            // return redirect()->route('admin.certificate.rejected');
         }
     }
     public function certificateStore(Request $request, Certificate $certificate){
