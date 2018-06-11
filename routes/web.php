@@ -21,8 +21,8 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'adm
 
     $this->get('certificates-report', 'CertificateController@certificatesReport')->name('admin.certificates.report'); 
     $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('admin.certificate.validate'); 
-    $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('admin.certificates/{status}'); 
-    $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('admin.certificates/{status}/{id}'); 
+    $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('admin.certificates'); 
+    $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('admin.certificates'); 
 
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('admin.certificate.store');    
     $this->get('certificate-upload', 'CertificateController@upload')->name('admin.certificate.upload'); 
