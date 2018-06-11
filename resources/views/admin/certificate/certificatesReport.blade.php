@@ -59,8 +59,8 @@
                                 <td>{{ $key }}</td>
                                 <td>{{ $certificate->description }}</td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{ $certificate->local }}</td>
+                                <td>{{ $certificate->period }}</td>
                                 <td>{{ $certificate->chCertificate }}</td>
                                 <!-- <td></td> -->
                             </tr>
