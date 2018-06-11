@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Fazer upload de certificados</h1>
+    <h1>Fazer envio de certificados</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         <li><a href="{{ route('admin.activity.new') }}">Nova atividade</a></li>
@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3>Cadastrar nova</h3>
+            <h3>Enviar certificado</h3>
         </div>
 
         <div class="box-body">
@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <select name="activity_id" class="form-control" required>
-                        <option value="">--- Selecione a atividade ---</option>
+                        <option value="">--- Selecione a atividade que corresponde o certificado ---</option>
                         @foreach ($activities as $activity)
                             <option value="{{ $activity->id }}">{{ $activity->id }} - {{ $activity->descricao }}</option>
                         @endforeach
@@ -33,14 +33,22 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="chCertificate" placeholder="CH do certificado" class="form-control" required>
+                    <input type="text" name="local" placeholder="Local, Cidade e Estado onde foi emitido o certificado" class="form-control" required>
                 </div>
 
-                <input id="prodId" name="certificateValided" type="hidden" value="0"> <!-- 0 não validado -->
+                <div class="form-group">
+                    <input type="text" name="period" placeholder="Ex: Janeiro/2018;  Maio/2018 a Junho/2018" class="form-control" required>
+                </div>
 
                 <div class="form-group">
                     <input type="file" name="image" class="form-control" required>
                 </div>
+
+                <div class="form-group">
+                    <input type="text" name="chCertificate" placeholder="CH do certificado" class="form-control" required>
+                </div>
+
+                <input id="prodId" name="certificateValided" type="hidden" value="0"> <!-- 0 não validado -->
 
                 <div class="form-group">
                     <input type="text" name="linkValidation" placeholder="Link da validação do certificado (opcional)" class="form-control">
