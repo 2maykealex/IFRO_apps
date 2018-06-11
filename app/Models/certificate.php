@@ -21,6 +21,8 @@ class certificate extends Model
         $this->person_id             = $data['person_id'];
         $this->activity_id           = $data['activity_id'];
         $this->description           = $data['description'];
+        $this->local                 = $data['local'];
+        $this->period                = $data['period'];
         $this->chCertificate         = $data['chCertificate'];
         $this->certificateValided    = $data['certificateValided'];
         $this->image                 = $data['image'];

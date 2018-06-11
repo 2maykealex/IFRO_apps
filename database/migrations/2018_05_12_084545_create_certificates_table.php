@@ -20,6 +20,8 @@ class CreateCertificatesTable extends Migration
             $table->integer('activity_id')->unsigned();
             $table->foreign('activity_id')->references('id')->on('activities')->onDelete('cascade');            
             $table->string('description', 100)->nullable;
+            $table->string('local', 100)->nullable;
+            $table->string('period', 100)->nullable;
             $table->integer('chCertificate')->nullable;
             $table->integer('certificateValided')->nullable();
             $table->string('linkValidation', 200)->nullable();
