@@ -15,10 +15,22 @@
     
     <script>
         $(document).ready(function(e) {
+
+            // 
+            if ($("#studentName").val() == '') {
+                // alert($("#btnReport").val());
+                $("#btnReport").hide();
+            } else {
+                $("#btnReport").show();
+            };
+
+
             $("body").delegate("#studentName", "change", function(data){
 
                 //Pegando o valor do select
                 var valor = $(this).val();
+
+               
 
                 window.location = "/admin/certificates/accepted/"+valor
             });
@@ -54,8 +66,8 @@
 
 
  <div class="form-group">            
-    <a href="{{ route('admin.certificates.report') }}">
-        <button class="btn btn-primary">Ver Relatório</button>
+    <a href="{{ route('admin.certificates.report', [$id]) }}">
+        <button class="btn btn-primary" id="btnReport" >Ver Relatório</button>
     </a>   
 </div>     
     <div class="box-body">

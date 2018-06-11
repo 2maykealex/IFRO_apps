@@ -88,13 +88,13 @@ class CertificateController extends Controller
         return redirect()->route('admin.certificates', ['pending', ''])->with('success', 'Certificado carregado com sucesso!');
 
     }
-    public function certificatesReport(){
+    public function certificatesReport($id){
 
         $userCoord = auth()->user();
 
         $coordinator = Person::where('user_id', $userCoord->id)->with('course')->get()->first();
 
-        $person = Person::where('user_id', 3)->with('course')->get()->first();
+        $person = Person::where('user_id', $id)->with('course')->get()->first();
 
         $activities = [];
     
@@ -122,7 +122,7 @@ class CertificateController extends Controller
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
         // dd($activities);
-        return view('admin.certificate.certificatesReport', compact(['coordinator', 'person', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey']));
+        return view('admin.certificate.certificatesReport', compact(['id','coordinator', 'person', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey']));
 
                                                                        
         // return view('admin.certificate.certificatesReport', compact(['$certificates', '$personActivities','person']));

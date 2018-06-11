@@ -19,7 +19,7 @@ Route::group(['middleware' => ['auth'], 'namespace' => 'Site', 'prefix' => 'site
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
-    $this->get('certificates-report', 'CertificateController@certificatesReport')->name('admin.certificates.report'); 
+    $this->get('certificates-report/{id}', 'CertificateController@certificatesReport')->name('admin.certificates.report'); 
     $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('admin.certificate.validate'); 
     $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('admin.certificates'); 
     $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('admin.certificates'); 
