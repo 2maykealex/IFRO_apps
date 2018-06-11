@@ -6,9 +6,44 @@
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         
     </ol>
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    
+    <script>
+        $(document).ready(function(e) {
+            $("body").delegate("#studentName", "change", function(data){
+
+                //Pegando o valor do select
+                var valor = $(this).val();
+
+                window.location = "/admin/certificates/rejected/"+valor
+            });
+
+        });
+    </script>     
 @stop
 
 @section('content')
+
+    <div class="row">
+        <div class="col-md-12">        
+            <div class="form-group">
+
+                <label for="studentName">
+                    Filtrar certificados do Aluno:
+                </label>
+                
+                <select name="studentName" class="form-control" id="studentName" >
+                    <option value="">Listar todos</option>
+
+                    @foreach ($students as $student)                         
+                        <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
+                    @endforeach  
+                </select>
+            </div>
+        </div>        
+    </div>
+
     <div class="box-body">
         @include('admin.includes.alerts')
           

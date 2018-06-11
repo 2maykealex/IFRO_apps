@@ -181,12 +181,12 @@ class CertificateController extends Controller
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
         if ($valided == 0){
-            return view('admin.certificate.certificates', compact(['activities', 'students', 'person', 'certificates', 'count','soum']));
+            return view('admin.certificate.certificates', compact(['id', 'activities', 'students', 'person', 'certificates', 'count','soum']));
         }else if ($valided == 1){
-            return view('admin.certificate.accepted', compact(['activities', 'students', 'person', 'certificates', 'count','soum']));
+            return view('admin.certificate.accepted', compact(['id', 'activities', 'students', 'person', 'certificates', 'count','soum']));
         }
         else if ($valided == 2){
-            return view('admin.certificate.rejected', compact(['activities', 'students', 'person', 'certificates', 'count','soum']));
+            return view('admin.certificate.rejected', compact(['id', 'activities', 'students', 'person', 'certificates', 'count','soum']));
         }
 
         

@@ -30,30 +30,22 @@
 @section('content')
 
     <div class="row">
-    
-        <div class="col-md-1">
-            Aluno:        
-        </div>
-
-        <div class="col-md-10">        
+        <div class="col-md-12">        
             <div class="form-group">
+
+                <label for="studentName">
+                    Filtrar certificados do Aluno:
+                </label>
+                
                 <select name="studentName" class="form-control" id="studentName" >
-                    @foreach ($students as $student)     
-                        @if ($student->person != null)               
-                            <option value="{{ $student->person->id }}">{{ $student->person->name }}</option>
-                        @endif
+                    <option value="">Listar todos</option>
+
+                    @foreach ($students as $student)                         
+                        <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
                     @endforeach  
                 </select>
             </div>
-        </div>
-
-        <div class="col-md-1">
-            <a href="">   <!-- /route(admin.certificates/pending) -->
-                <button class="btn btn-primary">
-                    Filtrar
-                </button>
-            </a>
-        </div>
+        </div>        
     </div>
     
     <div class="box-body">

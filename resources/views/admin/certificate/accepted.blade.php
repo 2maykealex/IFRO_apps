@@ -2,31 +2,62 @@
 
 @section('content_header')
 
-    <div class="row">
-        <div class="col-md-10">
-            <h1>Certificados aprovados</h1>    
-            
-        </div>
+    <h1>Certificados aprovados</h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('admin.home') }}">Home</a></li>
+        <li><a href="{{ route('admin.courses') }}">Lista de certificados dos Alunos</a></li>
+    </ol>
 
-        <div class="col-md-2">
-            <div class="row">
-            <br>
-
-            <a href="{{ route('admin.certificates.report') }}">
-                <button class="btn btn-primary">Ver Relatório</button>
-            </a>   
-            
-            </div>
-
-                 
-        </div>  
-    </div>
+    
     
 
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    
+    <script>
+        $(document).ready(function(e) {
+            $("body").delegate("#studentName", "change", function(data){
+
+                //Pegando o valor do select
+                var valor = $(this).val();
+
+                window.location = "/admin/certificates/accepted/"+valor
+            });
+
+        });
+    </script>   
 
 @stop
 
 @section('content')
+
+    <div class="row">
+        <div class="col-md-12">        
+            <div class="form-group">
+
+                <label for="studentName">
+                    Filtrar certificados do Aluno:
+                </label>
+                
+                <select name="studentName" class="form-control" id="studentName" >
+                    <option value="">Listar todos</option>
+
+                    @foreach ($students as $student)                         
+                        <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
+                    @endforeach  
+                </select>
+            </div>
+        </div> 
+
+       
+
+    </div>
+
+
+ <div class="form-group">            
+    <a href="{{ route('admin.certificates.report') }}">
+        <button class="btn btn-primary">Ver Relatório</button>
+    </a>   
+</div>     
     <div class="box-body">
         @include('admin.includes.alerts')
           
