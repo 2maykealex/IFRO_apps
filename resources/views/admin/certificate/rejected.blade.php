@@ -70,9 +70,9 @@
                             <th>Aluno:</th>           
                             <th>Curso:</th>      
                             <th>Validado em:</th>      
-                            <th>Link Validação:</th>      
+                            <th>Link:</th>      
                             <th>Código:</th>    
-                            <th>CH Válidas:</th>      
+                            <th>CH:</th>      
                             <th>Ações:</th>      
                         </tr>
                     </thead>

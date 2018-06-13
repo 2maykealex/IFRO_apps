@@ -2,16 +2,11 @@
 
 @section('content_header')
 
-    
-    
-
     <h1>Certificados aprovados</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         <li><a href="{{ route('admin.courses') }}">Lista de certificados dos Alunos</a></li>
     </ol>
-
-    
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     
@@ -24,7 +19,6 @@
             } else {
                 $("#btnReport").show();
             };
-
 
             $("body").delegate("#studentName", "change", function(data){
 
@@ -40,8 +34,6 @@
 @stop
 
 @section('content')
-
-    
 
     <div class="row">
         <div class="col-md-12">        
@@ -74,8 +66,6 @@
           
         <table class="table table-bordered table-hover table-responsive">
             <!-- Sem Tag de cabeçalho -->
-            
-            
 
             @Foreach ($activities as $key => $activity)
                 
@@ -95,9 +85,9 @@
                             <th>Aluno:</th>     
                             <th>Curso:</th>      
                             <th>Validado em:</th>      
-                            <th>Link Validação:</th>      
+                            <th>Link:</th>      
                             <th>Código:</th>    
-                            <th>CH Válidas:</th>      
+                            <th>CH:</th>      
                             <th>Ações:</th>      
                         </tr>
                     </thead>
@@ -121,15 +111,10 @@
                                     <td></td>       
                                     
                                     <td>{{ $certificate->chCertificate}}</td>
-                                    <td>
-                                        
+                                    <td>                                        
                                         <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
-                                            <button class="btn btn-primary">Imagem</button>
-                                        </a>
-
-                                       
-
-                                    
+                                            <button class="btn btn-default">Imagem</button>
+                                        </a>                                    
                                     </td>
                                 </tr>
 
