@@ -5,9 +5,8 @@ $this->get('import-students', 'ExcelController@getImport')->name('admin.excel.ge
 
 Route::group(['middleware' => ['auth'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
 
-    $this->get('certificates', 'CertificateController@certificatesPending')->name('site.certificates'); 
-    $this->get('certificates-accepted', 'CertificateController@certificatesAccepted')->name('site.certificate.accepted'); 
-    $this->get('certificates-rejected', 'CertificateController@certificatesRejected')->name('site.certificate.rejected'); 
+    $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('site.certificates'); 
+    $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('site.certificates'); 
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('site.certificate.store');    
     $this->get('certificate-upload', 'CertificateController@upload')->name('site.certificate.upload'); 
 
