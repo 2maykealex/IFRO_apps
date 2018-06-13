@@ -197,9 +197,6 @@ class CertificateController extends Controller
         else if ($valided == 2){
             return view('admin.certificate.rejected', compact(['id', 'activities', 'students', 'person', 'certificates', 'count','soum']));
         }
-
-        
-        
     }
 
 }
