@@ -1,5 +1,7 @@
 <?php
 
+//O MENU DO PERFIL DO ALUNO ESTÁ NA VIEW:     VIEW\VENDOR\ADMINLTE\USER.BLADE.PHP  A PARTIR DA LINHA  90
+
 if(0 == 0){ //Checar a possibilidade de vir o tipo de usuário e preenchero o menu
 
     return [
