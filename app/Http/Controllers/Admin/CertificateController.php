@@ -18,13 +18,20 @@ class CertificateController extends Controller
 
         $person = Person::where('user_id', $user->id)->get()->first();
 
+        $course = $person->course_id;
+
+        $students = Student::with(['person' => function($q) use($course) {
+            $q->where('course_id', $course);
+        }])
+        ->get()->sortBy('person.name');
+
         $activities = Activity::all();
 
-        $student = Student::with(['person'])->get();
+        // $student = Student::with(['person'])->get();
 
         $value = 0;
 
-        return view('admin.certificate.upload', compact(['person', 'activities', 'value']));
+        return view('admin.certificate.upload', compact(['students', 'person', 'activities', 'value']));
     }
     public function validateCertificate($id, $value){
 
@@ -46,13 +53,13 @@ class CertificateController extends Controller
 
         $activityData = $data['activity_id'];
 
-        //dd($activityData);
+        // dd($data);
 
         $user = auth()->user();
 
         $person = Person::where('user_id', $user->id)->get()->first();
 
-        $data['person_id'] = $person->id;  //add no final de $data   
+        $data['person_id'] = $data['idStudent']; //$person->id;  //add no final de $data   
         
         $activity = Activity::where('id', $activityData)->get()->first();
 
@@ -83,9 +90,11 @@ class CertificateController extends Controller
 
         }   
         
+        $data['certificateValided'] = 1;  //Já aceita o certificado automáticamente ao fazer o UPLOAD
+
         $update = $certificate->certificateNew($data);
 
-        return redirect()->route('admin.certificates', ['pending', ''])->with('success', 'Certificado carregado com sucesso!');
+        return redirect()->route('admin.certificates', ['accepted', ''])->with('success', 'Certificado carregado com sucesso!');
 
     }
     public function certificatesReport($id){
