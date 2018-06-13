@@ -6,6 +6,13 @@
         <li><a href="{{ URL::previous() }}">Voltar</a></li>
     </ol>
 
+
+    <style media="print">
+        .btnPrint {
+        display: none;
+        }
+    </style>
+
     <script>
         .centralizar{
             margin-left: auto; 
@@ -14,9 +21,22 @@
         }
     </script>
 
+    <script>
+        function cont(){
+            var conteudo = document.getElementById('print').innerHTML;
+            tela_impressao = window.open('about:blank');
+            tela_impressao.document.write(conteudo);
+            tela_impressao.window.print();
+            tela_impressao.window.close();
+        }
+    </script>
+
 @stop
 
 @section('content')
+
+    <input class="btnPrint btn btn-warning" type="button" value="Imprimir relatório" onClick="window.print()"/>
+
     <div class="box-body">
         @include('admin.includes.alerts')        
         
