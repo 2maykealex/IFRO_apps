@@ -6,10 +6,53 @@
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         <li><a href="{{ route('admin.activity.new') }}">Nova atividade</a></li>
     </ol>
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    
+    <script>
+        $(document).ready(function(e) {
+
+            $("#formulario").hide();             // carrega a página com o formulário de envio oculto
+
+            $("body").delegate("#studentName", "change", function(data){
+                //Pegando o valor do select
+                var valor = $(this).val();
+                
+                $("#idStudent").val(valor);
+                
+                if ($("#studentName").val() == '') {
+                    $("#formulario").hide();
+                } else {
+                    $("#formulario").show();
+                };
+            });
+        });
+    </script>   
+
 @stop
 
 @section('content')
-    <div class="box">
+
+    <div class="row">
+        <div class="col-md-12">        
+            <div class="form-group">
+
+                <label for="studentName">
+                    Incluir certificado para o Aluno:
+                </label>
+                
+                <select name="studentName" class="form-control" id="studentName" >
+                    <option value="">Selecionar o aluno:</option>
+
+                    @foreach ($students as $student)                         
+                        <option value="{{ $student->person->id }}"> {{ $student->person->name }}</option>                        
+                    @endforeach  
+                </select>
+            </div>
+        </div> 
+    </div>
+
+    <div class="box" id="formulario">
         <div class="box-header">
             <h3>Enviar certificado</h3>
         </div>
@@ -49,6 +92,8 @@
                 </div>
 
                 <input id="prodId" name="certificateValided" type="hidden" value="0"> <!-- 0 não validado -->
+
+                <input id="idStudent" name="idStudent" type="hidden"> <!-- 0 não validado -->
 
                 <div class="form-group">
                     <input type="text" name="linkValidation" placeholder="Link da validação do certificado (opcional)" class="form-control">
