@@ -30,16 +30,24 @@
                 <div class="form-group">
                     <input type="text" name="description" placeholder="Descrição do certificado" class="form-control" required>
                 </div>
+                
+                <div class="form-group">
+                    <input type="text" name="local" placeholder="Local, Cidade e Estado onde foi emitido o certificado" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" name="period" placeholder="Ex: Janeiro/2018;  Maio/2018 a Junho/2018" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="file" name="image" class="form-control" required>
+                </div>
 
                 <div class="form-group">
                     <input type="text" name="chCertificate" placeholder="CH do certificado" class="form-control" required>
                 </div>
 
                 <input id="prodId" name="certificateValided" type="hidden" value="0"> <!-- 0 não validado -->
-
-                <div class="form-group">
-                    <input type="file" name="image" class="form-control" required>
-                </div>
 
                 <div class="form-group">
                     <input type="text" name="linkValidation" placeholder="Link da validação do certificado (opcional)" class="form-control">
