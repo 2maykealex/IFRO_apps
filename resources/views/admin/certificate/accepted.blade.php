@@ -113,7 +113,7 @@
                                     <td>{{ $certificate->chCertificate}}</td>
                                     <td>                                        
                                         <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
-                                            <button class="btn btn-default">Imagem</button>
+                                            <button class="btn btn-primary">Imagem</button>
                                         </a>                                    
                                     </td>
                                 </tr>
