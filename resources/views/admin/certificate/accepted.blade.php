@@ -2,6 +2,9 @@
 
 @section('content_header')
 
+    
+    
+
     <h1>Certificados aprovados</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
@@ -9,28 +12,24 @@
     </ol>
 
     
-    
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     
     <script>
         $(document).ready(function(e) {
 
-            // 
-            if ($("#studentName").val() == '') {
-                // alert($("#btnReport").val());
-                $("#btnReport").hide();
-            } else {
-                $("#btnReport").show();
-            };
+            // if ($("#studentName").val() == '') {
+            //     // alert($("#btnReport").val());
+            //     $("#btnReport").hide();
+            // } else {
+            //     $("#btnReport").show();
+            // };
 
 
             $("body").delegate("#studentName", "change", function(data){
 
                 //Pegando o valor do select
-                var valor = $(this).val();
-
-               
+                var valor = $(this).val();               
 
                 window.location = "/admin/certificates/accepted/"+valor
             });
@@ -41,6 +40,8 @@
 @stop
 
 @section('content')
+
+    
 
     <div class="row">
         <div class="col-md-12">        
@@ -59,9 +60,6 @@
                 </select>
             </div>
         </div> 
-
-       
-
     </div>
 
 
@@ -70,8 +68,9 @@
         <button class="btn btn-primary" id="btnReport" >Ver Relatório</button>
     </a>   
 </div>     
+
+@include('admin.includes.alerts')
     <div class="box-body">
-        @include('admin.includes.alerts')
           
         <table class="table table-bordered table-hover table-responsive">
             <!-- Sem Tag de cabeçalho -->
