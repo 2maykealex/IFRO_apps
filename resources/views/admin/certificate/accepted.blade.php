@@ -18,12 +18,12 @@
     <script>
         $(document).ready(function(e) {
 
-            // if ($("#studentName").val() == '') {
-            //     // alert($("#btnReport").val());
-            //     $("#btnReport").hide();
-            // } else {
-            //     $("#btnReport").show();
-            // };
+            if ($("#studentName").val() == '') {
+                // alert($("#btnReport").val());
+                $("#btnReport").hide();
+            } else {
+                $("#btnReport").show();
+            };
 
 
             $("body").delegate("#studentName", "change", function(data){
