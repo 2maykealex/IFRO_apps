@@ -1,8 +1,5 @@
 <?php
 
-$this->post('storeImport', 'ExcelController@studentStore')->name('student.import.store');
-$this->get('import-students', 'ExcelController@getImport')->name('admin.excel.getImport');
-
 Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
 
     $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('site.certificates'); 
