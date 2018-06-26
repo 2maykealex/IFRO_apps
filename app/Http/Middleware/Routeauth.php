@@ -3,8 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use \App\Models\Student;
-use \App\User;
+// use \App\Models\Student;
+// use \App\User;
 use \App\Models\Coordinator;
 use Illuminate\Http\Request;
 
@@ -20,6 +20,8 @@ class Routeauth               //se o usuário logado acessar um link q não seja
     public function handle($request, Closure $next)
     {
         $user = auth()->user();  //recupera o usuário logado
+
+        // dd($user->userProfile->profileAccess->name);  
 
         $profile = $user->userProfile->profileAccess->name;  //retorna o perfil dele
 
