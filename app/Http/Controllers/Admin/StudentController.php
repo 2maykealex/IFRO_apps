@@ -14,6 +14,73 @@ use App\User;
 class StudentController extends Controller
 {
 
+    public function importExcel(){        
+        return view('admin.student.import');
+    }
+
+    public function importExcelStore(Request $request){
+
+        $userCoord = auth()->user(); 
+        $personCoord = Person::where('user_id', $userCoord->id)->get()->first();
+
+
+        $filename = $_FILES['fileStudents']['tmp_name'];
+        $handle = fopen("$filename", "r");
+        
+        $row = 1;
+        $studentsInvalided = Array();
+
+        while (($emapData = fgetcsv($handle, 10000, ";")) !== FALSE){
+            $num = count($emapData);
+            // dd($emapData);
+
+            if (filter_var($emapData[11], FILTER_VALIDATE_EMAIL)){
+
+                $email = $emapData[11];
+                $name      = $emapData[0]; 
+                $nameArray = explode(" ", $name);      //transforma a string em array
+                $firstName = $nameArray[0];                   //Obtendo o primeiro nome do array criado
+                $cpf       = $emapData[5];
+                $cpf = trim($cpf);
+                $cpf = str_replace(".", "", $cpf);
+                $password  = md5($cpf);
+
+                $users[$row][0] = $firstName;
+                $users[$row][1] = $email;
+                $users[$row][2] = $password;    
+                
+                $people[$row][0] = $name;  //name
+                $people[$row][1] = $cpf;
+                $people[$row][2] = $personCoord->course_id;     // Id do curso do Coordenador Logado
+                $people[$row][3] = trim($emapData[12]);  //explode(";", $emapData[12]) ;               // Telefones
+
+                $students[$row][0] = $emapData[13];   //matrícula
+                $students[$row][1] = $emapData[17];   //última turma vinculada
+
+                //STATUS
+                if ($emapData[18] == 'MATRICULADO'){
+                    $students[$row][2] = 1;   //MATRICULADO
+                } else {
+                    $students[$row][2] = 0;   //TRANCADO/EVADIDO/OUTROS
+                }
+                
+            } else{
+                //recebe os dados que não estão completos para inserir aluno por importação
+                //fazer filtragem dos campos que interessa
+                $studentsInvalided [$row] = $emapData;
+            }
+            //fazer a inserção na model
+            
+            $row++;
+            
+        }
+
+        // dd($students);
+        fclose($handle);
+        
+        return view('admin.student.import', ["users" => $users, "people" => $people, "students" => $students,  "studentsInvalideds" => $studentsInvalided]);
+    }
+
     public function newStudent(){
 
         $courses = Course::with('area')->get();
