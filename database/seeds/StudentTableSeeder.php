@@ -15,11 +15,15 @@ class StudentTableSeeder extends Seeder
         Student::create([
             'person_id'    => 2,
             'registration' => 987654,
+            'group'  => '20181066301A',
+            'status' => 1,
         ]);
 
         Student::create([
             'person_id'    => 3,
             'registration' => 56784,
+            'group'  => '20181066301A',
+            'status' => 1,
         ]);
     }
 }
