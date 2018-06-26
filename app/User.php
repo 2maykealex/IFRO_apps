@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Models\userProfile;
+use App\Models\UserProfile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
