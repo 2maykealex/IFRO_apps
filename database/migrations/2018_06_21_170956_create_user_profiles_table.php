@@ -22,7 +22,6 @@ class CreateUserProfilesTable extends Migration
             $table->integer('profile_access_id')->unsigned();
             $table->foreign('profile_access_id')->references('id')->on('profile_accesses') ;
 
-            $table->timestamps(); //remover depois
         });
     }
 
