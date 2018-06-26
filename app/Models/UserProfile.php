@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserProfile extends Model
 {
+    public $timestamps = false;
+    
     public function profileAccess(){
         return $this->belongsTo(ProfileAccess::class);
     }
