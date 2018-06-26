@@ -56,6 +56,6 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Admin', 'pr
 
 
 $this->get('/', 'Site\SiteController@index');
-$this->get('/check-user', 'Site\SiteController@checkUser');
+$this->get('/check-user', 'Site\SiteController@checkUser');   //é necessário pois os Menus são diferentes
 
 Auth::routes();
