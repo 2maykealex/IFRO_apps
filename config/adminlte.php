@@ -125,7 +125,13 @@ return [
             'url'  => 'admin',
             'icon' => 'user',
             'submenu' => [
-                
+                    [
+                        'text' => 'Importar de arquivo .CSV',
+                        'url'  => 'admin/import-students',
+                        'icon' => 'file',
+                        
+                    ],
+
                     [
                         'text' => 'Incluir novo aluno',
                         'url'  => 'admin/student-new',
