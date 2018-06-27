@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             $table->integer('person_id')->unsigned();
             $table->foreign('person_id')->references('id')->on('people');
-            $table->integer('registration');
+            $table->string('registration', 20);
             $table->string('group', 50);           //turma
             $table->boolean('status');          // 1- MATRICULADO   0-TRANCADO OU EVADIDO
 
