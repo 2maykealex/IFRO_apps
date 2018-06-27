@@ -1,4 +1,4 @@
-@extends('adminlte::user')
+@extends('adminlte::page')
 
 @section('content_header')
     <h1>Cadastrar Alunos por importação</h1>
