@@ -1,13 +1,13 @@
 <?php
 
-$this->post('storeImport', 'Admin\StudentController@importExcelStore')->name('admin.student.import');
-$this->get('import', 'Admin\StudentController@importExcel')->name('admin.import');
+
+
 
 Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
 
     $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('site.certificates'); 
     $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('site.certificates'); 
-    $this->post('certificate-store', 'CertificateController@certificateStore')->name('site.certificate.store');    
+    $this->post('certificate-store', 'CertificateController@certificateStore')->name('site.certificate.store');
     $this->get('certificate-upload', 'CertificateController@upload')->name('site.certificate.upload'); 
 
     $this->get('/', 'SiteController@home')->name('site.home');    
@@ -26,7 +26,8 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Admin', 'pr
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('admin.certificate.store');     
     $this->get('certificate-upload', 'CertificateController@upload')->name('admin.certificate.upload');  
 
-    
+    $this->post('storeImport', 'StudentController@importExcelStore')->name('admin.student.import'); //ajustar essas rotas
+    $this->get('import-students', 'StudentController@importExcel')->name('admin.import.students');
     
     $this->post('student-store', 'StudentController@studentStore')->name('admin.student.store'); 
     $this->get('students', 'StudentController@students')->name('admin.students');     
