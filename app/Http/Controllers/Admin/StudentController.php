@@ -80,7 +80,9 @@ class StudentController extends Controller
         
         $update = $importPeople->importPeople($users, $people, $students);
 
-        return view('admin.student.import', ["users" => $users, "people" => $people, "students" => $students,  "studentsInvalideds" => $studentsInvalided]);
+        return redirect()->route('admin.students')->with('success', 'Alunos importados com sucesso!');
+
+        // return view('admin.student.import', ["users" => $users, "people" => $people, "students" => $students,  "studentsInvalideds" => $studentsInvalided]);
     }
 
     public function newStudent(){
