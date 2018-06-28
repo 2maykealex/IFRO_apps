@@ -13,13 +13,6 @@
     <script>
         $(document).ready(function(e) {
 
-            if ($("#studentName").val() == '') {
-                // alert($("#btnReport").val());
-                $("#btnReport").hide();
-            } else {
-                $("#btnReport").show();
-            };
-
             $("body").delegate("#studentName", "change", function(data){
 
                 //Pegando o valor do select
@@ -56,12 +49,13 @@
         </div> 
     </div>
 
-
- <div class="form-group">            
-    <a href="{{ route('admin.certificates.report', [$id]) }}">
-        <button class="btn btn-primary" id="btnReport" >Ver Relatório</button>
-    </a>   
-</div>     
+@if ($id > 0)
+    <div class="form-group">            
+        <a href="{{ route('admin.certificates.report', [$id]) }}">
+            <button class="btn btn-primary" id="btnReport" >Ver Relatório</button>
+        </a>   
+    </div> 
+@endif  
 
 @include('admin.includes.alerts')
     <div class="box-body">
