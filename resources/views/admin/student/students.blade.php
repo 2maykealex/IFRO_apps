@@ -4,7 +4,7 @@
     <h1>Alunos</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
-        <li><a href="{{ route('admin.courses') }}">Lista de Coordenadores</a></li>
+        <li><a href="{{ route('admin.courses') }}">Lista de Alunos</a></li>
     </ol>
 @stop
 
@@ -16,7 +16,7 @@
                 <tr>
                     <th>#</th>
                     <th>Nome</th>
-                    <th>Coordena o curso</th>
+                    <th>Matriculado no curso</th>
                     <th>Celular</th>
                     <th>Registro no IFRO</th>
                 </tr>
