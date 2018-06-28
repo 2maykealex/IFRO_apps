@@ -103,6 +103,18 @@ class CertificateController extends Controller
 
         $coordinator = Person::where('user_id', $userCoord->id)->with('course')->get()->first();
 
+        $students = Student::with(['person' => function($q) use($id) {
+            $q->where('id', $id)
+              ->with('course');
+        }])
+        ->get();
+
+        foreach ($students as $student){
+            if ($student->person){
+                break;
+            }
+        }
+
         $person = Person::where('user_id', $id)->with('course')->get()->first();
 
         $activities = [];
@@ -131,7 +143,7 @@ class CertificateController extends Controller
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
         // dd($activities);
-        return view('admin.certificate.certificatesReport', compact(['id','coordinator', 'person', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey']));
+        return view('admin.certificate.certificatesReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey']));
 
                                                                        
         // return view('admin.certificate.certificatesReport', compact(['$certificates', '$personActivities','person']));

@@ -46,7 +46,7 @@
         <p style="text-align: center;">INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE RONDÔNIA</p>
         <p style="text-align: center;">CAMPUS ZONA NORTE</p>
         <p style="text-align: center;">ATESTADO DE CONCLUSÃO DE ATIVIDADES ACADÊMICAS COMPLEMENTARES</p>
-        <p style="text-align: center;">Atesto que o aluna(o) <strong> {{ $person->name }} </strong>, matriculada(o) no Curso <strong>{{ $person->course->name }} </strong>, {{ $person->course->qtSem }}º período, turma_______, deste <i>Campus</i>, cumpriu a carga horária das Atividades Acadêmicas Complementares, com aproveitamento suficiente, conforme a seguinte programação:</p>
+        <p style="text-align: center;">Atesto que o aluna(o) <strong> {{ $student->person->name }}</strong>, matriculada(o) no Curso <strong>{{ $student->person->course->name }}</strong>, {{ $student->person->course->qtSem }}º período, turma <strong>{{ $student->group }}</strong>, deste <i>Campus</i>, cumpriu a carga horária das Atividades Acadêmicas Complementares, com aproveitamento suficiente, conforme a seguinte programação:</p>
         
         <br>
 
