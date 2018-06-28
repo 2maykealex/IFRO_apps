@@ -36,8 +36,10 @@
                 <select name="studentName" class="form-control" id="studentName" >
                     <option value="">Listar todos</option>
 
-                    @foreach ($students as $student)                         
-                        <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
+                    @foreach ($students as $student)      
+                        @if (!is_null($student->person))                    
+                            <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
+                        @endif
                     @endforeach  
                 </select>
             </div>
