@@ -81,7 +81,7 @@
                                 <td></td>
                                 <td>{{ $certificate->local }}</td>
                                 <td>{{ $certificate->period }}</td>
-                                <td>{{ $certificate->chCertificate }}</td>
+                                <td>{{ $certificate->chCertificate }} horas</td>
                                 <!-- <td></td> -->
                             </tr>
 
@@ -99,7 +99,7 @@
             <tr class="row">
                     <td class="" colspan="4">TOTAL</td>
                     <td class=""></td>
-                    <td class="">{{ $soum }}</td>
+                    <td class="">{{ $soum }} horas</td>
                     <td class="" colspan="2"></td>
             </tr>
                 
