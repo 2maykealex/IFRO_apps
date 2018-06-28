@@ -13,18 +13,18 @@ class Person extends Model
         
         $count = count($students);
 
-        for ($x = 1; $x <= 3 ; $x++){
+        for ($x = 1; $x <= 2 ; $x++){
             $user   = new User;
             $studs  = new Student;
             $person = new Person;
             $profileAccess = new UserProfile;
 
-            $user->name       =  $users[$x][0];
+            $user->name       = strtoupper($users[$x][0]);
             $user->email      =  $users[$x][1];
             $user->password   =  bcrypt($users[$x][2]);
             $user->image      =  "";
 
-            $user->save();
+            $salvedUser = $user->save();
             
             $lastId = $user->id;
 
@@ -32,13 +32,13 @@ class Person extends Model
             $profileAccess->profile_access_id = 2;  //perfil: site
 
             // dd($profileAccess);
-            $profileAccess->save();
+            $salvedProfileAccess = $profileAccess->save();
 
             $person->user_id    =  $lastId;        //Count(User::all()) + 1;
             $person->course_id  =  $people[$x][2];
-            $person->name       =  $people[$x][0];
+            $person->name       =  strtoupper($people[$x][0]);
             $person->cpf        =  $people[$x][1];            
-            $person->telefones  =  $people[$x][3];
+            $person->telefones  =  strtoupper($people[$x][3]);
             
             $person->save();
 
@@ -51,7 +51,7 @@ class Person extends Model
 
             // dd($students[$x][0]);
             
-            $studs->save();
+            $salvedStudents = $studs->save();
 
             
 
@@ -60,7 +60,7 @@ class Person extends Model
             // $studs  = $this->save();
         }
 
-        if ($user)
+        if ($salvedUser and $salvedProfileAccess and $salvedStudents)
             return [
                 'success' => true,
                 'message' => 'Nova atividade foi cadastrada com sucesso!'
