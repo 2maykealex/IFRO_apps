@@ -95,7 +95,21 @@ class StudentController extends Controller
     }
 
     public function students(){ 
-        $students = Student::with(['person'])->get();
+
+        $user = auth()->user();       
+
+        $person = Person::where('user_id', $user->id)->get()->first();
+
+        $course = $person->course_id;
+
+        $students = Student::with(['person' => function($q) use($course) {
+            $q->where('course_id', $course);
+        }])
+        ->get()->sortBy('person.name');
+
+        // dd($students);
+        
+        // $students = Student::with(['person'])->get();
         return view('admin.student.students', compact('students') );
     }
 
