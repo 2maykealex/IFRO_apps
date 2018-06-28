@@ -114,12 +114,10 @@ class CertificateController extends Controller
                 break;
             }
         }
-
-        $person = Person::where('user_id', $id)->with('course')->get()->first();
+    
+        $certificates = Certificate::where('person_id',$student->person->id)->with(['activity', 'person'])->orderby('description')->get();        
 
         $activities = [];
-    
-        $certificates = Certificate::where('person_id',$person->id)->with(['activity', 'person'])->orderby('description')->get();        
         
         $personActivities = Certificate::where('certificateValided', 1)->orderby('activity_id') 
                                                                        ->get();
