@@ -23,13 +23,15 @@
             </thead>
             <tbody>        
                 @forelse ($students as $student)
-                <tr>
-                    <td>{{ $student->person->id }}</td>
-                    <td>{{ $student->person->name}}</td>
-                    <td>{{ $student->person->course->name}}</td>
-                    <td>{{ $student->person->cel }}</td>
-                    <td>{{ $student->registration }}</td>
-                </tr>
+                    @if (!is_null($student->person))    
+                        <tr>
+                            <td>{{ $student->person->id }}</td>
+                            <td>{{ $student->person->name}}</td>
+                            <td>{{ $student->person->course->name}}</td>
+                            <td>{{ $student->person->cel }}</td>
+                            <td>{{ $student->registration }}</td>
+                        </tr>
+                    @endif
                 @empty
                 @endforelse
                 
