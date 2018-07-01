@@ -14,7 +14,6 @@ class Student extends Model
         $student->registration  = $data['registration'];
         $student->group         = $data['group'];
         $student->status        = $data['status'];
-        $student->person_id     = $data['person_id'];
 
         $updated = $student->save();
 

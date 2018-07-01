@@ -158,7 +158,7 @@ return [
                 
                     [
                         'text' => 'Incluir novo Coordenador',
-                        'url'  => '#',
+                        'url'  => 'admin/coordinator-new',
                         'icon' => 'plus-circle',
                         
                     ],

@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1>Cadastrar um curso</h1>
+    <h1>Cadastrar novo coordenador de curso</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
         <li><a href="{{ route('admin.activity.new') }}">Novo curso</a></li>
@@ -11,51 +11,52 @@
 @section('content')
     <div class="box">
         <div class="box-header">
-            <h3>Cadastrar novo</h3>
         </div>
 
         <div class="box-body">
             @include('admin.includes.alerts')
-            <form action="{{ route('admin.course.store') }}" method="post">
+            <form action="{{ route('admin.coordinator.store') }}" method="post">
                 {!! csrf_field() !!}
 
                 <div class="form-group">
-                    <select name="area_id" class="form-control">
-                        <option value="">--- Selecione a área do curso ---</option>
-                        @foreach ($areas as $area)
-                            <option value="{{ $area->id }}">{{ $area->descricao }}</option>
+                    <label for="course_id">Irá coordenar o curso:</label>
+                    <select name="course_id" class="form-control">
+                        <option value="">--- Selecione o curso ---</option>
+                        @foreach ($courses as $course)
+                            <option value="{{ $course->id }}">{{ $course->name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="name" placeholder="Nome do curso" class="form-control">
+                    <label for="name">Nome:</label>
+                    <input type="text" name="name" placeholder="Nome do coordenador" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="qtSem" placeholder="Qtd de semestres" class="form-control">
+                    <label for="cpf">CPF</label>
+                    <input type="text" name="cpf" placeholder="CPF" class="form-control" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="chCourse" placeholder="Carga horária" class="form-control">
+                    <label for="telefones">Telefones para contato:</label>
+                    <input type="text" name="telefones" placeholder="Ex.:   Pessoal: (XX) 9 XXXX-XXXX;    Mãe (XX) 9 XXXX-XXXX;    Emergência: (XX) 9 XXXX-XXXX " class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="modalidade" placeholder="Modalidade" class="form-control">
+                    <label for="registration">Código do coordenador na Instituição</label>
+                    <input type="text" name="registration" placeholder="Ex.:  2018107066029-0" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail para logar no sistema:</label>
+                    <input type="email" name="email" placeholder="fulanodetal@google.com" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Registrar</button>
-                </div>
-            
-            
-            
-            </form>
-        
-        
+                </div>            
+            </form>        
         </div>
-    
-    
-    
     </div>
 @stop
