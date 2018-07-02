@@ -35,6 +35,11 @@ class StudentController extends Controller
 
             if (filter_var($emapData[11], FILTER_VALIDATE_EMAIL)){
 
+                $newUser   = new User;
+                $newStuds  = new Student;
+                $newPerson = new Person;
+                $newUserProfile = new UserProfile;
+
                 $email = $emapData[11];
                 $name      = utf8_encode($emapData[0]); 
                 $nameArray = explode(" ", $name);      //transforma a string em array
@@ -46,23 +51,44 @@ class StudentController extends Controller
 
                 $password  = $cpf;
 
-                $users[$row][0] = $firstName;
-                $users[$row][1] = $email;
-                $users[$row][2] = $password;    
+                $users['name']     = $firstName;
+                $users['email']    = $email;
+                $users['password'] = $password;    
+                $users['image']    = '';    
+
+                $newUserId   = $newUser->newUser($users);
                 
-                $people[$row][0] = $name;  //name
-                $people[$row][1] = $cpf;
-                $people[$row][2] = $personCoord->course_id;     // Id do curso do Coordenador Logado
-                $people[$row][3] = trim(utf8_encode(substr($emapData[12], 0,99)));  //explode(";", $emapData[12]) ;               // Telefones
+                if($newUserId){
+                    $person['name'] = $name;  //name
+                    $person['cpf'] = $cpf;
+                    $person['course_id'] = $personCoord->course_id;     // Id do curso do Coordenador Logado
+                    $person['telefones'] = trim(utf8_encode(substr($emapData[12], 0,99)));  //explode(";", $emapData[12]) ;               // Telefones
+                    $person['user_id'] = $newUserId[0];
 
-                $students[$row][0] = $emapData[13];   //matrícula
-                $students[$row][1] = $emapData[17];   //última turma vinculada
+                    $newPersonId   = $newPerson->newPerson($person); 
 
-                //STATUS
-                if ($emapData[18] == 'MATRICULADO'){
-                    $students[$row][2] = 1;   //MATRICULADO
-                } else {
-                    $students[$row][2] = 0;   //TRANCADO/EVADIDO/OUTROS
+                    if ($newPersonId){
+                        $student['person_id']    = $newPersonId[0];   //matrícula
+                        $student['registration'] = $emapData[13];   //matrícula
+                        $student['group']        = $emapData[17];   //última turma vinculada;
+
+                        //STATUS
+                        if ($emapData[18] == 'MATRICULADO'){
+                            $student['status'] = 1;   //MATRICULADO
+                        } else {
+                            $student['status'] = 0;   //TRANCADO/EVADIDO/OUTROS
+                        }
+
+                        $newStudentId   = $newStuds->newStudent($student);   //mudar para Person
+
+                        if ($newStudentId){
+
+                            $UserProfile['user_id']            = $newUserId[0];
+                            $UserProfile['profile_access_id']  = 2;  //2 = site
+
+                            $newUserProfile_id = $newUserProfile->newUserProfile($UserProfile);
+                        }
+                    }
                 }
 
                 $row++;
@@ -78,10 +104,11 @@ class StudentController extends Controller
         // dd($studentsInvalided);
         
         fclose($handle);
-        
-        $update = $importPeople->importPeople($users, $people, $students);
+
 
         return redirect()->route('admin.students')->with('success', 'Alunos importados com sucesso!');
+
+
 
         // return view('admin.student.import', ["users" => $users, "people" => $people, "students" => $students,  "studentsInvalideds" => $studentsInvalided]);
     }
