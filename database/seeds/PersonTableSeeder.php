@@ -14,7 +14,7 @@ class PersonTableSeeder extends Seeder
     {
         Person::create([
             'user_id'      => 1,            
-            'course_id'    => 2,
+            'course_id'    => 3,
 
             'name'         => 'Saulo',
             'cpf'          => '33333333333',
@@ -36,7 +36,7 @@ class PersonTableSeeder extends Seeder
 
         Person::create([
             'user_id'      => 2,            
-            'course_id'    => 2,
+            'course_id'    => 3,
 
             'name'         => 'Carlos',
             'cpf'          => '22222222222',
@@ -57,7 +57,7 @@ class PersonTableSeeder extends Seeder
 
         Person::create([
             'user_id'      => 3,            
-            'course_id'    => 2,
+            'course_id'    => 3,
             
             'name'         => 'Mayke Alex Miranda Plaça',
             'cpf'          => '73862789268',
