@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
-class ProfileAccess extends Seeder
+use App\Models\ProfileAccess;
+
+class ProfileAccessTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
