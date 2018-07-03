@@ -20,8 +20,9 @@
                 {!! csrf_field() !!}
 
                 <div class="form-group">
+                    <label for="area_id">Área do curso:</label>
                     <select name="area_id" class="form-control">
-                        <option value="">--- Selecione a área do curso ---</option>
+                        <option value="">--- Selecione a área ---</option>
                         @foreach ($areas as $area)
                             <option value="{{ $area->id }}">{{ $area->descricao }}</option>
                         @endforeach
@@ -29,18 +30,22 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="name">Nome do curso:</label>
                     <input type="text" name="name" placeholder="Nome do curso" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <input type="text" name="qtSem" placeholder="Qtd de semestres" class="form-control">
+                    <label for="qtSem">Quantidade de semestres:</label>
+                    <input type="text" name="qtSem" placeholder="Quantidade de semestres" class="form-control">
                 </div>
 
                 <div class="form-group">
+                    <label for="chCourse">Carga horária:</label>
                     <input type="text" name="chCourse" placeholder="Carga horária" class="form-control">
                 </div>
 
                 <div class="form-group">
+                    <label for="modalidade">Modalidade:</label>
                     <input type="text" name="modalidade" placeholder="Modalidade" class="form-control">
                 </div>
 
