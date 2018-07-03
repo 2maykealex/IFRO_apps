@@ -21,19 +21,21 @@ class CourseTableSeeder extends Seeder
         ]);
 
         Course::create([
-            'area_id'     => 2,
-            'name' => 'Técnico em Informática para Internet Subsequente ao Ensino Médio',
-            'qtSem' => 3,
-            'chCourse' => 1200 ,
-            'modalidade' => 'Subsequente ao Ensino  Médio, presencial',
+            'area_id'     => 1,
+            'name' => 'Gestão Pública',
+            'qtSem' => 5,
+            'chCourse' => 2500 ,
+            'modalidade' => 'Curso Superior de Tecnologia',
         ]);
 
         Course::create([
-            'area_id'     => 1,
-            'name' => 'Técnico em Finanças',
-            'qtSem' => 3,
-            'chCourse' => 1150 ,
-            'modalidade' => 'Subsequente ao ensino médio, presencial',
+            'area_id'     => 2,
+            'name' => 'Redes de Computadores',
+            'qtSem' => 6,
+            'chCourse' => 2500 ,
+            'modalidade' => 'Curso Superior de Tecnologia',
         ]);
+
+        
     }
 }
