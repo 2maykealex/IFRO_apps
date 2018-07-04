@@ -16,6 +16,13 @@ class SiteController extends Controller
     }
 
     public function index(){
+
+        $user = auth()->user();
+
+        if (isset($user)){
+            return redirect()->route('check-user');
+        }
+        
         return view('site.home.index');
     }
 
