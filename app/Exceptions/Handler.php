@@ -48,6 +48,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($this->isHttpException($exception))
+        {
+            if($exception->getStatusCode() == 404)                
+                return redirect()->back()->with('error','Este local não existe no sistema!');
+
+            if($exception->getStatusCode() == 500)
+                return "SISTEMA FORA DO AR";
+        }
+
         return parent::render($request, $exception);
     }
 }
