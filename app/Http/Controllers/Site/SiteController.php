@@ -20,7 +20,7 @@ class SiteController extends Controller
         $user = auth()->user();
 
         if (isset($user)){
-            return redirect()->route('check-user');
+            return redirect()->back();
         }
         
         return view('site.home.index');
