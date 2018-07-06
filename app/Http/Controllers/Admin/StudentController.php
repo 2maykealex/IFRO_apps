@@ -49,7 +49,7 @@ class StudentController extends Controller
                 $cpf = str_replace(".", "", $cpf);
                 $cpf = str_replace("-", "", $cpf);
 
-                $password  = $cpf;
+                $password  = bcrypt($cpf);
 
                 $users['name']     = $firstName;
                 $users['email']    = $email;
