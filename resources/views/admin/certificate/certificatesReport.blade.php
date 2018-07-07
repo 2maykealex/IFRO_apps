@@ -40,7 +40,7 @@
     <div class="box-body">
         @include('admin.includes.alerts')        
         
-        <p style="text-align:center;"><img src="{{ url('storage/images/brasao.jpeg') }}" alt="Brasão do Brasil" width="8%"></p>
+        <p style="text-align:center;"><img src="{{ url('storage/images/logo_do_ifro AAC.jpg') }}" alt="Brasão do Brasil" width="100%"></p>
 
         <p style="text-align: center;">MINISTÉRIO DA EDUCAÇÃO</p>
         <p style="text-align: center;">INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE RONDÔNIA</p>
