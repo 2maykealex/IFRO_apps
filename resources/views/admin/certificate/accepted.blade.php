@@ -100,17 +100,22 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $count }}</td>
-                                    <td style="width:280px;">{{ $certificate->person->name }}</td>
-                                    <td style="width:400px;">{{ $certificate->description}}</td>       
-                                    <td>{{ $certificate->updated_at->format('d/m/Y')}}</td>       
+
+                                    <td style="width:275px;">{{ $certificate->person->name }}</td>
+                                    <td style="width:370px;">{{ $certificate->description}}</td> 
+                                    <td>{{ $certificate->updated_at->format('d/m/Y')}}</td>         
                                     <td></td>       
-                                    <td></td>       
+                                    <td style="width:40px;"></td>    
                                     
                                     <td>{{ $certificate->chCertificate}}</td>
                                     <td>                                        
                                         <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
                                             <button class="btn btn-primary">Imagem</button>
-                                        </a>                                    
+                                        </a>    
+
+                                        <a href="#">
+                                            <button class="btn btn-default"><i class="fa fa-undo"></i></button>
+                                        </a>                                
                                     </td>
                                 </tr>
 

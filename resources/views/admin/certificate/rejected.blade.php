@@ -47,14 +47,12 @@
     </div>
 
     <div class="box-body">
-        @include('admin.includes.alerts')
-          
-        <table class="table table-bordered table-hover table-responsive">
-            <!-- Sem Tag de cabeçalho -->
-            
-            
+        @include('admin.includes.alerts')          
 
-            @Foreach ($activities as $key => $activity)
+        @Foreach ($activities as $key => $activity)
+
+            <table class="table table-bordered table-hover table-responsive">
+                <!-- Sem Tag de cabeçalho -->
                 
                 <?php $soum = 0; ?>
 
@@ -91,11 +89,11 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $count }}</td>
-                                    <td style="width:280px;">{{ $certificate->person->name }}</td>
-                                    <td style="width:400px;">{{ $certificate->description}}</td> 
+                                    <td style="width:275px;">{{ $certificate->person->name }}</td>
+                                    <td style="width:370px;">{{ $certificate->description}}</td> 
                                     <td>{{ $certificate->updated_at->format('d/m/Y')}}</td>         
                                     <td></td>       
-                                    <td></td>       
+                                    <td style="width:40px;"></td>       
                                     
                                     <td>{{ $certificate->chCertificate}}</td>
                                     <td>
@@ -104,8 +102,9 @@
                                             <button class="btn btn-primary">Imagem</button>
                                         </a>
 
-                                       
-
+                                        <a href="#">                                                
+                                            <button class="btn btn-default"><i class="fa fa-undo"></i></button>                                                
+                                        </a>
                                     
                                     </td>
                                 </tr>
@@ -139,11 +138,12 @@
                         </tr>
 
                     </tbody>
-                </table>
-                <br>
-                <hr>
-            @endforeach  
-        </table>  
+                </table>               <!-- Fim da tabela interna -->
+                <!-- <br> -->
+                <hr>             
+            </table>     <!-- Fim da tabela externa -->
+
+        @endforeach 
     </div>    
 @stop
 
