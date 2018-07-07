@@ -30,23 +30,28 @@ class SiteController extends Controller
 
         $user = auth()->user();
 
-        if ($user == null){
-            return view('site.home.index');
-        } else {
-            
-            $person = Person::where('user_id', $user->id)->get()->first();
+        if ($user->created_at == $user->updated_at){
+            dd("Seu primeiro acesso. Favor alterar a senha!");
+        } 
 
-            $student = Student::with('person')->where('person_id', $person->id)->get()->first();        
-            
-            $coordinator = Coordinator::with('person')->where('person_id', $person->id)->get()->first();
-    
-            if ($student != null){
-                return redirect()->route('site.home');       //Redireciona para a rota de Student
+            if ($user == null){
+                return view('site.home.index');
             } else {
-                return redirect()->route('admin.home');      //Redireciona para a rota de Coordinator
-            }
+                
+                $person = Person::where('user_id', $user->id)->get()->first();
 
-        }
+                $student = Student::with('person')->where('person_id', $person->id)->get()->first();        
+                
+                $coordinator = Coordinator::with('person')->where('person_id', $person->id)->get()->first();
+        
+                if ($student != null){
+                    return redirect()->route('site.home');       //Redireciona para a rota de Student
+                } else {
+                    return redirect()->route('admin.home');      //Redireciona para a rota de Coordinator
+                }
+
+            }
+        
 
     }
 
