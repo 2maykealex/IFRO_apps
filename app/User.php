@@ -32,6 +32,19 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class)->with('profileAccess');
     }
 
+    public function changePassword($data):Array{
+
+        $this->password    = $data['password'];
+
+        $updated = $this->save();
+
+        if ($updated){
+            return [
+                $updated
+            ];
+        }
+    }
+
     public function newUser($data):Array{
 
         $user = new User;

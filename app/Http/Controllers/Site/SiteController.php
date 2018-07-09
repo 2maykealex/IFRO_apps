@@ -11,7 +11,38 @@ use App\User;
 
 class SiteController extends Controller
 {
+    
+    public function passwordStore(Request $request){
+
+        $user = User::where('email', $request->email)->get()->first();
+
+        $updateUser['password'] = bcrypt($request->password);
+
+        $update = $user->changePassword($updateUser);
+
+        if ($update){
+            return redirect()->route('check-user')->with('success', 'Senha alterada com sucesso!');
+        }        
+    }
+
+    public function changePassword($reason=0){
+
+        $user = auth()->user();
+
+        if ($reason == 1) {
+            $user['reason'] = $reason;
+        }
+
+        return view('site.home.changePassword', compact('user'));
+    }
+
     public function home(){
+
+        $user = auth()->user();
+
+        if ($user->created_at == $user->updated_at){
+            return redirect()->route('change.password', 1);  //reason = 1
+        } 
         return view('site.home.home');
     }
 
@@ -30,27 +61,25 @@ class SiteController extends Controller
 
         $user = auth()->user();
 
-        if ($user->created_at == $user->updated_at){
-            dd("Seu primeiro acesso. Favor alterar a senha!");
-        } 
+        if ($user == null){
+            return view('site.home.index');
+        } else {
+            
+            $person = Person::where('user_id', $user->id)->get()->first();
 
-            if ($user == null){
-                return view('site.home.index');
+            $student = Student::with('person')->where('person_id', $person->id)->get()->first();        
+            
+            $coordinator = Coordinator::with('person')->where('person_id', $person->id)->get()->first();
+
+
+    
+            if ($student != null){
+                return redirect()->route('site.home');       //Redireciona para a rota de Student
             } else {
-                
-                $person = Person::where('user_id', $user->id)->get()->first();
-
-                $student = Student::with('person')->where('person_id', $person->id)->get()->first();        
-                
-                $coordinator = Coordinator::with('person')->where('person_id', $person->id)->get()->first();
-        
-                if ($student != null){
-                    return redirect()->route('site.home');       //Redireciona para a rota de Student
-                } else {
-                    return redirect()->route('admin.home');      //Redireciona para a rota de Coordinator
-                }
-
+                return redirect()->route('admin.home');      //Redireciona para a rota de Coordinator
             }
+
+        }
         
 
     }
