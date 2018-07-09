@@ -9,7 +9,7 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Site', 'pre
     $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('site.certificates'); 
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('site.certificate.store');
     $this->get('certificate-upload', 'CertificateController@upload')->name('site.certificate.upload'); 
-
+    
     $this->get('/', 'SiteController@home')->name('site.home');    
 
 }); 
@@ -55,6 +55,9 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Admin', 'pr
 });
 
 
+$this->post('password-store', 'Site\SiteController@passwordStore')->name('password.store');
+$this->get('change-password', 'Site\SiteController@changePassword')->name('change.password');
+$this->get('change-password/{reason}', 'Site\SiteController@changePassword')->name('change.password');
 
 $this->get('/', 'Site\SiteController@index');
 $this->get('/check-user', 'Site\SiteController@checkUser')->name('check-user');   //é necessário pois os Menus são diferentes
