@@ -19,5 +19,9 @@
 @section('content')
     <div>
 
+        <a href="{{ route('change.password','0') }}">
+            <button class="btn btn-warning">Altere sua senha</button>
+        </a>
+
     </div>
 @stop
