@@ -26,15 +26,6 @@ class CreatePeopleTable extends Migration
 
             $table->string('name', 100);
             $table->string('cpf', 11);
-            
-            // $table->string('address', 150);
-            // $table->string('number', 10);
-            // $table->string('complement', 60);
-            // $table->string('neighborhood', 60);
-            // $table->string('zipCode', 10);
-
-            // $table->integer('city_id')->unsigned();
-            // $table->foreign('city_id')->references('id')->on('cities') ;
 
             $table->string('telefones', 100);
             $table->timestamps();
