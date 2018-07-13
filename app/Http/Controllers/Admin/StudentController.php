@@ -10,6 +10,7 @@ use App\Models\Activity;
 use App\Models\Certificate;
 use App\Models\Course;
 use App\Models\UserProfile;
+use App\Models\StudentsInvalided;
 use App\User;
 
 class StudentController extends Controller
@@ -27,11 +28,30 @@ class StudentController extends Controller
         $filename = $_FILES['fileStudents']['tmp_name'];
         $handle = fopen("$filename", "r");
         
-        $row = 1;
+        $count = 1;
+    
         $studentsInvalided = Array();
 
         while (($emapData = fgetcsv($handle, 10000, ";")) !== FALSE){
             $num = count($emapData);
+
+            $name         = utf8_encode($emapData[0]); 
+            $nameArray    = explode(" ", $name);             //transforma a string em array
+            $firstName    = $nameArray[0];                   //Obtendo o primeiro nome do array criado
+            $cpf          = $emapData[5];
+            $cpf          = trim($cpf);
+            $cpf          = str_replace(".", "", $cpf);
+            $cpf          = str_replace("-", "", $cpf);
+            $telefones    = trim(utf8_encode(substr($emapData[12], 0,99)));  //explode(";", $emapData[12]) ;               // Telefones
+            $registration = $emapData[13];   //matrícula
+            $group        = $emapData[17];          //última turma vinculada;
+
+            //STATUS
+            if ($emapData[18] == 'MATRICULADO'){
+                $status = 1;   //MATRICULADO
+            } else {
+                $status = 0;   //TRANCADO/EVADIDO/OUTROS
+            }
 
             if (filter_var($emapData[11], FILTER_VALIDATE_EMAIL)){
 
@@ -40,14 +60,7 @@ class StudentController extends Controller
                 $newPerson = new Person;
                 $newUserProfile = new UserProfile;
 
-                $email = $emapData[11];
-                $name      = utf8_encode($emapData[0]); 
-                $nameArray = explode(" ", $name);      //transforma a string em array
-                $firstName = $nameArray[0];                   //Obtendo o primeiro nome do array criado
-                $cpf       = $emapData[5];
-                $cpf = trim($cpf);
-                $cpf = str_replace(".", "", $cpf);
-                $cpf = str_replace("-", "", $cpf);
+                $email = $emapData[11];                
 
                 $password  = bcrypt($cpf);
 
@@ -62,22 +75,16 @@ class StudentController extends Controller
                     $person['name'] = $name;  //name
                     $person['cpf'] = $cpf;
                     $person['course_id'] = $personCoord->course_id;     // Id do curso do Coordenador Logado
-                    $person['telefones'] = trim(utf8_encode(substr($emapData[12], 0,99)));  //explode(";", $emapData[12]) ;               // Telefones
+                    $person['telefones'] = $telefones;
                     $person['user_id'] = $newUserId[0];
 
                     $newPersonId   = $newPerson->newPerson($person); 
 
                     if ($newPersonId){
                         $student['person_id']    = $newPersonId[0];   //matrícula
-                        $student['registration'] = $emapData[13];   //matrícula
-                        $student['group']        = $emapData[17];   //última turma vinculada;
-
-                        //STATUS
-                        if ($emapData[18] == 'MATRICULADO'){
-                            $student['status'] = 1;   //MATRICULADO
-                        } else {
-                            $student['status'] = 0;   //TRANCADO/EVADIDO/OUTROS
-                        }
+                        $student['registration'] = $registration;
+                        $student['group']        = $group;
+                        $student['status'] = $status;
 
                         $newStudentId   = $newStuds->newStudent($student);   //mudar para Person
 
@@ -90,27 +97,30 @@ class StudentController extends Controller
                         }
                     }
                 }
-
-                $row++;
+            
+                $count++;
                 
             } else{
-                //recebe os dados que não estão completos para inserir aluno por importação
-                //fazer filtragem dos campos que interessa
-                $studentsInvalided [$row] = $emapData;
-            }
-            //fazer a inserção na model            
+                //recebe os dados que não estão completos ao inserir aluno por importação
+                $newStudentInvalided = new StudentsInvalided;
+                
+                $notValided['coord_user_id'] = $userCoord->id;
+                $notValided['name']          = $name;
+                $notValided['cpf']           = $cpf;
+                $notValided['telefones']     = $telefones;
+                $notValided['registration']  = $registration;
+                $notValided['group']         = $group;
+                $notValided['status']        = $status;
+
+                $newStudentInvalided_id = $newStudentInvalided->newStudentInvalided($notValided);
+            }          
         }
-       
-        // dd($studentsInvalided);
         
         fclose($handle);
 
+        // dd($studentsInvalided);
 
-        return redirect()->route('admin.students')->with('success', 'Alunos importados com sucesso!');
-
-
-
-        // return view('admin.student.import', ["users" => $users, "people" => $people, "students" => $students,  "studentsInvalideds" => $studentsInvalided]);
+        return redirect()->route('admin.students', 'studentsInvalided')->with('success', 'Alunos importados com sucesso!');
     }
 
     public function studentStore(Request $request){
@@ -201,7 +211,7 @@ class StudentController extends Controller
         // dd($students);
         
         // $students = Student::with(['person'])->get();
-        return view('admin.student.students', compact('students') );
+        return view('admin.student.students', compact('students', 'studentsInvalided') );
     }
 
     public function uploadCertificate(){
