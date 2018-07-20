@@ -12,6 +12,7 @@ class StudentsInvalided extends Model
         $this->name          = $data['name'];
         $this->cpf           = $data['cpf'];
         $this->telefones     = $data['telefones'];
+        $this->course_id     = $data['course_id'];
         $this->registration  = $data['registration'];
         $this->group         = $data['group'];
         $this->status        = $data['status'];   

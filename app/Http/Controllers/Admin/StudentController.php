@@ -33,94 +33,110 @@ class StudentController extends Controller
         $studentsInvalided = Array();
 
         while (($emapData = fgetcsv($handle, 10000, ";")) !== FALSE){
-            $num = count($emapData);
 
-            $name         = utf8_encode($emapData[0]); 
-            $nameArray    = explode(" ", $name);             //transforma a string em array
-            $firstName    = $nameArray[0];                   //Obtendo o primeiro nome do array criado
-            $cpf          = $emapData[5];
-            $cpf          = trim($cpf);
-            $cpf          = str_replace(".", "", $cpf);
-            $cpf          = str_replace("-", "", $cpf);
-            $telefones    = trim(utf8_encode(substr($emapData[12], 0,99)));  //explode(";", $emapData[12]) ;               // Telefones
-            $registration = $emapData[13];   //matrícula
-            $group        = $emapData[17];          //última turma vinculada;
+            if ($emapData[0] != "" and $emapData[5] != "" and $emapData[13] != "" and $emapData[17] != "") {
+                $num = count($emapData);
 
-            //STATUS
-            if ($emapData[18] == 'MATRICULADO'){
-                $status = 1;   //MATRICULADO
-            } else {
-                $status = 0;   //TRANCADO/EVADIDO/OUTROS
-            }
+                $name         = utf8_encode($emapData[0]); 
+                $nameArray    = explode(" ", $name);             //transforma a string em array
+                $firstName    = $nameArray[0];                   //Obtendo o primeiro nome do array criado
+                $cpf          = $emapData[5];
+                $cpf          = trim($cpf);
+                $cpf          = str_replace(".", "", $cpf);
+                $cpf          = str_replace("-", "", $cpf);
 
-            if (filter_var($emapData[11], FILTER_VALIDATE_EMAIL)){
 
-                $newUser   = new User;
-                $newStuds  = new Student;
-                $newPerson = new Person;
-                $newUserProfile = new UserProfile;
+                $telefones    = explode(";", $emapData[12]);  // cria array de telefones
 
-                $email = $emapData[11];                
-
-                $password  = bcrypt($cpf);
-
-                $users['name']     = $firstName;
-                $users['email']    = $email;
-                $users['password'] = $password;    
-                $users['image']    = '';    
-
-                $newUserId   = $newUser->newUser($users);
+                $telefone = trim(str_replace("Celular", "", $telefones[0])); //Remove String "Celular" e espaços
+            
+                $telefones    = trim(utf8_encode($telefone));   //
                 
-                if($newUserId){
-                    $person['name'] = $name;  //name
-                    $person['cpf'] = $cpf;
-                    $person['course_id'] = $personCoord->course_id;     // Id do curso do Coordenador Logado
-                    $person['telefones'] = $telefones;
-                    $person['user_id'] = $newUserId[0];
+                // dd($telefones);
 
-                    $newPersonId   = $newPerson->newPerson($person); 
+                $telefones    = str_replace(";", " / ", $telefones);
+                
+                $registration = $emapData[13];   //matrícula
+                $group        = $emapData[17];          //última turma vinculada;
 
-                    if ($newPersonId){
-                        $student['person_id']    = $newPersonId[0];   //matrícula
-                        $student['registration'] = $registration;
-                        $student['group']        = $group;
-                        $student['status'] = $status;
+                //STATUS
+                if ($emapData[18] == 'MATRICULADO'){
+                    $status = 1;   //MATRICULADO
+                } else {
+                    $status = 0;   //TRANCADO/EVADIDO/OUTROS
+                }
 
-                        $newStudentId   = $newStuds->newStudent($student);   //mudar para Person
+                if (filter_var($emapData[11], FILTER_VALIDATE_EMAIL)){
 
-                        if ($newStudentId){
+                    $newUser        = new User;
+                    $newStuds       = new Student;
+                    $newPerson      = new Person;
+                    $newUserProfile = new UserProfile;
 
-                            $UserProfile['user_id']            = $newUserId[0];
-                            $UserProfile['profile_access_id']  = 2;  //2 = site
+                    $email = $emapData[11];                
 
-                            $newUserProfile_id = $newUserProfile->newUserProfile($UserProfile);
+                    $password  = bcrypt($cpf);
+
+                    $users['name']     = $firstName;
+                    $users['email']    = $email;
+                    $users['password'] = $password;    
+                    $users['image']    = '';    
+
+                    $newUserId   = $newUser->newUser($users);
+                    
+                    if($newUserId){
+                        $person['name']      = $name;  //name
+                        $person['cpf']       = $cpf;
+                        $person['course_id'] = $personCoord->course_id;     // Id do curso do Coordenador Logado
+                        $person['telefones'] = $telefones;
+                        $person['user_id']   = $newUserId[0];
+
+                        $newPersonId   = $newPerson->newPerson($person); 
+
+                        if ($newPersonId){
+                            $student['person_id']    = $newPersonId[0];   //matrícula
+                            $student['registration'] = $registration;
+                            $student['group']        = $group;
+                            $student['status']       = $status;
+
+                            $newStudentId   = $newStuds->newStudent($student);   //mudar para Person
+
+                            if ($newStudentId){
+
+                                $UserProfile['user_id']            = $newUserId[0];
+                                $UserProfile['profile_access_id']  = 2;  //2 = site
+
+                                $newUserProfile_id = $newUserProfile->newUserProfile($UserProfile);
+                            }
                         }
                     }
-                }
-            
-                $count++;
                 
-            } else{
-                //recebe os dados que não estão completos ao inserir aluno por importação
-                $newStudentInvalided = new StudentsInvalided;
-                
-                $notValided['coord_user_id'] = $userCoord->id;
-                $notValided['name']          = $name;
-                $notValided['cpf']           = $cpf;
-                $notValided['telefones']     = $telefones;
-                $notValided['registration']  = $registration;
-                $notValided['group']         = $group;
-                $notValided['status']        = $status;
+                    $count++;
+                        
+                } else{
+                    //recebe os dados que não estão completos ao inserir aluno por importação
+                    $newStudentInvalided = new StudentsInvalided;
 
-                $newStudentInvalided_id = $newStudentInvalided->newStudentInvalided($notValided);
-            }          
+                    $notValided['coord_user_id'] = $userCoord->id;
+                    $notValided['name']          = $name;
+                    $notValided['cpf']           = $cpf;
+                    $notValided['telefones']     = $telefones;
+                    $notValided['course_id']     = $personCoord->course_id;
+                    $notValided['registration']  = $registration;
+                    $notValided['group']         = $group;
+                    $notValided['status']        = $status;
+
+                    $newStudentInvalided_id = $newStudentInvalided->newStudentInvalided($notValided);
+                }   
+            }      
+            
         }
         
         fclose($handle);
 
         // dd($studentsInvalided);
 
-        return redirect()->route('admin.students', 'studentsInvalided')->with('success', 'Alunos importados com sucesso!');
+        return redirect()->route('admin.students')->with('success', 'Alunos importados com sucesso!');
     }
 
     public function studentStore(Request $request){
@@ -175,20 +191,30 @@ class StudentController extends Controller
                     $newUserProfile_id = $newUserProfile->newUserProfile($UserProfile);
 
                     if ($newUserProfile_id){
-                        return redirect()->route('admin.students')->with('success', 'Cadastrado com sucesso!');
+                        $studentInvalided = StudentsInvalided::where('id', $data['studentInvalid'])->get()->first();
+
+                        $deleteStudentInvalided = $studentInvalided->delete();
+
+                        if ($deleteStudentInvalided){
+                            return redirect()->route('admin.students')->with('success', 'Cadastrado com sucesso!');
+                        }
                     }
                 }
             }
         }
     }
 
-    public function newStudent(){
+    public function newStudent($student=0){
         $userCoord = auth()->user(); 
         $personCoord = Person::where('user_id', $userCoord->id)->get()->first();
         $course = $personCoord->course_id;
 
+        if ($student > 0){
+            $student = StudentsInvalided::where('id', $student)->get()->first();
+        }
+
         // dd($course);
-        return view('admin.student.new', compact('course'));
+        return view('admin.student.new', compact('course', 'student'));
     }
 
     public function student(){
@@ -208,10 +234,23 @@ class StudentController extends Controller
         }])
         ->get()->sortBy('person.name');
 
-        // dd($students);
+        return view('admin.student.students', compact('students') );
+    }
+
+    public function studentsinvalided(){ 
+
+        $user = auth()->user();
+
+        $person = Person::where('user_id', $user->id)->with('course')->get()->first();
+
+        $courseName = $person->course->name;
+
+        $course = $person->course_id;
+        $count = 1;
+
+        $students = StudentsInvalided::where('coord_user_id', $user->id)->orderBy('name')->get();
         
-        // $students = Student::with(['person'])->get();
-        return view('admin.student.students', compact('students', 'studentsInvalided') );
+        return view('admin.student.StudentsInvalided', compact('students', 'courseName', 'count') );
     }
 
     public function uploadCertificate(){

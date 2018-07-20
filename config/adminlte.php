@@ -143,6 +143,12 @@ return [
                         'text' => 'Listar alunos',
                         'url'  => 'admin/students',
                         'icon' => 'list-ul',
+                    ],
+
+                    [
+                        'text' => 'Alunos não validados',
+                        'url'  => 'admin/students-invalided',
+                        'icon' => 'list-ul',
                     ]
 
                             

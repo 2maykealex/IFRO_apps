@@ -23,6 +23,7 @@ class CreateStudentsInvalidedsTable extends Migration
             $table->string('name', '50');
             $table->string('cpf', 11);
             $table->string('telefones', 100);
+            $table->integer('course_id');
 
             $table->string('registration', 20);
             $table->string('group', 50);
