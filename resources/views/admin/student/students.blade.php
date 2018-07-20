@@ -28,7 +28,7 @@
                             <td>{{ $student->person->id }}</td>
                             <td>{{ $student->person->name}}</td>
                             <td>{{ $student->person->course->name}}</td>
-                            <td>{{ $student->person->cel }}</td>
+                            <td>{{ $student->person->telefones }}</td>
                             <td>{{ $student->registration }}</td>
                         </tr>
                     @endif
