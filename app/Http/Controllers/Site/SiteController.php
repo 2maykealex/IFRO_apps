@@ -74,9 +74,9 @@ class SiteController extends Controller
 
     
             if ($student != null){
-                return redirect()->route('site.home');       //Redireciona para a rota de Student
+                return redirect()->route('site.home');             //Redireciona para a rota de Student
             } else {
-                return redirect()->route('admin.home');      //Redireciona para a rota de Coordinator
+                return redirect()->route('coordinator.home');      //Redireciona para a rota de Coordinator
             }
 
         }
