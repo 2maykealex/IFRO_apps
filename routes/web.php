@@ -14,7 +14,42 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Site', 'pre
 
 }); 
 
-// ->middleware('authroute')
+Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator', 'prefix' => 'coordinator'], function () {
+
+    $this->get('report/complete', 'CertificateController@checkChComplete')->name('coordinator.report.complete');  
+    $this->get('report/attestation/{id}', 'CertificateController@attestationReport')->name('coordinator.report.attestation');  
+
+    $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('coordinator.certificate.validate');  
+    $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('coordinator.certificates'); 
+    $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('coordinator.certificates');       
+
+    $this->post('certificate-store', 'CertificateController@certificateStore')->name('coordinator.certificate.store');     
+    $this->get('certificate-upload', 'CertificateController@upload')->name('coordinator.certificate.upload');  
+
+    $this->post('storeImport', 'StudentController@importExcelStore')->name('coordinator.student.import'); //ajustar essas rotas
+    $this->get('import-students', 'StudentController@importExcel')->name('coordinator.import.students');
+    
+    $this->post('student-store', 'StudentController@studentStore')->name('coordinator.student.store'); 
+    $this->get('student-new', 'StudentController@newStudent')->name('coordinator.student.new'); 
+    $this->get('student-new/{student}', 'StudentController@newStudent')->name('coordinator.student.new'); 
+    
+    $this->get('students/', 'StudentController@students')->name('coordinator.students');     
+    $this->get('students-invalided', 'StudentController@studentsInvalided')->name('coordinator.students.invalided');     
+    $this->get('student', 'StudentController@student')->name('coordinator.student');         
+
+    $this->get('coordinators', 'CoordinatorController@coordinators')->name('coordinator.coordinators');     
+    $this->get('coordinator', 'CoordinatorController@coordinator')->name('coordinator.coordinator');     
+     
+    $this->get('area-course', 'CourseController@areaCurso')->name('coordinator.area.course');     
+    $this->get('courses-area', 'AreaController@courses')->name('coordinator.courses.area');     
+       
+    $this->get('courses', 'CourseController@courses')->name('coordinator.courses');     
+
+    $this->get('activities', 'ActivityController@activities')->name('coordinator.activities');     
+    $this->get('activity', 'ActivityController@index')->name('coordinator.activity');     
+      
+    $this->get('/', 'CoordinatorController@index')->name('coordinator.home');
+});
 
 Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
