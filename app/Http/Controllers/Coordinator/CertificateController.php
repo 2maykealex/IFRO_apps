@@ -8,23 +8,26 @@ use App\Models\Student;
 use App\Models\Person;
 use App\Models\Activity;
 use App\Models\Certificate;
+use App\Models\ReasonRejected;
 use App\Models\Course;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
 class CertificateController extends Controller
 {
-    public function checkChComplete(){       
-
+    public function checkChComplete(){       //listar todos os alunos que sua carga horária APROVADA, atinja ou ultrapasse 
+                                             //a carga horária que cada curso exige
         $students = DB::select(
             DB::raw('SELECT P.id, S.registration, P.name as "studentName", c.name as "courseName", S.group as "group"
 
-                FROM (SELECT person_id, SUM(chCertificate) as ch FROM certificates GROUP BY person_id) as T
+                FROM (SELECT person_id, SUM(chCertificate) as ch FROM certificates 
+                        WHERE certificateValided = 1 GROUP BY person_id) as T
+
                 inner join people as P on P.id = T.person_id 
                 inner join students as S on S.person_id = T.person_id  
                 inner join courses as C on C.id = P.course_id  
                 
-                WHERE T.ch >=30  
+                WHERE (T.ch >=30)
                 ORDER BY S.group, P.name
             ')
         );
@@ -52,18 +55,45 @@ class CertificateController extends Controller
 
         return view('coordinator.certificate.upload', compact(['students', 'person', 'activities', 'value']));
     }
-    public function validateCertificate($id, $value){
+    public function validateCertificate( $id, $value){
+    
+        $certificateId = $id;
+        $op            = $value;
 
-        $data = Certificate::where('id', $id)->get()->first();
+        $data = Certificate::where('id', $certificateId)->get()->first();
 
-        $data->certificateValided = $value;
+        $data->certificateValided = $op;
         
-        $data->save();
+        $update = $data->save();
 
-        if ($value == 1){
-            return redirect()->route('coordinator.certificates', ['accepted', ''])->with('success', 'Certificado validado com sucesso!');
-        }else if($value == 2){
-            return redirect()->route('coordinator.certificates', ['rejected', ''])->with('error', 'Certificado validado com sucesso!');
+        if ($update){
+            
+            return redirect()->route('coordinator.certificates', ['accepted', ''])->with('success', 'O certificado foi aprovado!');
+        }
+    }
+    public function rejectCertificate(Request $request){
+        
+        $certificateId = $request->idCert;
+        $op            = $request->operation;
+        
+        $data = Certificate::where('id', $certificateId)->get()->first();
+
+        $data->certificateValided = $op;
+        
+        $update = $data->save();
+
+        if ($update){
+
+            $reason = new ReasonRejected;
+
+            $reason->certificate_id = $certificateId;
+            $reason->description    = $request->reason;
+            
+            $updateReason = $reason->save();
+
+            if ($updateReason){
+                return redirect()->route('coordinator.certificates', ['rejected', ''])->with('error', 'O certificado foi rejeitado!');
+            }            
         }
     }
     public function certificateStore(Request $request, Certificate $certificate){
@@ -198,7 +228,7 @@ class CertificateController extends Controller
             ->get();  
 
         } else {
-            $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course, $id) {
+            $certificates = Certificate::with('person', 'activity', 'rejected')->whereHas('person', function($query) use($course, $id) {
                 $query->where('course_id', $course)
                       ->where('id',$id);
             } )
@@ -206,8 +236,6 @@ class CertificateController extends Controller
             ->orderby('activity_id') 
             ->get();  
         }
-
-        
 
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $activities = [];
