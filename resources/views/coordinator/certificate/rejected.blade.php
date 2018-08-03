@@ -70,8 +70,7 @@
                             <th>Aluno:</th>           
                             <th>Curso:</th>      
                             <th>Validado em:</th>      
-                            <th>Link:</th>      
-                            <th>Código:</th>    
+                            <th>Motivo:</th>       
                             <th>CH:</th>      
                             <th>Ações:</th>      
                         </tr>
@@ -90,10 +89,9 @@
                                     <td></td>
                                     <td>{{ $count }}</td>
                                     <td style="width:275px;">{{ $certificate->person->name }}</td>
-                                    <td style="width:370px;">{{ $certificate->description}}</td> 
+                                    <td>{{ $certificate->description}}</td> 
                                     <td>{{ $certificate->updated_at->format('d/m/Y')}}</td>         
-                                    <td></td>       
-                                    <td style="width:40px;"></td>       
+                                    <td>{{ $certificate->rejected->description}}</td>        
                                     
                                     <td>{{ $certificate->chCertificate}}</td>
                                     <td>
@@ -107,7 +105,9 @@
                                         </a>
                                     
                                     </td>
+                                    
                                 </tr>
+
 
                                 <?php 
                                     $count = $count + 1;
@@ -123,7 +123,6 @@
                         
 
                         <tr>
-                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>

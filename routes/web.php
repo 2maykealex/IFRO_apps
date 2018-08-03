@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->get('report/attestation/{id}', 'CertificateController@attestationReport')->name('coordinator.report.attestation');  
 
     $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('coordinator.certificate.validate');  
+    $this->post('validate/reject', 'CertificateController@rejectCertificate')->name('coordinator.certificate.reject');  
     $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('coordinator.certificates'); 
     $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('coordinator.certificates');       
 

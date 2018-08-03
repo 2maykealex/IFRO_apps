@@ -14,6 +14,10 @@ class certificate extends Model
         return $this->belongsTo(Activity::class);
     }
 
+    public function rejected(){
+        return $this->hasOne(ReasonRejected::class);
+    }
+
     public function certificateNew($data):Array {
 
         // dd($data);
