@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="telefones">Telefones para contato:</label>
+                    <label for="telefones">Telefone para contato:</label>
                     <input type="text" name="telefones" placeholder="Ex.: (XX) 9 XXXX-XXXX " class="form-control" value="<?php if($student) {echo $student->telefones;} ?>">
                 </div>
 

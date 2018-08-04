@@ -3,8 +3,8 @@
 @section('content_header')
     <h1>Alunos não importados do curso de {{ $courseName }}</h1>
     <ol class="breadcrumb">
-        <li><a href="{{ route('admin.home') }}">Home</a></li>
-        <li><a href="{{ route('admin.courses') }}">Lista de Alunos</a></li>
+        <li><a href="{{ route('coordinator.home') }}">Home</a></li>
+        <!-- <li><a href="{{ route('coordinator.courses') }}">Lista de Alunos</a></li> -->
     </ol>
 @stop
 
@@ -32,7 +32,7 @@
                         <td>{{ $student->registration }}</td>
                         <td>{{ $student->group }}</td>
                         <td>
-                            <a href="{{ route('admin.student.new', compact('student')) }}">
+                            <a href="{{ route('coordinator.student.new', compact('student')) }}">
                                 <button class="btn btn-warning">Editar</button>
                             </a>                        
                         </td>
