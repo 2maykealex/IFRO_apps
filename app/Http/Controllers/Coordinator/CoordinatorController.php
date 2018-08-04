@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 class CoordinatorController extends Controller
 {
     public function index(){
-        return view('coordinator.home.index');
+        return view('coordinator.home.home');
     }
 
     public function coordinator(){
