@@ -18,6 +18,7 @@ class CreateCoordinatorsTable extends Migration
             $table->integer('person_id')->unsigned();
             $table->foreign('person_id')->references('id')->on('people');
             $table->integer('registration');
+            $table->string('signature', 100)->nullable;
             
             $table->timestamps();
         });
