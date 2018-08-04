@@ -88,9 +88,9 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $count }}</td>
-                                    <td style="width:275px;">{{ $certificate->person->name }}</td>
-                                    <td>{{ $certificate->description}}</td> 
-                                    <td>{{ $certificate->updated_at->format('d/m/Y')}}</td>         
+                                    <td style="width:245px;">{{ $certificate->person->name }}</td>
+                                    <td style="width:245px;">{{ $certificate->description}}</td> 
+                                    <td style="width:100px;">{{ $certificate->updated_at->format('d/m/Y')}}</td>         
                                     <td>{{ $certificate->rejected->description}}</td>        
                                     
                                     <td>{{ $certificate->chCertificate}}</td>
@@ -139,7 +139,7 @@
                     </tbody>
                 </table>               <!-- Fim da tabela interna -->
                 <!-- <br> -->
-                <hr>             
+                
             </table>     <!-- Fim da tabela externa -->
 
         @endforeach 
