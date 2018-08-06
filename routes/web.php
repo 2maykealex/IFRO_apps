@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('coordinator.certificate.validate');  
     $this->post('validate/reject', 'CertificateController@rejectCertificate')->name('coordinator.certificate.reject');  
     $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('coordinator.certificates'); 
-    $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('coordinator.certificates');       
+    $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('coordinator.certificates');        
 
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('coordinator.certificate.store');     
     $this->get('certificate-upload', 'CertificateController@upload')->name('coordinator.certificate.upload');  
@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->get('students-invalided', 'StudentController@studentsInvalided')->name('coordinator.students.invalided');     
     $this->get('student', 'StudentController@student')->name('coordinator.student');         
 
+    $this->post('sign-store', 'CoordinatorController@signStore')->name('coordinator.sign.store');    
+
     $this->get('coordinators', 'CoordinatorController@coordinators')->name('coordinator.coordinators');     
     $this->get('coordinator', 'CoordinatorController@coordinator')->name('coordinator.coordinator');     
      
@@ -49,7 +51,7 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->get('activities', 'ActivityController@activities')->name('coordinator.activities');     
     $this->get('activity', 'ActivityController@index')->name('coordinator.activity');     
       
-    $this->get('/', 'CoordinatorController@index')->name('coordinator.home');
+    $this->get('/', 'CoordinatorController@home')->name('coordinator.home');
 });
 
 Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
