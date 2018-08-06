@@ -10,11 +10,31 @@ use App\Models\Coordinator;
 class CoordinatorController extends Controller
 {
     public function signStore(Request $request){
-        $data = $request->all();
 
-        // dd($data);
+        $data = $request->all();        
+
+        if($request->hasFile('image') && $request->file('image')->isValid() ){
+            
+            $date = date('Y-m-d-H-i');
+            $name = $request->idCoord.'-'.kebab_case($date);
+            $extension = $request->image->extension();
+            $nameFile  = "{$name}.{$extension}";
+
+            $data['image'] = $nameFile;
+            $upload = $request->image->storeAs('signatures', $nameFile);
+
+            if(!$upload)
+                return redirect()->back()->with('error', 'Falha ao carregar a imagem do certificado!');
+
+        }   
 
         $coordinator = new Coordinator;
+
+        $update = $coordinator->newSign($data);
+
+        if ($update){
+            return redirect()->back()->with('success', 'Assinatura carregada com sucesso!');
+        }
     }
     
     public function home(){

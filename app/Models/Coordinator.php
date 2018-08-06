@@ -24,12 +24,25 @@ class Coordinator extends Model
         }
     }
 
-    public function person(){
-        return $this->belongsTo(Person::class);
+    public function newSign($data):Array{
+
+        $coordinator = Coordinator::where('id', $data['idCoord'])->get()->first();
+        
+        $coordinator->signature  = $data['image'];
+
+        $updated = $coordinator->save();
+
+        // dd($user->id);
+
+        if ($updated){
+            return [
+                $coordinator->id
+            ];
+        }
     }
 
-    public function course(){
-        return $this->belongsTo(Course::class);
+    public function person(){
+        return $this->belongsTo(Person::class);
     }
 
 }

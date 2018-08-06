@@ -47,10 +47,14 @@
                         <button type="submit" class="btn btn-success">Registrar</button>
                     </div>            
                 </form> 
-                
-            
             </div>
-        
         </div>
+
+        @isset($coordinator->signature)
+            <div class="form-group">
+            <img src="{{ url('storage/signatures/'.$coordinator->signature) }}" class="img-fluid " alt="Responsive image">
+            </div>        
+
+        @endisset
     </div>
 @stop

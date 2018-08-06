@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Person;
+use App\Models\Coordinator;
 use App\Models\Activity;
 use App\Models\Certificate;
 use App\Models\ReasonRejected;
@@ -149,8 +150,9 @@ class CertificateController extends Controller
     public function attestationReport($id){
 
         $userCoord = auth()->user();
-
-        $coordinator = Person::where('user_id', $userCoord->id)->with('course')->get()->first();
+        $person = Person::where('user_id', $userCoord->id)->get()->first();
+        
+        $coordinator = Coordinator::with(['person'])->where('person_id', $person->id)->get()->first();
 
         $students = Student::with(['person' => function($q) use($id) {
             $q->where('id', $id)

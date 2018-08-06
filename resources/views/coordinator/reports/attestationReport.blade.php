@@ -125,11 +125,13 @@
                             <br>
                             <br>
 
-                            <p style="text-align:center;">_________________________________________________</p>
+                            <!-- <p style="text-align:center;">_________________________________________________</p> -->
                 
+                            <div style="text-align:center;">                            
+                                <img src="{{ url('storage/signatures/'.$coordinator->signature) }}" class="img-fluid" alt="Responsive image" width="50%" >
+                            </div>
 
-                            <p style="text-align:center;">{{ $coordinator->name }}</p>
-                            <p style="text-align:center;">Coordenador do Curso</p>
+                            <p style="text-align:center;">Coordenador do Curso de {{ $coordinator->person->course->name }}</p>
                         </div>     
                
                </div>
