@@ -106,7 +106,17 @@
                     </div>
                     <br>
                     <div class="form-group">
-                        <button type="button" class="btn btn-warning">Cancelar</button>
+
+                        @isset($user->reason)
+                            <a href="{{ url('/logout') }}">
+                                <button type="button" class="btn btn-warning">Sair</button>
+                            </a>
+                        @else
+                            <a href="{{ URL::previous() }}">
+                                <button type="button" class="btn btn-warning">Cancelar</button>
+                            </a>
+                        @endisset
+                        
                         <button type="submit" class="btn btn-success">Salvar nova senha</button>
                     </div>            
                 </form>

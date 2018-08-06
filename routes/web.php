@@ -99,6 +99,8 @@ $this->get('change-password', 'Site\SiteController@changePassword')->name('chang
 $this->get('change-password/{reason}', 'Site\SiteController@changePassword')->name('change.password');
 
 $this->get('/', 'Site\SiteController@index');
+$this->get('/logout', 'Site\SiteController@logout');
+
 $this->get('/check-user', 'Site\SiteController@checkUser')->name('check-user');   //é necessário pois os Menus são diferentes
 
 Auth::routes();

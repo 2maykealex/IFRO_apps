@@ -3,14 +3,20 @@
 namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use App\Models\Person;
 use App\Models\Student;
 use App\Models\Coordinator; 
 use App\User;
+use Session;
 
 class SiteController extends Controller
 {
+    public function logout(){
+        Session::flush(); 
+        return Redirect::to('/');
+    }
     
     public function passwordStore(Request $request){
 
