@@ -10,8 +10,8 @@
 
     <div class="text-center">
         <img src="{{ url('storage/profile/1.jpg') }}" class="img-fluid img-circle" alt="Responsive image" height="160" width="150">
-        <h1> MaykeAlexMirandaPlaça </h1>
-        <h4>Curso Superior de Tecnologia em Redes</h4>
+        <h1> {{ $coordinator->person->name }} </h1>
+        <h4>{{ $coordinator->person->course->name }}</h4>
         
     </div>
 @stop
@@ -33,7 +33,7 @@
             <div class="box-body">
                 @include('admin.includes.alerts')
 
-                <form action="{{ route('coordinator.certificate.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('coordinator.sign.store') }}" method="post" enctype="multipart/form-data">
                     {!! csrf_field() !!}
 
                     <div class="form-group">
@@ -41,7 +41,7 @@
                         <input type="file" name="image" class="form-control-file" required>
                     </div>
 
-                    <input id="idCoord" name="idCoord" type="hidden"> 
+                    <input id="idCoord" name="idCoord" type="hidden" value="{{ $coordinator->id }}"> 
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-success">Registrar</button>
