@@ -18,6 +18,9 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
+    <!-- Alternative Font -->
+    <link href="{{ url('/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+
     <!-- Styles -->
     <style>
         /* html, body {
@@ -106,7 +109,8 @@
                     </div>
                     <br>
                     <div class="form-group">
-
+                        <button type="submit" class="btn btn-success">Salvar nova senha</button>
+                        
                         @isset($user->reason)
                             <a href="{{ url('/logout') }}">
                                 <button type="button" class="btn btn-warning">Sair</button>
@@ -115,9 +119,8 @@
                             <a href="{{ URL::previous() }}">
                                 <button type="button" class="btn btn-warning">Cancelar</button>
                             </a>
-                        @endisset
+                        @endisset                       
                         
-                        <button type="submit" class="btn btn-success">Salvar nova senha</button>
                     </div>            
                 </form>
             </div>
