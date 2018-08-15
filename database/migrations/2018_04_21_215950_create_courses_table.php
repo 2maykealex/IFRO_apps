@@ -21,6 +21,7 @@ class CreateCoursesTable extends Migration
             $table->integer('qtSem');
             $table->integer('chCourse');
             $table->string('modalidade');
+            $table->integer('chMin');
         });
 
     }
