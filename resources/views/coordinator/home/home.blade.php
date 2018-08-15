@@ -9,7 +9,7 @@
     <br>
 
     <div class="text-center">
-        <img src="{{ url('storage/profile/1.jpg') }}" class="img-fluid img-circle" alt="Responsive image" height="160" width="150">
+        <img src="{{ url('storage/profile/'.$coordinator->person->user->image) }}" class="img-fluid img-circle" alt="Responsive image" height="180" width="180">
         <h1> {{ $coordinator->person->name }} </h1>
         <h4>{{ $coordinator->person->course->name }}</h4>
         

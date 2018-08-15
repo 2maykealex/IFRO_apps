@@ -9,7 +9,8 @@
     <br>
 
     <div class="text-center">
-        <img src="{{ url('storage/profile/1.jpg') }}" class="img-fluid img-circle" alt="Responsive image" height="160" width="150">
+        <img src="{{ url('storage/profile/'.$user->image) }}" class="img-fluid img-circle" alt="Responsive image" height="160" width="150">
+        <h1> {{ $user->name }} </h1>
 
         
     </div>
@@ -17,7 +18,7 @@
 
 @section('content')
 
-    <div class="row">
+    <div class="row text-center">
 
         @include('admin.includes.alerts')
         <div>

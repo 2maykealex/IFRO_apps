@@ -45,11 +45,13 @@ class SiteController extends Controller
     public function home(){
 
         $user = auth()->user();
+        $person = Person::where('user_id', $user->id)->get()->first();
+        $student = Student::where('person_id', $person->id)->get()->first();
 
         if ($user->created_at == $user->updated_at){
             return redirect()->route('change.password', 1);  //reason = 1
         } 
-        return view('site.home.home');
+        return view('site.home.home', compact('student'));
     }
 
     public function index(){

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.home.index');
+        $user = auth()->user();
+        return view('admin.home.index', compact('user'));
     }
 }
