@@ -124,17 +124,15 @@
                             <br>
                             <br>
                             <br>
-
                             <!-- <p style="text-align:center;">_________________________________________________</p> -->
-                
-                            <div style="text-align:center;">                            
-                                <img src="{{ url('storage/signatures/'.$coordinator->signature) }}" class="img-fluid" alt="Responsive image" width="50%" >
-                            </div>
-
-                            <p style="text-align:center;">Coordenador do Curso de {{ $coordinator->person->course->name }}</p>
-                        </div>     
+                            
+                        </div>                    
+                </div>
                
-               </div>
+                <div style="text-align:center; width: 35%;">                            
+                    <img src="{{ url('storage/signatures/'.$coordinator->signature) }}" class="img-fluid" alt="Responsive image" width="40%" >
+                    <p>Coordenador do Curso de {{ $coordinator->person->course->name }}</p>
+                </div>  
 
     </div>    
 @stop
