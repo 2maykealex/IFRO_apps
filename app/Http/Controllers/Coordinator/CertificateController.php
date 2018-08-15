@@ -28,7 +28,7 @@ class CertificateController extends Controller
                 inner join students as S on S.person_id = T.person_id  
                 inner join courses as C on C.id = P.course_id  
                 
-                WHERE (T.ch >=30)
+                WHERE (T.ch >= C.chMin)
                 ORDER BY S.group, P.name
             ')
         );
