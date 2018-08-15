@@ -14,11 +14,15 @@ class ProfileAccessTableSeeder extends Seeder
     public function run()
     {
         ProfileAccess::create([
-            'group'  => 'admin'
+            'name'  => 'admin'
         ]);
 
         ProfileAccess::create([
-            'group'  => 'site'
+            'name'  => 'coordinator'
+        ]);
+
+        ProfileAccess::create([
+            'name'  => 'site'
         ]);
     }
 }

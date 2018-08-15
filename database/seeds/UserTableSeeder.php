@@ -12,6 +12,14 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+
+        User::create([
+            'name'     => 'admin',
+            'email'    => 'admin@ifro.edu.br',
+            'password' => bcrypt('123456'),
+            'image'    => '',
+        ]);
+
         User::create([
             'name'     => 'Saulo',
             'email'    => 'saulo@ifro.edu.br',
