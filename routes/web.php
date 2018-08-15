@@ -54,26 +54,7 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->get('/', 'CoordinatorController@home')->name('coordinator.home');
 });
 
-Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {
-
-    $this->get('certificates-report/{id}', 'CertificateController@certificatesReport')->name('admin.certificates.report');  
-    $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('admin.certificate.validate');  
-    $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('admin.certificates'); 
-    $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('admin.certificates');       
-
-    $this->post('certificate-store', 'CertificateController@certificateStore')->name('admin.certificate.store');     
-    $this->get('certificate-upload', 'CertificateController@upload')->name('admin.certificate.upload');  
-
-    $this->post('storeImport', 'StudentController@importExcelStore')->name('admin.student.import'); //ajustar essas rotas
-    $this->get('import-students', 'StudentController@importExcel')->name('admin.import.students');
-    
-    $this->post('student-store', 'StudentController@studentStore')->name('admin.student.store'); 
-    $this->get('student-new', 'StudentController@newStudent')->name('admin.student.new'); 
-    $this->get('student-new/{student}', 'StudentController@newStudent')->name('admin.student.new'); 
-    // $this->get('students/{studentsInvalided}', 'StudentController@students')->name('admin.students');     
-    $this->get('students/', 'StudentController@students')->name('admin.students');     
-    $this->get('students-invalided', 'StudentController@studentsInvalided')->name('admin.students.invalided');     
-    $this->get('student', 'StudentController@student')->name('admin.student');         
+Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Admin', 'prefix' => 'admin'], function () {   
 
     $this->post('coordinator-store', 'CoordinatorController@coordinatorStore')->name('admin.coordinator.store'); 
     $this->get('coordinator-new', 'CoordinatorController@coordinatorNew')->name('admin.coordinator.new');    
