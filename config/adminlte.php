@@ -118,43 +118,6 @@ return [
             'url'         => 'admin',
             'icon'        => 'university',
         ],
-        
-        
-        [
-            'text' => 'Alunos',
-            'url'  => 'admin',
-            'icon' => 'user',
-            'submenu' => [
-                    [
-                        'text' => 'Importar de arquivo .CSV',
-                        'url'  => 'admin/import-students',
-                        'icon' => 'file',
-                        
-                    ],
-
-                    [
-                        'text' => 'Incluir novo aluno',
-                        'url'  => 'admin/student-new',
-                        'icon' => 'plus-circle',
-                        
-                    ],
-
-                    [
-                        'text' => 'Listar alunos',
-                        'url'  => 'admin/students',
-                        'icon' => 'list-ul',
-                    ],
-
-                    [
-                        'text' => 'Alunos não validados',
-                        'url'  => 'admin/students-invalided',
-                        'icon' => 'list-ul',
-                    ]
-
-                            
-            ],
-
-        ],
 
         [
             'text' => 'Coordenadores',
@@ -221,51 +184,11 @@ return [
                         'url'  => 'admin/activities',
                         'icon' => 'list-ul',
                     ]
-
                             
             ],
             
 
         ],
-
-        [
-            'text' => 'Certificados',
-            'url'  => 'admin',
-            'icon' => 'user',
-            'submenu' => [
-                
-                    [
-                        'text' => 'Incluir novo certificado',
-                        'url'  => 'admin/certificate-upload',
-                        'icon' => 'plus-circle',
-                        
-                    ],
-
-                    [
-                        'text' => 'Listar certificados pendentes',
-                        'url'  => 'admin/certificates/pending',
-                        'icon' => 'list-ul',
-                    ],
-
-                    [
-                        'text' => 'Listar certificados aceitos',
-                        'url'  => 'admin/certificates/accepted',
-                        'icon' => 'list-ul',
-                    ],
-
-                    [
-                        'text' => 'Listar certificados recusados',
-                        'url'  => 'admin/certificates/rejected',
-                        'icon' => 'list-ul',
-                    ]
-
-                    //FALTA AS VIEWS ACIMA
-
-                            
-            ],
-
-        ],
-
         
     ],
 
