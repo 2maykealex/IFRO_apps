@@ -15,7 +15,7 @@
 
         <div class="box-body">
             @include('admin.includes.alerts')
-            <form action="{{ route('admin.student.store') }}" method="post">
+            <form action="{{ route('coordinator.student.store') }}" method="post">
                 {!! csrf_field() !!}
 
                 <input id="course_id" name="course_id" type="hidden" value="{{ $course }}">
