@@ -18,6 +18,7 @@ class CourseTableSeeder extends Seeder
             'qtSem' => 5,
             'chCourse' => 1734 ,
             'modalidade' => 'Curso Superior de Tecnologia',
+            'chMin' => 100,
         ]);
 
         Course::create([
@@ -26,6 +27,7 @@ class CourseTableSeeder extends Seeder
             'qtSem' => 5,
             'chCourse' => 2500 ,
             'modalidade' => 'Curso Superior de Tecnologia',
+            'chMin' => 200,
         ]);
 
         Course::create([
@@ -34,6 +36,7 @@ class CourseTableSeeder extends Seeder
             'qtSem' => 6,
             'chCourse' => 2500 ,
             'modalidade' => 'Curso Superior de Tecnologia',
+            'chMin' => 100,
         ]);
 
         
