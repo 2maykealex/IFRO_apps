@@ -67,22 +67,28 @@ class SiteController extends Controller
 
         $user = auth()->user();
 
+        $profile = $user->userProfile->profileAccess->name;  //retorna o perfil dele
+
+        // dd($profile);
+
         if ($user == null){
             return view('site.home.index');
         } else {
             
-            $person = Person::where('user_id', $user->id)->get()->first();
+            // $person = Person::where('user_id', $user->id)->get()->first();
 
-            $student = Student::with('person')->where('person_id', $person->id)->get()->first();        
+            // $student = Student::with('person')->where('person_id', $person->id)->get()->first();        
             
-            $coordinator = Coordinator::with('person')->where('person_id', $person->id)->get()->first();
+            // $coordinator = Coordinator::with('person')->where('person_id', $person->id)->get()->first();
 
 
     
-            if ($student != null){
+            if ($profile == "site"){
                 return redirect()->route('site.home');             //Redireciona para a rota de Student
-            } else {
+            } else if ($profile == "coordinator"){
                 return redirect()->route('coordinator.home');      //Redireciona para a rota de Coordinator
+            } else if ($profile == "admin"){
+                return redirect()->route('admin.home');      //Redireciona para a rota de Admin
             }
 
         }
