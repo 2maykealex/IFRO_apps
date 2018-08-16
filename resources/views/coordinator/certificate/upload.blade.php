@@ -7,6 +7,8 @@
     </ol>
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+
+    <script src="{{ url('/vendor/jquery/jquery.min.js') }}"></script>
     
     <script>
         $(document).ready(function(e) {
@@ -15,6 +17,7 @@
 
             $("body").delegate("#studentName", "change", function(data){
                 //Pegando o valor do select
+                
                 var valor = $(this).val();
                 
                 $("#idStudent").val(valor);
