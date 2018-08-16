@@ -17,28 +17,28 @@ class UserTableSeeder extends Seeder
             'name'     => 'admin',
             'email'    => 'admin@ifro.edu.br',
             'password' => bcrypt('123456'),
-            'image'    => '',
+            'image'    => 'default_user.png',
         ]);
 
         User::create([
             'name'     => 'Saulo',
             'email'    => 'saulo@ifro.edu.br',
             'password' => bcrypt('123456'),
-            'image'    => '',
+            'image'    => 'default_user.png',
         ]);
 
         User::create([
             'name'     => 'Carlos',
             'email'    => 'carlos@especialista.com.br',
             'password' => bcrypt('123456'),
-            'image'    => '',
+            'image'    => 'default_user.png',
         ]);
 
         User::create([
             'name'     => 'Mayke',
             'email'    => 'mayke.suporte@gmail.com',
             'password' => bcrypt('123456'),
-            'image'    => '',
+            'image'    => '1.jpg',
         ]);
     }
 }
