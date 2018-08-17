@@ -23,6 +23,7 @@ class Course extends Model
         $this->qtSem       = $dados['qtSem'];
         $this->chCourse    = $dados['chCourse'];
         $this->modalidade  = $dados['modalidade'];
+        $this->chMin       = $dados['chMin'];
 
         $course = $this->save();
 

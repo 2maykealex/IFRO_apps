@@ -14,22 +14,24 @@
         <table class="table table-bordered table-hover table-responsive">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <!-- <th>#</th> -->
                     <th>Curso</th>
                     <th>Qtd Semestres</th>
                     <th>CH Curso</th>
                     <th>Modalidade</th>
+                    <th>Ch Mín p/ colação</th>
 
                 </tr>
             </thead>
             <tbody>
                 @forelse ($courses as $course)
                 <tr>
-                    <td>{{ $course->id }}</td>
+                    <!-- <td>{{ $course->id }}</td> -->
                     <td>{{ $course->name}}</td>
                     <td>{{ $course->qtSem }}</td>
                     <td>{{ $course->chCourse }}</td>
                     <td>{{ $course->modalidade }}</td>
+                    <td>{{ $course->chMin }}</td>
 
                 </tr>
                 @empty

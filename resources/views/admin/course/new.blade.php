@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label for="area_id">Área do curso:</label>
-                    <select name="area_id" class="form-control">
+                    <select name="area_id" class="form-control" required>
                         <option value="">--- Selecione a área ---</option>
                         @foreach ($areas as $area)
                             <option value="{{ $area->id }}">{{ $area->descricao }}</option>
@@ -31,17 +31,17 @@
 
                 <div class="form-group">
                     <label for="name">Nome do curso:</label>
-                    <input type="text" name="name" placeholder="Nome do curso" class="form-control">
+                    <input type="text" name="name" placeholder="Nome do curso" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <label for="qtSem">Quantidade de semestres:</label>
-                    <input type="text" name="qtSem" placeholder="Quantidade de semestres" class="form-control">
+                    <input type="text" name="qtSem" placeholder="Quantidade de semestres" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <label for="chCourse">Carga horária:</label>
-                    <input type="text" name="chCourse" placeholder="Carga horária" class="form-control">
+                    <input type="text" name="chCourse" placeholder="Carga horária" class="form-control" required>
                 </div>
 
                 <div class="form-group">
@@ -50,17 +50,17 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">Registrar</button>
+                    <label for="chCourse">Carga horária mínima para colação:</label>
+                    <input type="text" name="chMin" placeholder="Carga horária mínima para colação" class="form-control" required>
                 </div>
-            
-            
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Registrar</button>
+                </div>            
             
             </form>
-        
-        
+
         </div>
-    
-    
     
     </div>
 @stop
