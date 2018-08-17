@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Site', 'prefix' => 'site'], function () {
 
     $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('site.certificates'); 
@@ -39,12 +36,6 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->get('student', 'StudentController@student')->name('coordinator.student');         
 
     $this->post('sign-store', 'CoordinatorController@signStore')->name('coordinator.sign.store');    
-
-    $this->get('coordinators', 'CoordinatorController@coordinators')->name('coordinator.coordinators');     
-    $this->get('coordinator', 'CoordinatorController@coordinator')->name('coordinator.coordinator');     
-     
-    $this->get('area-course', 'CourseController@areaCurso')->name('coordinator.area.course');     
-    $this->get('courses-area', 'AreaController@courses')->name('coordinator.courses.area');     
        
     $this->get('courses', 'CourseController@courses')->name('coordinator.courses');     
 
