@@ -30,7 +30,7 @@ class Course extends Model
         if ($course)
             return [
                 'success' => true,
-                'message' => 'Nova atividade foi cadastrada com sucesso!'
+                'message' => 'Novo curso foi cadastrado com sucesso!'
             ];
 
         return [
