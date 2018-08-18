@@ -12,6 +12,7 @@ use App\Models\Course;
 use App\Models\UserProfile;
 use App\Models\StudentsInvalided;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -84,7 +85,7 @@ class StudentController extends Controller
                     $users['name']     = $firstName;
                     $users['email']    = $email;
                     $users['password'] = $password;    
-                    $users['image']    = '';    
+                    $users['image']    = 'default_user.png';    
 
                     $newUserId   = $newUser->newUser($users);
                     
@@ -157,7 +158,7 @@ class StudentController extends Controller
         $user['name']             = $firstName;
         $user['email']            = $data['email'];
         $user['password']         = bcrypt($cpf);
-        $user['image']            =  "";
+        $user['image']            = 'default_user.png';               //ajustar para imagem default  -- o aluno alterará sua imagem depois
 
         $newUser = new User;
         $newUserId = $newUser->newUser($user);
@@ -225,7 +226,7 @@ class StudentController extends Controller
         $student = Student::find(1)::with(['person'])->get()->first();
     }
 
-    public function students(){ 
+    public function students($group=""){ 
 
         $user = auth()->user();       
 
@@ -238,7 +239,16 @@ class StudentController extends Controller
         }])
         ->get()->sortBy('person.name');
 
-        return view('coordinator.student.students', compact('students') );
+        if ($group != ""){
+            $students = $students->where('group', $group);
+        }
+
+        $groups = DB::select(
+            DB::raw('SELECT DISTINCT `group` FROM `students` ORDER BY `group` DESC
+            ')
+        );        
+
+        return view('coordinator.student.students', compact('students','groups','group') );
     }
 
     public function studentsinvalided(){ 

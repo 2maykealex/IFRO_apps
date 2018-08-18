@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->get('student-new/{student}', 'StudentController@newStudent')->name('coordinator.student.new'); 
     
     $this->get('students/', 'StudentController@students')->name('coordinator.students');     
+    $this->get('students/{group}', 'StudentController@students')->name('coordinator.students');     
     $this->get('students-invalided', 'StudentController@studentsInvalided')->name('coordinator.students.invalided');     
     $this->get('student', 'StudentController@student')->name('coordinator.student');         
 
