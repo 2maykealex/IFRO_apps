@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->post('student-store', 'StudentController@studentStore')->name('coordinator.student.store'); 
     $this->get('student-new', 'StudentController@newStudent')->name('coordinator.student.new'); 
     $this->get('student-new/{student}', 'StudentController@newStudent')->name('coordinator.student.new'); 
+    $this->get('student/edit/{student}', 'StudentController@newStudent')->name('coordinator.student.edit'); 
     
     $this->get('students/', 'StudentController@students')->name('coordinator.students');     
     $this->get('students/{group}', 'StudentController@students')->name('coordinator.students');     
