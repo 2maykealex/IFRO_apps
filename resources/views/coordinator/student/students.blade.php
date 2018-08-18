@@ -54,6 +54,7 @@
                     <th>Matrícula</th>
                     <th>Celular</th>                    
                     <th>E-mail</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>        
@@ -68,6 +69,11 @@
                             <td>{{ $student->registration }}</td>
                             <td>{{ $student->person->telefones }}</td>
                             <td>{{ $student->person->user->email }}</td>
+                            <td>
+                                <a href="{{ route('coordinator.student.edit', compact('student')) }}">
+                                    <button class="btn btn-warning">Editar</button>
+                                </a>                        
+                        </td>
                         </tr>
                     @endif
                 @empty
