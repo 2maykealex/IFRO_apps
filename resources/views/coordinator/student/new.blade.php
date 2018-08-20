@@ -57,10 +57,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Registrar</button>
                 </div>
-            
             </form>
-        
         </div>
-    
     </div>
 @stop

@@ -118,12 +118,9 @@
                                 ?>
                             @endif
 
-
                         @empty
                         @endforelse
-
                         
-
                         <tr>
                             <td></td>
                             <td></td>
@@ -133,12 +130,10 @@
                             <td></td>
                             <td><strong>TOTAL</strong></td>
                             
-                            
                             <td><strong> <?php echo $soum?> </strong></td>
                             <td><strong>HORAS</strong></td>
                             
                         </tr>
-
                     </tbody>
                 </table>
                 <br>

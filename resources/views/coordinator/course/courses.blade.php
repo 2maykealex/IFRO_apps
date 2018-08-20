@@ -30,7 +30,6 @@
                     <td>{{ $course->qtSem }}</td>
                     <td>{{ $course->chCourse }}</td>
                     <td>{{ $course->modalidade }}</td>
-
                 </tr>
                 @empty
                 @endforelse

@@ -64,11 +64,6 @@
 
         function showReason(id) {
             var modal = document.getElementById("myModal");
-            // var inputId = document.getElementById("idCert");
-            // var form = document.getElementById("formCert");
-
-            // inputId.value = id;
-            // alert('ok');
 
             if (id == -1){
                 modal.style.display = "none";
@@ -87,7 +82,6 @@
         <h4>{{ $coordinator->person->course->name }}</h4>
         
     </div>
-
 
 @stop
 
@@ -123,8 +117,7 @@
                     <div class="form-group">
                         <img src="{{ url('storage/signatures/'.$coordinator->signature) }}" class="img-fluid " alt="Responsive image">
                     </div>        
-                @endisset
-                             
+                @endisset    
                     
             </div>
         </div>
@@ -140,34 +133,4 @@
 
     </div>
 
-    <!-- <div class="row"> 
-
-        <div class="col-md-2 box" id="formulario">
-
-            <div class="box-body">
-                @include('admin.includes.alerts')
-
-                <form action="{{ route('coordinator.sign.store') }}" method="post" enctype="multipart/form-data">
-                    {!! csrf_field() !!}
-
-                    <div class="form-group">
-                        <label for="image">Selecione a imagem de sua assinatura digitalizada:</label>
-                        <input type="file" name="image" class="form-control-file" required>
-                    </div>
-
-                    <input id="idCoord" name="idCoord" type="hidden" value="{{ $coordinator->id }}"> 
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-success">Registrar</button>
-                    </div>            
-                </form> 
-            </div>
-        </div>
-
-        @isset($coordinator->signature)
-            <div class="form-group">
-                <img src="{{ url('storage/signatures/'.$coordinator->signature) }}" class="img-fluid " alt="Responsive image">
-            </div>        
-        @endisset
-    </div> -->
 @stop

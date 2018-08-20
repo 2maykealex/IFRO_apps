@@ -57,11 +57,9 @@
                                     
                                     <td>{{ $certificate->chCertificate}}</td>
                                     <td>
-                                        
                                         <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
                                             <button class="btn btn-primary">Imagem</button>
                                         </a>
-                                    
                                     </td>
                                 </tr>
 
@@ -71,13 +69,9 @@
                                     $idActivity = $certificate->activity_id; 
                                 ?>
                             @endif
-
-
                         @empty
                         @endforelse
-
                         
-
                         <tr>
                             <td></td>
                             <td></td>

@@ -64,23 +64,12 @@
             $("#myModal").hide();
         });
 
-   
-
         function showReason(id) {
             var modal = document.getElementById("myModal");
             var inputId = document.getElementById("idCert");
             var form = document.getElementById("formCert");
 
             inputId.value = id;
-
-
-            // $('#formCert').attr('action', route);
-
-            // form.action = route;
-
-            //  alert(route);
-
-            // $('#linkBtn').attr('href', route);
 
             if (id == -1){
                 modal.style.display = "none";

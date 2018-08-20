@@ -6,7 +6,6 @@
         
     </ol>
 
-    
 @stop
 @section('content')
     <div class="box">
@@ -28,9 +27,7 @@
                 </div>
             
             </form>
-        
         </div>
-    
     </div>
 
 
@@ -55,7 +52,6 @@
                             <td>{{ $student[2] }}</td>
                         </tr>
                     @endforeach
-
                     
                 </tbody>
             </table>    
@@ -86,8 +82,7 @@
                         @else
                             
                         @endif                       
-                    @endforeach
-                    
+                    @endforeach                    
                 </tbody>
             </table>    
         </div>

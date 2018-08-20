@@ -78,7 +78,6 @@
         @endif
 
         <div class="content">
-
             <div>
                 <img src="{{ url('storage/images/if_logo.png') }}" style="max-width:100px;">
             </div>

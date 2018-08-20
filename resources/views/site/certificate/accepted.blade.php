@@ -13,8 +13,6 @@
           
         <table class="table table-bordered table-hover table-responsive">
             <!-- Sem Tag de cabeçalho -->
-            
-            
 
             @Foreach ($activities as $key => $activity)
                 
@@ -73,12 +71,8 @@
                                     $idActivity = $certificate->activity_id; 
                                 ?>
                             @endif
-
-
                         @empty
                         @endforelse
-
-                        
 
                         <tr>
                             <td></td>

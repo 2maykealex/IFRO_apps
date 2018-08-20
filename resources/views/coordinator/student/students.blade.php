@@ -18,7 +18,6 @@
         }); 
     </script>
 
-
     <h1>Alunos</h1>
     <ol class="breadcrumb">
         <li><a href="{{ route('admin.home') }}">Home</a></li>
@@ -73,7 +72,7 @@
                                 <a href="{{ route('coordinator.student.edit', compact('student')) }}">
                                     <button class="btn btn-warning">Editar</button>
                                 </a>                        
-                        </td>
+                            </td>
                         </tr>
                     @endif
                 @empty
@@ -82,5 +81,4 @@
             </tbody>
         </table>    
     </div>
-    
 @stop
