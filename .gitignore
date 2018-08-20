@@ -1,4 +1,7 @@
-vendor/
+vendor/bootstrap
+vendor/mail
+vendor/notifications
+vendor/*
 node_modules/
 npm-debug.log
 
