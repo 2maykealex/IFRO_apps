@@ -9,7 +9,7 @@ use App\Models\Activity;
 class ActivityController extends Controller
 {
     public function newActivity(){
-        return view('coordinator.activity.new');
+        return view('coordinator.activity.new');   
     }
 
     public function activities(){

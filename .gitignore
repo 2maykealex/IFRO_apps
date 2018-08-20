@@ -13080,3 +13080,4 @@ vendor/psy/psysh/.gitignore
 vendor/ramsey/uuid/docs/.gitignore
 vendor/sebastian/comparator/.gitignore
 vendor/sebastian/diff/.gitignore
+vendor/sebastian/diff/tests/fixtures/out/.editorconfig
