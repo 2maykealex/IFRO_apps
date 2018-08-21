@@ -85,72 +85,91 @@
         </header>
 
         @if(config('adminlte.layout') != 'top-nav')
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
 
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
 
-                <!-- Sidebar Menu -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="">
+                    <!-- Sidebar Menu -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        
+                        @if (url('/site') == URL::current() )
+                            <li class="active">
+                        @else
+                            <li class="">
+                        @endif
+                            <a href="{{ url('/site') }}">
+                                <i class="fa fa-fw fa-university "></i>
+                                <span>Home</span>
+                            </a>
+                        </li>
 
-                    <a href="{{ url('/site') }}">
-                        <i class="fa fa-fw fa-university "></i>
-                        <span>Home</span>
-                    </a>
-                    </li>
+                        @if ((url('/site/certificate-upload') == URL::current()) or (url('/site/certificates/pending') == URL::current()) or (url('/site/certificates/accepted') == URL::current())  or (url('/site/certificates/rejected') == URL::current())  )
+                            <li class="active treeview menu-open">
+                        @else
+                            <li class="treeview">
+                        @endif
 
-                    <li class="treeview">
-                        <a href="{{ url('/site') }}"  >
-                        <i class="fa fa-fw fa-user "></i>
-                        <span>Certificados</span>
-                                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                            </span>
+                        <a href="{{ url('/coordinator') }}">
+                            <i class="fa fa-fw fa-user "></i>
+                            <span>Certificados</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                        </a>
+
+                        <ul class="treeview-menu">                            
+
+                            @if (url('/site/certificate-upload') == URL::current() )
+                                <li class="active">
+                            @else
+                                <li class="">
+                            @endif
+                                <a href="{{ url('/site') }}/certificate-upload">
+                                    <i class="fa fa-fw fa-plus-circle "></i>
+                                    <span>Incluir novo certificado</span>
                                 </a>
-                                <ul class="treeview-menu">
-                        <li class="">
-                            <a href="{{ url('/site') }}/certificate-upload"
-                                    >
-                            <i class="fa fa-fw fa-plus-circle "></i>
-                            <span>Incluir novo certificado</span>
-                                    </a>
-                        </li>
-                        <li class="">
-                            <a href="{{ url('/site') }}/certificates/pending"
-                                    >
-                            <i class="fa fa-fw fa-list-ul "></i>
-                            <span>Listar certificados pendentes</span>
-                                    </a>
-                        </li>
-                        <li class="">
-                            <a href="{{ url('/site') }}/certificates/accepted"
-                                    >
-                            <i class="fa fa-fw fa-list-ul "></i>
-                            <span>Listar certificados aceitos</span>
-                                    </a>
-                        </li>
-                        <li class="">
-                            <a href="{{ url('/site') }}/certificates/rejected"
-                                    >
-                            <i class="fa fa-fw fa-list-ul "></i>
-                            <span>Listar certificados recusados</span>
+                            </li>
+                        
+                            @if (url('/site/certificates/pending') == URL::current() )
+                                <li class="active">
+                            @else
+                                <li class="">
+                            @endif
+                                <a href="{{ url('/site') }}/certificates/pending">
+                                    <i class="fa fa-fw fa-list-ul "></i>
+                                    <span>Listar certificados pendentes</span>
                                 </a>
-                        </li>
+                            </li>
+                        
+                            @if (url('/site/certificates/accepted') == URL::current() )
+                                <li class="active">
+                            @else
+                                <li class="">
+                            @endif
+                                <a href="{{ url('/site') }}/certificates/accepted">
+                                    <i class="fa fa-fw fa-list-ul "></i>
+                                    <span>Listar certificados aceitos</span>
+                                </a>
+                            </li>
+                        
+                            @if (url('/site/certificates/rejected') == URL::current() )
+                                <li class="active">
+                            @else
+                                <li class="">
+                            @endif
+                                <a href="{{ url('/site') }}/certificates/rejected">
+                                    <i class="fa fa-fw fa-list-ul "></i>
+                                    <span>Listar certificados recusados</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    </ul>
-                    <!-- /.sidebar-menu -->
+                        <!-- /.sidebar-menu -->
                 </section>
-                <!-- /.sidebar -->
-                </aside>
-
-
-                </ul>
-                <!-- /.sidebar-menu -->
-            </section>
             <!-- /.sidebar -->
-        </aside>
+            </aside>
         @endif
 
         <!-- Content Wrapper. Contains page content -->

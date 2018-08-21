@@ -241,32 +241,32 @@
                         </ul>
                     </li>
 
-                @if ((url('/coordinator/report/complete') == URL::current()) )
-                    <li class="active treeview menu-open">
-                @else
-                    <li class="treeview">
-                @endif
-                    <a href="{{ url('/coordinator') }}">
-                        <i class="fa fa-fw fa-graduation-cap "></i>
-                        <span>Relatórios</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    
-                    <ul class="treeview-menu">
-                        @if (url('/coordinator/report/complete') == URL::current() )
-                            <li class="active">
-                        @else
-                            <li class="">
-                        @endif
-                            <a href="{{ url('/coordinator') }}/report/complete">
-                                <i class="fa fa-fw fa-list-ul "></i>
-                                <span>Alunos com C.H. completa</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    @if ((url('/coordinator/report/complete') == URL::current()) )
+                        <li class="active treeview menu-open">
+                    @else
+                        <li class="treeview">
+                    @endif
+                        <a href="{{ url('/coordinator') }}">
+                            <i class="fa fa-fw fa-graduation-cap "></i>
+                            <span>Relatórios</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        
+                        <ul class="treeview-menu">
+                            @if (url('/coordinator/report/complete') == URL::current() )
+                                <li class="active">
+                            @else
+                                <li class="">
+                            @endif
+                                <a href="{{ url('/coordinator') }}/report/complete">
+                                    <i class="fa fa-fw fa-list-ul "></i>
+                                    <span>Alunos com C.H. completa</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     
                 </ul>
                     <!-- /.sidebar-menu -->
