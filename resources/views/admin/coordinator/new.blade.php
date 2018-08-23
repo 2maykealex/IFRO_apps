@@ -40,12 +40,12 @@
 
                 <div class="form-group">
                     <label for="telefones">Telefones para contato:</label>
-                    <input type="text" name="telefones" placeholder="Ex.:   Pessoal: (XX) 9 XXXX-XXXX;    Mãe (XX) 9 XXXX-XXXX;    Emergência: (XX) 9 XXXX-XXXX " class="form-control">
+                    <input type="text" name="telefones" placeholder="Ex.:  (XX) 9 XXXX-XXXX" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="registration">Código do coordenador na Instituição</label>
-                    <input type="text" name="registration" placeholder="Ex.:  2018107066029-0" class="form-control" required>
+                    <label for="registration">Matrícula SIAPE</label>
+                    <input type="text" name="registration" placeholder="Ex.:  1234567" class="form-control" required>
                 </div>
 
                 <div class="form-group">

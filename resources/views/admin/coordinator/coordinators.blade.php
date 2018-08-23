@@ -18,7 +18,8 @@
                     <th>Nome</th>
                     <th>Coordena o curso</th>
                     <th>Celular</th>
-                    <th>Registro no IFRO</th>
+                    <th>Matrícula SIAPE</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>        
@@ -29,6 +30,17 @@
                     <td>{{ $coordinator->person->course->name}}</td>
                     <td>{{ $coordinator->person->cel }}</td>
                     <td>{{ $coordinator->registration }}</td>
+                    <td>
+                        <a href="#">
+                            <button class="btn btn-warning">Editar</button>
+                        </a>      
+
+                        
+                            <a href="#">
+                                <button class="btn btn-danger">Apagar</button>
+                            </a>                        
+                        
+                    </td>
                 </tr>
                 @empty
                 @endforelse
