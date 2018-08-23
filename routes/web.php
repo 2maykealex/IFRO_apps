@@ -18,7 +18,9 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
 
     $this->get('certificate/{id}/{value}', 'CertificateController@validateCertificate')->name('coordinator.certificate.validate');  
     $this->post('validate/reject', 'CertificateController@rejectCertificate')->name('coordinator.certificate.reject');  
-    $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('coordinator.certificates'); 
+     
+    $this->get('certificates/{status}/{group}', 'CertificateController@listCertificates')->name('coordinator.certificates'); 
+    $this->get('certificates/{status}/{group}/{id}', 'CertificateController@listCertificates')->name('coordinator.certificates');
     $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('coordinator.certificates');        
 
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('coordinator.certificate.store');     
@@ -26,14 +28,14 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
 
     $this->post('storeImport', 'StudentController@importExcelStore')->name('coordinator.student.import'); //ajustar essas rotas
     $this->get('import-students', 'StudentController@importExcel')->name('coordinator.import.students');
-    
+
     $this->post('student-store', 'StudentController@studentStore')->name('coordinator.student.store'); 
     $this->get('student-new', 'StudentController@newStudent')->name('coordinator.student.new'); 
     $this->get('student-new/{student}', 'StudentController@newStudent')->name('coordinator.student.new'); 
     $this->get('student/edit/{student}', 'StudentController@newStudent')->name('coordinator.student.edit'); 
     
-    $this->get('students/', 'StudentController@students')->name('coordinator.students');     
     $this->get('students/{group}', 'StudentController@students')->name('coordinator.students');     
+    $this->get('students/', 'StudentController@students')->name('coordinator.students');   
     $this->get('students-invalided', 'StudentController@studentsInvalided')->name('coordinator.students.invalided');     
     $this->get('student', 'StudentController@student')->name('coordinator.student');         
 
