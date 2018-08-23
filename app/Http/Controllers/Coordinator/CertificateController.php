@@ -28,7 +28,7 @@ class CertificateController extends Controller
                 inner join students as S on S.person_id = T.person_id  
                 inner join courses as C on C.id = P.course_id  
                 
-                WHERE (T.ch >= C.chMin)
+                WHERE (T.ch >= 1)
                 ORDER BY S.group, P.name
             ')
         );
@@ -198,7 +198,7 @@ class CertificateController extends Controller
 
         return view('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
     }
-    public function listCertificates($status, $id = 0){
+    public function listCertificates($status, $group="", $id = 0){
         if ($status == 'pending'){
             $valided = 0;
         } else if ($status == 'accepted'){
@@ -220,8 +220,37 @@ class CertificateController extends Controller
         }])
         ->get()->sortBy('person.name');
 
+        if ($group != ""){
+            $students = $students->where('group', $group);
+        }
 
-        if ($id == 0){
+        $groups = DB::select(
+            DB::raw('SELECT DISTINCT `group` FROM `students` ORDER BY `group` DESC
+            ')
+        );
+
+        if ($group == "" and $id == 0){
+            $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course) {
+                $query->where('course_id', $course);
+            } )
+            ->where('certificateValided', $valided)
+            ->orderby('activity_id') 
+            ->get();  
+
+        } else if ($group != "" and $id == 0){
+
+            // $certificates = DB::select(
+            //     DB::raw('SELECT * FROM certificates
+            //         INNER JOIN people ON people.id = certificates.person_id
+            //         INNER JOIN students ON students.person_id = people.id
+                    
+            //         WHERE certificates.certificateValided = 2 AND students.group = "20181066301A"
+            //     ')
+            // );
+
+
+
+            // dd($certificates);
             $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course) {
                 $query->where('course_id', $course);
             } )
@@ -250,12 +279,12 @@ class CertificateController extends Controller
         $idActivity = isset($certificates[0]->activity_id) ? $certificates[0]->activity_id : '';
 
         if ($valided == 0){
-            return view('coordinator.certificate.certificates', compact(['id', 'activities', 'students', 'person', 'certificates', 'count','soum']));
+            return view('coordinator.certificate.certificates', compact(['id', 'activities', 'students', 'person', 'certificates', 'count', 'soum', 'groups', 'group']));
         }else if ($valided == 1){
-            return view('coordinator.certificate.accepted', compact(['id', 'activities', 'students', 'person', 'certificates', 'count','soum']));
+            return view('coordinator.certificate.accepted',     compact(['id', 'activities', 'students', 'person', 'certificates', 'count', 'soum', 'groups', 'group']));
         }
         else if ($valided == 2){
-            return view('coordinator.certificate.rejected', compact(['id', 'activities', 'students', 'person', 'certificates', 'count','soum']));
+            return view('coordinator.certificate.rejected',     compact(['id', 'activities', 'students', 'person', 'certificates', 'count', 'soum', 'groups', 'group']));
         }
     }
 

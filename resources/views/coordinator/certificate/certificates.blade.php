@@ -9,6 +9,7 @@
 
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="{{ url('/vendor/jquery/jquery.min.js') }}"></script>
 
     <style>            
             /* The Modal (background) */
@@ -53,14 +54,36 @@
     
     <script>
         $(document).ready(function(e) {
-            $("body").delegate("#studentName", "change", function(data){
+            $("body").delegate("#group", "change", function(data){
 
                 //Pegando o valor do select
-                var valor = $(this).val();
-
-                window.location = "/coordinator/certificates/pending/"+valor
+                var group = $(this).val();
+                
+                route = "{{ url('/coordinator/certificates/pending') }}"+"/"+group;
+                
+                window.location = route;
             });
 
+            $("body").delegate("#studentName", "change", function(data){
+
+                //pegando o id do Select Group
+                var group = $("#group").val();
+                // alert(group);
+
+                //Pegando o valor do select
+                var id = $(this).val();
+
+                window.location = "/coordinator/certificates/pending/"+group+"/"+id ;
+            });
+
+            // alert($("#group").val());
+
+            if ($("#group").val() == 0){
+                $("#studentBlock").hide();
+            }else{
+                $("#studentBlock").show();
+            }
+            
             $("#myModal").hide();
         });
 
@@ -119,19 +142,35 @@
         <div class="col-md-12">        
             <div class="form-group">
 
-                <label for="studentName">
-                    Filtrar certificados do Aluno:
+                <label for="group">
+                    Filtrar alunos por turma:
                 </label>
-                
-                <select name="studentName" class="form-control" id="studentName" >
-                    <option value="">Listar todos</option>
 
-                    @foreach ($students as $student)          
-                        @if (!is_null($student->person)) 
-                            <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
-                        @endif                                    
+                <select name="group" id="group" class="form-control">
+                    <option value="">Listar todos os alunos</option>
+
+                    @foreach ($groups as $gp)          
+                        <option value="{{ $gp->group }}" <?php if ($group == $gp->group) { echo "selected";  }?> > {{ $gp->group }}</option>                                                
                     @endforeach  
                 </select>
+                    <br>
+
+                <div id="studentBlock">
+                    <label for="studentName">
+                        Filtrar certificados do Aluno:
+                    </label>
+                    
+                    <select name="studentName" class="form-control" id="studentName" >
+                        <option value="">Listar todos</option>
+
+                        @foreach ($students as $student)          
+                            @if (!is_null($student->person)) 
+                                <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
+                            @endif                                    
+                        @endforeach  
+                    </select>
+                </div>
+                
             </div>
         </div>        
     </div>
