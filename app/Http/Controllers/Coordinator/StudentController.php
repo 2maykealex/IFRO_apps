@@ -147,6 +147,8 @@ class StudentController extends Controller
     public function studentStore(Request $request){
         $data = $request->all();
 
+        // dd($data);
+
         $name      = utf8_encode($data['name']); 
         $nameArray = explode(" ", $name);      //transforma a string em array
         $firstName = $nameArray[0];                   //Obtendo o primeiro nome do array criado
@@ -196,14 +198,19 @@ class StudentController extends Controller
                     $newUserProfile_id = $newUserProfile->newUserProfile($UserProfile);
 
                     if ($newUserProfile_id){
-                        $studentInvalided = StudentsInvalided::where('id', $data['studentInvalid'])->get()->first();
+                    
+                        if (isset($data['studentInvalid'])){
+                            $studentInvalided = StudentsInvalided::where('id', $data['studentInvalid'])->get()->first();
 
-                        $deleteStudentInvalided = $studentInvalided->delete();
+                            $deleteStudentInvalided = $studentInvalided->delete();
 
-                        if ($deleteStudentInvalided){
-                            return redirect()->route('coordinator.students')->with('success', 'Cadastrado com sucesso!');
+                            if ($deleteStudentInvalided){
+                                return redirect()->route('coordinator.students')->with('success', 'Cadastrado com sucesso!');
+                            }
                         }
-                    }
+
+                        return redirect()->route('coordinator.students')->with('success', 'Cadastrado com sucesso!');
+                    }                    
                 }
             }
         }
@@ -226,7 +233,7 @@ class StudentController extends Controller
         $student = Student::find(1)::with(['person'])->get()->first();
     }
 
-    public function students($group=""){ 
+    public function students($group="", $id=0){ 
 
         $user = auth()->user();       
 
