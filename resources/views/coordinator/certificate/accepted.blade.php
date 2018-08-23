@@ -46,18 +46,6 @@
             $("#myModal").hide();
         });
 
-
-        $(document).ready(function(e) {
-
-            $("body").delegate("#studentName", "change", function(data){
-
-                //Pegando o valor do select
-                var valor = $(this).val();               
-
-                window.location = "/coordinator/certificates/accepted/"+valor
-            });
-
-        });
     </script>   
 
 @stop
