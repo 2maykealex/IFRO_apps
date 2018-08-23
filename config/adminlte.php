@@ -133,7 +133,7 @@ return [
                     ],
 
                     [
-                        'text' => 'Listar Coordenadores',
+                        'text' => 'Gerenciar Coordenadores',
                         'url'  => 'admin/coordinators',
                         'icon' => 'list-ul',
                     ]
@@ -157,7 +157,7 @@ return [
                     ],
 
                     [
-                        'text' => 'Listar Cursos',
+                        'text' => 'Gerenciar Cursos',
                         'url'  => 'admin/courses',
                         'icon' => 'list-ul',
                     ]
@@ -180,7 +180,7 @@ return [
                     ],
 
                     [
-                        'text' => 'Listar atividades',
+                        'text' => 'Gerenciar atividades',
                         'url'  => 'admin/activities',
                         'icon' => 'list-ul',
                     ]
