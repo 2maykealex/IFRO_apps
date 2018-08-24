@@ -47,21 +47,24 @@ class User extends Authenticatable
 
     public function newUser($data):Array{
 
-        $user = new User;
-        
-        $user->name        = $data['name'];
-        $user->email       = $data['email'];
-        $user->password    = $data['password'];
-        $user->image       = $data['image'];
+        $user = User::where('email', $data['email'])->get()->first(); //verifica se existe o email de novo usuário no banco 
 
-        $updated = $user->save();
+        if (!$user){             //caso não, cadastre 
+            $this->name        = $data['name'];
+            $this->email       = $data['email'];
+            $this->password    = $data['password'];
+            $this->image       = $data['image'];
 
-        // dd($user->id);
+            $updated = $this->save();
 
-        if ($updated){
-            return [
-                $user->id
-            ];
+            if ($updated){
+                return [
+                    $this->id
+                ];
+            }
+
+        } else{
+            return [0];
         }
     }
 }

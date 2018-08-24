@@ -88,8 +88,10 @@ class StudentController extends Controller
                     $users['image']    = 'default_user.png';    
 
                     $newUserId   = $newUser->newUser($users);
+
+                    // dd($newUserId);
                     
-                    if($newUserId){
+                    if($newUserId[0] > 0){  
                         $person['name']      = $name;  //name
                         $person['cpf']       = $cpf;
                         $person['course_id'] = $personCoord->course_id;     // Id do curso do Coordenador Logado
