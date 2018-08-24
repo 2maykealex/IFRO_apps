@@ -93,6 +93,10 @@
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
 
+                    <?php 
+                        $url = explode("/", URL::current());      //Pega a URL Atual(string) e a transforma em array
+                    ?>
+
                     @if (url('/coordinator') == URL::current() )
                         <li class="active">
                     @else
@@ -115,7 +119,7 @@
                         </a>
                     </li>
 
-                    @if ((url('/coordinator/import-students') == URL::current()) or (url('/coordinator/student-new') == URL::current()) or (url('/coordinator/students') == URL::current())  or (url('/coordinator/students-invalided') == URL::current())  )
+                    @if (in_array('import-students', $url)   or in_array('student-new', $url)  or in_array('students', $url)  or in_array('students-invalided', $url)  or in_array('student', $url) )
                         <li class="active treeview menu-open">
                     @else
                         <li class="treeview">
@@ -130,7 +134,7 @@
                         </a>
 
                         <ul class="treeview-menu">
-                            @if (url('/coordinator/import-students') == URL::current() )
+                            @if (in_array('import-students', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -141,7 +145,7 @@
                                 </a>
                             </li>
 
-                            @if (url('/coordinator/student-new') == URL::current() )
+                            @if (in_array('student-new', $url) )
                                 <li class="active">
                             @else
                                 <li class="">
@@ -152,17 +156,17 @@
                                 </a>
                             </li>
                         
-                            @if (url('/coordinator/students') == URL::current() )
+                            @if (in_array('students', $url) or in_array('student', $url)) 
                                 <li class="active">
                             @else
                                 <li class="">
                             @endif
                                 <a href="{{ url('/coordinator') }}/students">
                                     <i class="fa fa-fw fa-list-ul "></i>
-                                    <span>Listar alunos</span>
+                                    <span>Gerenciar alunos</span>
                                             </a>
                                     </li>
-                            @if (url('/coordinator/students-invalided') == URL::current() )
+                            @if (in_array('students-invalided', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -175,8 +179,7 @@
                         </ul>
                     </li>
 
-
-                    @if ((url('/coordinator/certificate-upload') == URL::current()) or (url('/coordinator/certificates/pending') == URL::current()) or (url('/coordinator/certificates/accepted') == URL::current())  or (url('/coordinator/certificates/rejected') == URL::current())  )
+                    @if ((in_array('certificate-upload', $url)) or (in_array('pending', $url)) or (in_array('accepted', $url)) or (in_array('rejected', $url)) )
                         <li class="active treeview menu-open">
                     @else
                         <li class="treeview">
@@ -191,7 +194,7 @@
                     
                         <ul class="treeview-menu">
 
-                            @if (url('/coordinator/certificate-upload') == URL::current() )
+                            @if (in_array('certificate-upload', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -203,7 +206,7 @@
                                         </a>
                             </li>
 
-                            @if (url('/coordinator/certificates/pending') == URL::current() )
+                            @if (in_array('pending', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -211,11 +214,11 @@
                                 <a href="{{ url('/coordinator') }}/certificates/pending"
                                         >
                                 <i class="fa fa-fw fa-list-ul "></i>
-                                <span>Listar certificados pendentes</span>
+                                <span>Gerenciar certificados pendentes</span>
                                         </a>
                             </li>
 
-                            @if (url('/coordinator/certificates/accepted') == URL::current() )
+                            @if (in_array('accepted', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -223,11 +226,11 @@
                                 <a href="{{ url('/coordinator') }}/certificates/accepted"
                                         >
                                 <i class="fa fa-fw fa-list-ul "></i>
-                                <span>Listar certificados aceitos</span>
+                                <span>Gerenciar certificados aceitos</span>
                                         </a>
                             </li>
 
-                            @if (url('/coordinator/certificates/rejected') == URL::current() )
+                            @if (in_array('rejected', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -235,13 +238,13 @@
                                 <a href="{{ url('/coordinator') }}/certificates/rejected"
                                         >
                                 <i class="fa fa-fw fa-list-ul "></i>
-                                <span>Listar certificados recusados</span>
+                                <span>Gerenciar certificados recusados</span>
                                     </a>
                             </li>
                         </ul>
                     </li>
 
-                    @if ((url('/coordinator/report/complete') == URL::current()) )
+                    @if (in_array('report', $url))
                         <li class="active treeview menu-open">
                     @else
                         <li class="treeview">
@@ -255,7 +258,7 @@
                         </a>
                         
                         <ul class="treeview-menu">
-                            @if (url('/coordinator/report/complete') == URL::current() )
+                            @if (in_array('report', $url))
                                 <li class="active">
                             @else
                                 <li class="">
