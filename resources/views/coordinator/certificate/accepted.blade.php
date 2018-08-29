@@ -132,9 +132,9 @@
                                     <td></td>
                                     <td>{{ $count }}</td>
 
-                                    <td style="width:275px;">{{ $certificate->person->name }}</td>
+                                    <td style="width:275px;">{{ $certificate->name }}</td>
                                     <td style="width:370px;">{{ $certificate->description}}</td> 
-                                    <td>{{ $certificate->updated_at->format('d/m/Y')}}</td>         
+                                    <td>{{ $certificate->updated_at}}</td>         
                                     <td></td>       
                                     <td style="width:40px;"></td>    
                                     

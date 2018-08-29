@@ -28,7 +28,8 @@ class CertificateController extends Controller
                 inner join students as S on S.person_id = T.person_id  
                 inner join courses as C on C.id = P.course_id  
                 
-                WHERE (T.ch >= 1)
+                WHERE (T.ch >= C.chMin) 
+                and (S.status = 1)
                 ORDER BY S.group, P.name
             ')
         );
@@ -62,10 +63,15 @@ class CertificateController extends Controller
         $op            = $value;
 
         $data = Certificate::where('id', $certificateId)->get()->first();
+        // dd($data);
 
         $data->certificateValided = $op;
+
+        // dd($data, $certificateId, $op);
         
         $update = $data->save();
+
+        // dd($update);
 
         if ($update){
             
@@ -209,6 +215,8 @@ class CertificateController extends Controller
             return redirect()->back()->with('error', 'Este local não existe no sistema!');
         }
 
+        // dd($valided);
+
         $user = auth()->user();       
 
         $person = Person::where('user_id', $user->id)->get()->first();
@@ -230,12 +238,44 @@ class CertificateController extends Controller
         );
 
         if ($group == "" and $id == 0){
-            $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course) {
-                $query->where('course_id', $course);
-            } )
-            ->where('certificateValided', $valided)
-            ->orderby('activity_id') 
-            ->get();  
+
+
+            if ($valided == 2) {
+                $sql = "SELECT C.id as 'cId', C.*, A.id as 'actId', A.descricao, P.*, R.description as 'reason' FROM certificates as C
+                INNER JOIN people as P on P.id = C.person_id
+                INNER JOIN students as S on S.person_id = P.id
+                INNER JOIN activities as A on A.id = C.activity_id
+                INNER JOIN reason_rejecteds as R on R.certificate_id = C.id
+                
+                WHERE C.certificateValided =  $valided  
+                AND s.status = 1
+                
+                ORDER BY C.activity_id";
+            } else  {
+                $sql = "SELECT C.id as 'cId', C.*, A.id as 'actId', A.descricao, P.* FROM certificates as C
+                INNER JOIN people as P on P.id = C.person_id
+                INNER JOIN students as S on S.person_id = P.id
+                INNER JOIN activities as A on A.id = C.activity_id
+                
+                WHERE C.certificateValided =  $valided  
+                AND s.status = 1
+                
+                ORDER BY C.activity_id";
+            }            
+
+            // dd($sql);
+
+            $certificates = DB::select(
+                DB::raw($sql)
+            );
+            
+            
+            // $certificates = Certificate::with('person', 'activity')->whereHas('person', function($query) use($course) {
+            //     $query->where('course_id', $course);
+            // } )
+            // ->where('certificateValided', $valided)
+            // ->orderby('activity_id') 
+            // ->get();  
 
         } else if ($group != "" and $id == 0){
 
@@ -268,11 +308,14 @@ class CertificateController extends Controller
             ->get();  
         }
 
+        // dd($certificates);
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $activities = [];
         foreach ($certificates as $certificate){
-            $activities[$certificate->activity->id] = $certificate->activity->descricao;
+            // dd($certificate->activity_id);
+            $activities[$certificate->activity_id] = $certificate->descricao;
         }
+        // dd($activities);
 
         $count = 0;
         $soum  = 0;

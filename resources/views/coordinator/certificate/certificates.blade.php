@@ -96,7 +96,7 @@
                 modal.style.display = "none";
             } else{
                 modal.style.display = "block";
-                inputId.focus();
+                document.getElementById("reason").focus();
             }
         }
     </script>      
@@ -120,7 +120,7 @@
                 
                 <div class="form-group">
                     <label for="idCert">Informe o motivo:</label>
-                    <input type="text" id="" name="reason" class="form-control" required> 
+                    <input type="text" id="reason" name="reason" class="form-control" required focus> 
 
                     <input type="hidden" id="idCert" name="idCert"  > 
                     <input type="hidden" id="operation" name="operation" value = "2" > 
@@ -215,7 +215,7 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $count }}</td>
-                                    <td style="width:280px;">{{ $certificate->person->name }}</td>
+                                    <td style="width:280px;">{{ $certificate->name }}</td>
                                     <td style="width:310px;">{{ $certificate->description}}</td>   
 
                                     <td style="width:70px;">
@@ -238,11 +238,11 @@
                                             <button class="btn btn-primary">Imagem</button>
                                         </a>
                                         
-                                        <a href="{{ route('coordinator.certificate.validate', [$certificate->id, 1]) }}">
+                                        <a href="{{ route('coordinator.certificate.validate', [$certificate->cId, 1]) }}">
                                             <button class="btn btn-success">Aceitar</button>
                                         </a>
                                         
-                                        <button class="btn btn-danger" id="reject_{{ $certificate->id }}" onclick="showReason('{{ $certificate->id }}')" >Recusar</button>
+                                        <button class="btn btn-danger" id="reject_{{ $certificate->cId }}" onclick="showReason('{{ $certificate->id }}')" >Recusar</button>
                                         
                                     </td>                  
                                 </tr>
