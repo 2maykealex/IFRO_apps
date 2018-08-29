@@ -244,7 +244,7 @@
                         </ul>
                     </li>
 
-                    @if (in_array('report', $url))
+                    @if (in_array('complete', $url) or in_array('attested', $url))
                         <li class="active treeview menu-open">
                     @else
                         <li class="treeview">
@@ -268,6 +268,18 @@
                                     <span>Alunos com C.H. completa</span>
                                 </a>
                             </li>
+                        
+                            @if (in_array('attested', $url))
+                                <li class="active">
+                            @else
+                                <li class="">
+                            @endif
+                                <a href="{{ url('/coordinator') }}/report/attested">
+                                    <i class="fa fa-fw fa-list-ul "></i>
+                                    <span>Alunos já atestados</span>
+                                </a>
+                            </li>
+                            
                         </ul>
                     </li>
                     

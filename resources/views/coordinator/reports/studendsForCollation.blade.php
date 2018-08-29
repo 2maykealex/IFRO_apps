@@ -33,7 +33,7 @@
                             <button class="btn btn-success">Gerar relatório</button>
                         </a>
                         <a href="#">
-                            <button class="btn btn-danger">Arquivar aluno</button>
+                            <button class="btn btn-danger">Finalizar</button>
                         </a>
                     
                     </td>
