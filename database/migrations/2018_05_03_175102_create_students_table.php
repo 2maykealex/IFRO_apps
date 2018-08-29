@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
             $table->foreign('person_id')->references('id')->on('people');
             $table->string('registration', 20);
             $table->string('group', 50);           //turma
-            $table->boolean('status');          // 1- MATRICULADO   0-TRANCADO OU EVADIDO
+            $table->boolean('status');          // 0-TRANCADO OU EVADIDO  1- MATRICULADO  2-Atestado(Colou grau)
 
             $table->timestamps();
         });
