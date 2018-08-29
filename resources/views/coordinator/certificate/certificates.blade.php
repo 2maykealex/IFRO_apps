@@ -76,8 +76,6 @@
                 window.location = "/coordinator/certificates/pending/"+group+"/"+id ;
             });
 
-            // alert($("#group").val());
-
             if ($("#group").val() == 0){
                 $("#studentBlock").hide();
             }else{

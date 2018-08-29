@@ -15,12 +15,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
-{
-    public function teste(){
-        return "teste";
-    }
-
-    
+{    
     public function importExcel(){        
         return view('coordinator.student.import');
     }

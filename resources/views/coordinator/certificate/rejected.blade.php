@@ -153,9 +153,9 @@
                                             <button class="btn btn-primary">Imagem</button>
                                         </a>
 
-                                        <a href="#">                                                
+                                        <!-- <a href="#">                                                
                                             <button class="btn btn-default"><i class="fa fa-undo"></i></button>                                                
-                                        </a>
+                                        </a> -->
                                     
                                     </td>
                                     
