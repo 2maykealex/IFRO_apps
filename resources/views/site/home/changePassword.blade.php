@@ -45,6 +45,10 @@
     
 
     <script type="text/javascript">
+
+        function validaCaracter(e){
+            
+        }
     
         function ToValidPassword(){ 
             
@@ -99,13 +103,13 @@
                     <input name="email" type="hidden" value="{{ $user->email }}">
 
                     <div class="form-group">
-                        <label for="password">Senha:</label>
-                        <input type="password" id="password" name="password" placeholder="Insira uma nova senha" class="form-control" required autofocus>
+                        <label for="password">Senha: (Mínimo de 6 caracteres)</label>
+                        <input type="password" id="password" name="password" minlength="6" placeholder="Insira uma nova senha" onchange="validaCaracter(this)" class="form-control" required autofocus>
                     </div>
 
                     <div class="form-group">
                         <label for="confirmPassword">Confirmar senha:</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirme a senha digitada" onchange="ToValidPassword()" class="form-control"  required>
+                        <input type="password" id="confirmPassword" name="confirmPassword" minlength="6" placeholder="Confirme a senha digitada" onchange="ToValidPassword()" class="form-control"  required>
                     </div>
                     <br>
                     <div class="form-group">
