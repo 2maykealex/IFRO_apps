@@ -115,7 +115,7 @@
                     @endif
                         <a href="{{ url('/coordinator/activities') }}">
                             <i class="fa fa-fw fa-list-ul "></i>
-                            <span>Lista de atividades</span>
+                            <span>Categorias de atividades</span>
                         </a>
                     </li>
 
@@ -127,7 +127,7 @@
 
                         <a href="{{ url('/coordinator') }}">
                             <i class="fa fa-fw fa-user "></i>
-                            <span>Alunos</span>
+                            <span>Gerenciar Alunos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
@@ -163,7 +163,7 @@
                             @endif
                                 <a href="{{ url('/coordinator') }}/students">
                                     <i class="fa fa-fw fa-list-ul "></i>
-                                    <span>Gerenciar alunos</span>
+                                    <span>Alunos matriculados</span>
                                             </a>
                                     </li>
                             @if (in_array('students-invalided', $url))
@@ -186,7 +186,7 @@
                     @endif
                         <a href="{{ url('/coordinator') }}"  >
                             <i class="fa fa-fw fa-user "></i>
-                            <span>Certificados</span>
+                            <span>Gerenciar Certificados</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -214,7 +214,7 @@
                                 <a href="{{ url('/coordinator') }}/certificates/pending"
                                         >
                                 <i class="fa fa-fw fa-list-ul "></i>
-                                <span>Gerenciar certificados pendentes</span>
+                                <span>Certificados pendentes</span>
                                         </a>
                             </li>
 
@@ -226,7 +226,7 @@
                                 <a href="{{ url('/coordinator') }}/certificates/accepted"
                                         >
                                 <i class="fa fa-fw fa-list-ul "></i>
-                                <span>Gerenciar certificados aceitos</span>
+                                <span>Certificados aceitos</span>
                                         </a>
                             </li>
 
@@ -238,7 +238,7 @@
                                 <a href="{{ url('/coordinator') }}/certificates/rejected"
                                         >
                                 <i class="fa fa-fw fa-list-ul "></i>
-                                <span>Gerenciar certificados recusados</span>
+                                <span>Certificados recusados</span>
                                     </a>
                             </li>
                         </ul>

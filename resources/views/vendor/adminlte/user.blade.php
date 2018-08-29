@@ -105,12 +105,9 @@
                             </a>
                         </li>
 
-                        @if ((url('/site/certificate-upload') == URL::current()) or (url('/site/certificates/pending') == URL::current()) or (url('/site/certificates/accepted') == URL::current())  or (url('/site/certificates/rejected') == URL::current())  )
+                        
                             <li class="active treeview menu-open">
-                        @else
-                            <li class="treeview">
-                        @endif
-
+                        
                         <a href="{{ url('/coordinator') }}">
                             <i class="fa fa-fw fa-user "></i>
                             <span>Certificados</span>
@@ -139,7 +136,7 @@
                             @endif
                                 <a href="{{ url('/site') }}/certificates/pending">
                                     <i class="fa fa-fw fa-list-ul "></i>
-                                    <span>Listar certificados pendentes</span>
+                                    <span>Certificados pendentes</span>
                                 </a>
                             </li>
                         
@@ -150,7 +147,7 @@
                             @endif
                                 <a href="{{ url('/site') }}/certificates/accepted">
                                     <i class="fa fa-fw fa-list-ul "></i>
-                                    <span>Listar certificados aceitos</span>
+                                    <span>Certificados aceitos</span>
                                 </a>
                             </li>
                         
@@ -161,7 +158,7 @@
                             @endif
                                 <a href="{{ url('/site') }}/certificates/rejected">
                                     <i class="fa fa-fw fa-list-ul "></i>
-                                    <span>Listar certificados recusados</span>
+                                    <span>Certificados recusados</span>
                                 </a>
                             </li>
                         </ul>
