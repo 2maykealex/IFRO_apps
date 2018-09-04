@@ -258,7 +258,7 @@
                         </a>
                         
                         <ul class="treeview-menu">
-                            @if (in_array('report', $url))
+                            @if (in_array('complete', $url))
                                 <li class="active">
                             @else
                                 <li class="">

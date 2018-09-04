@@ -13,6 +13,8 @@ use App\Models\ReasonRejected;
 use App\Models\Course;
 use App\User;
 use Illuminate\Support\Facades\DB;
+use PDF;
+use App;
 
 class CertificateController extends Controller
 {
@@ -35,6 +37,26 @@ class CertificateController extends Controller
         );
         
         return view('coordinator.reports.studendsForCollation', compact('students'));        
+    }
+
+    public function studentsAttested(){
+        $students = DB::select(
+            DB::raw('SELECT P.id, S.registration, P.name as "studentName", c.name as "courseName", S.group as "group"
+
+                FROM (SELECT person_id, SUM(chCertificate) as ch FROM certificates 
+                        WHERE certificateValided = 1 GROUP BY person_id) as T
+
+                inner join people as P on P.id = T.person_id 
+                inner join students as S on S.person_id = T.person_id  
+                inner join courses as C on C.id = P.course_id  
+                
+                WHERE (T.ch >= C.chMin) 
+                and (S.status = 2)
+                ORDER BY S.group, P.name
+            ')
+        );
+        
+        return view('coordinator.reports.studentsAttested', compact('students'));            
     }
 
     public function upload(){
@@ -202,7 +224,32 @@ class CertificateController extends Controller
         $date = date('Y-m-d');
         $date = strftime("%d de %B de %Y", strtotime($date));
 
+        
+        $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadHTML('');
+        $pdf->loadView('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
+        
+        return $pdf->stream();
+
+
+        // $pdf = PDF::loadView('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
+        // return $pdf->download('coordinator.reports.attestationReport');
+
+
         return view('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
+    }
+
+    public function printAttestation(){
+        
+        $pdf = App::make('dompdf.wrapper');
+        // $pdf->loadView('coordinator.reports.attestationReport');
+        $pdf->loadView('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
+        return $pdf->stream();
+
+
+        // $pdf = PDF::loadView('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
+        // return $pdf->download('coordinator.reports.attestationReport');
+
     }
     public function listCertificates($status, $group="", $id = 0){
         if ($status == 'pending'){
