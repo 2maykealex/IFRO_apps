@@ -13,8 +13,8 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Site', 'pre
 
 Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator', 'prefix' => 'coordinator'], function () {
 
-    $this->get('report/attested', 'StudentController@attested')->name('coordinator.report.attested');  
-    
+    $this->get('report/attested', 'CertificateController@studentsAttested')->name('coordinator.report.attested');
+
     $this->get('report/complete', 'CertificateController@checkChComplete')->name('coordinator.report.complete');  
     $this->get('report/attestation/{id}', 'CertificateController@attestationReport')->name('coordinator.report.attestation');  
 
