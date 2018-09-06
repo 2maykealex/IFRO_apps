@@ -18,7 +18,7 @@
                 //Pegando o valor do select
                 var group = $(this).val();
                 
-                route = "{{ url('/coordinator/certificates/rejected') }}"+"/"+group;
+                route = "{{ url('/coordinator/certificates/accepted') }}"+"/"+group;
                 
                 window.location = route;
             });
@@ -32,7 +32,7 @@
                 //Pegando o valor do select
                 var id = $(this).val();
 
-                window.location = "/coordinator/certificates/rejected/"+group+"/"+id ;
+                window.location = "/coordinator/certificates/accepted/"+group+"/"+id ;
             });
 
             // alert($("#group").val());
@@ -61,7 +61,7 @@
                 </label>
 
                 <select name="group" id="group" class="form-control">
-                    <option value="">Listar todos os alunos</option>
+                    <option value="">Listar todos as turmas</option>
 
                     @foreach ($groups as $gp)          
                         <option value="{{ $gp->group }}" <?php if ($group == $gp->group) { echo "selected";  }?> > {{ $gp->group }}</option>                                                
@@ -141,8 +141,11 @@
                                     <td>{{ $certificate->chCertificate}}</td>
                                     <td>                                        
                                         <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
-                                            <button class="btn btn-primary">Imagem</button>
+                                            <button class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                            </button>
                                         </a>    
+
 
                                         <!-- <a href="#">
                                             <button class="btn btn-default"><i class="fa fa-undo"></i></button>

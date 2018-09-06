@@ -151,7 +151,9 @@
                                     <td>
                                         
                                         <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
-                                            <button class="btn btn-primary">Imagem</button>
+                                            <button class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                            </button>
                                         </a>
 
                                         <!-- <a href="#">                                                

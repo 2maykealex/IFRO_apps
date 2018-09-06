@@ -50,7 +50,7 @@
             cursor: pointer;
         }
 
-</style>
+    </style>
     
     <script>
         $(document).ready(function(e) {
@@ -75,14 +75,19 @@
 
                 window.location = "/coordinator/certificates/pending/"+group+"/"+id ;
             });
-
-            if ($("#group").val() == 0){
-                $("#studentBlock").hide();
-            }else{
-                $("#studentBlock").show();
-            }
             
-            $("#myModal").hide();
+            @if ($id != 0)
+                $("#studentBlock").show();
+            @else
+
+                if ($("#group").val() == 0){
+                    $("#studentBlock").hide();
+                }else{
+                    $("#studentBlock").show();
+                }
+            
+                $("#myModal").hide();
+            @endif
         });
 
         function showReason(id) {
@@ -136,42 +141,44 @@
         </div>
     </div>         
 
-    <div class="row">
-        <div class="col-md-12">        
-            <div class="form-group">
+    @if ($id == 0)
+        <div class="row">
+            <div class="col-md-12">        
+                <div class="form-group">
 
-                <label for="group">
-                    Filtrar alunos por turma:
-                </label>
-
-                <select name="group" id="group" class="form-control">
-                    <option value="">Listar todos os alunos</option>
-
-                    @foreach ($groups as $gp)          
-                        <option value="{{ $gp->group }}" <?php if ($group == $gp->group) { echo "selected";  }?> > {{ $gp->group }}</option>                                                
-                    @endforeach  
-                </select>
-                    <br>
-
-                <div id="studentBlock">
-                    <label for="studentName">
-                        Filtrar certificados do Aluno:
+                    <label for="group">
+                        Filtrar alunos por turma:
                     </label>
-                    
-                    <select name="studentName" class="form-control" id="studentName" >
-                        <option value="">Listar todos</option>
 
-                        @foreach ($students as $student)          
-                            @if (!is_null($student->person)) 
-                                <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
-                            @endif                                    
+                    <select name="group" id="group" class="form-control">
+                        <option value="">Listar todas as turmas</option>
+
+                        @foreach ($groups as $gp)          
+                            <option value="{{ $gp->group }}" <?php if ($group == $gp->group) { echo "selected";  }?> > {{ $gp->group }}</option>                                                
                         @endforeach  
                     </select>
+                        <br>
+
+                    <div id="studentBlock">
+                        <label for="studentName">
+                            Filtrar certificados do Aluno:
+                        </label>
+                        
+                        <select name="studentName" class="form-control" id="studentName" >
+                            <option value="">Listar todos</option>
+
+                            @foreach ($students as $student)          
+                                @if (!is_null($student->person)) 
+                                    <option value="{{ $student->person->id }}" <?php if ($id == $student->person->id) { echo "selected";  }?> > {{ $student->person->name }}</option>                        
+                                @endif                                    
+                            @endforeach  
+                        </select>
+                    </div>
+                    
                 </div>
-                
-            </div>
-        </div>        
-    </div>
+            </div>        
+        </div>
+    @endif
     
     <div class="box-body">
         @include('admin.includes.alerts')
@@ -215,8 +222,8 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $count }}</td>
-                                    <td style="width:280px;">{{ $certificate->name }}</td>
-                                    <td style="width:310px;">{{ $certificate->description}}</td>   
+                                    <td style="width:270px;">{{ $certificate->name }}</td>
+                                    <td style="width:300px;">{{ $certificate->description}}</td>   
 
                                     <td style="width:70px;">
                                         @if ($certificate->linkValidation != '')
@@ -232,17 +239,30 @@
                                     
                                     <td>{{ $certificate->chCertificate}}</td>
 
-                                    <td style="width:240px;">
-                                        
+                                    <td style="width:190px;">
+
                                         <a href="{{ url('storage/certificates/'.$certificate->image) }}" target="_blank">
-                                            <button class="btn btn-primary">Imagem</button>
-                                        </a>
+                                            <button class="btn btn-primary">
+                                                <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+                                            </button>
+                                        </a>   
+                                        
                                         
                                         <a href="{{ route('coordinator.certificate.validate', [$certificate->cId, 1]) }}">
-                                            <button class="btn btn-success">Aceitar</button>
+                                            <button class="btn btn-success">
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                            </button>
                                         </a>
-                                        
-                                        <button class="btn btn-danger" id="reject_{{ $certificate->cId }}" onclick="showReason('{{ $certificate->id }}')" >Recusar</button>
+
+                                        <button class="btn btn-danger" id="reject_{{ $certificate->cId }}" onclick="showReason('{{ $certificate->cId }}')" >
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+
+                                        <a href="{{ route('coordinator.certificate.upload', [$certificate->cId]) }}">
+                                            <button class="btn btn-warning">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            </button>
+                                        </a>
                                         
                                     </td>                  
                                 </tr>
