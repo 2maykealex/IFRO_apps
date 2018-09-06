@@ -91,6 +91,10 @@
                 <!-- sidebar: style can be found in sidebar.less -->
                 <section class="sidebar">
 
+                    <?php 
+                        $url = explode("/", URL::current());      //Pega a URL Atual(string) e a transforma em array
+                    ?>
+
                     <!-- Sidebar Menu -->
                     <ul class="sidebar-menu" data-widget="tree">
                         
@@ -106,7 +110,7 @@
                         </li>
 
                         
-                            <li class="active treeview menu-open">
+                    <li class="active treeview menu-open">
                         
                         <a href="{{ url('/coordinator') }}">
                             <i class="fa fa-fw fa-user "></i>
@@ -118,7 +122,7 @@
 
                         <ul class="treeview-menu">                            
 
-                            @if (url('/site/certificate-upload') == URL::current() )
+                            @if (in_array('certificate-upload', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -129,7 +133,7 @@
                                 </a>
                             </li>
                         
-                            @if (url('/site/certificates/pending') == URL::current() )
+                            @if (in_array('pending', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -140,7 +144,7 @@
                                 </a>
                             </li>
                         
-                            @if (url('/site/certificates/accepted') == URL::current() )
+                            @if (in_array('accepted', $url))
                                 <li class="active">
                             @else
                                 <li class="">
@@ -151,7 +155,7 @@
                                 </a>
                             </li>
                         
-                            @if (url('/site/certificates/rejected') == URL::current() )
+                            @if (in_array('rejected', $url))
                                 <li class="active">
                             @else
                                 <li class="">
