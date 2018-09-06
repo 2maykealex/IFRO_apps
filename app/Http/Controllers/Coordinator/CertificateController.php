@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Models\Person;
 use App\Models\Coordinator;
 use App\Models\Activity;
+
 use App\Models\Certificate;
 use App\Models\ReasonRejected;
 use App\Models\Course;
@@ -59,17 +60,25 @@ class CertificateController extends Controller
         return view('coordinator.reports.studentsAttested', compact('students'));            
     }
 
-    public function upload(){
-        $user = auth()->user();  //verificar para puxar Person e Student através do User Logado
+    public function upload($id=0){
+        if ($id != 0){
+            $certificate = Certificate::where('id', $id)->get()->first();
+            $students = Student::where('person_id', $certificate->person_id)->with(['person'])->get()->first();
+            $person = $students->person;
 
-        $person = Person::where('user_id', $user->id)->get()->first();
+        } else {
 
-        $course = $person->course_id;
+            $user = auth()->user();  //verificar para puxar Person e Student através do User Logado
 
-        $students = Student::with(['person' => function($q) use($course) {
-            $q->where('course_id', $course);
-        }])
-        ->get()->sortBy('person.name');
+            $person = Person::where('user_id', $user->id)->get()->first();
+    
+            $course = $person->course_id;
+
+            $students = Student::with(['person' => function($q) use($course) {
+                $q->where('course_id', $course);
+            }])
+            ->get()->sortBy('person.name');
+        }
 
         $activities = Activity::all();
 
@@ -77,7 +86,11 @@ class CertificateController extends Controller
 
         $value = 0;
 
-        return view('coordinator.certificate.upload', compact(['students', 'person', 'activities', 'value']));
+        if ($id==0){
+            return view('coordinator.certificate.upload', compact(['students', 'person', 'activities', 'value']));
+        } else{
+            return view('coordinator.certificate.upload', compact(['id', 'certificate', 'students', 'person', 'activities', 'value']));
+        }
     }
     public function validateCertificate( $id, $value){
     
@@ -125,13 +138,62 @@ class CertificateController extends Controller
             }            
         }
     }
-    public function certificateStore(Request $request, Certificate $certificate){
+    public function certificateUpdate(Request $request, Certificate $certificate){
 
         $data = $request->all();
 
         $activityData = $data['activity_id'];
 
-        // dd($data);
+        $StudentId = $data['idStudent'];
+
+        $user = auth()->user();
+
+        $student = Student::where('id', $StudentId)->get()->first();
+
+        $person = $student->person;
+
+        $data['person_id'] = $person->id;  //add no final de $data   
+        
+        $activity = Activity::where('id', $activityData)->get()->first();
+
+        isset($data['linkValidation']) ?  : '';
+
+        isset($data['linkValidation']) ? $data['linkValidation'] : '';
+
+        if($data['chCertificate'] > $activity->CHAtividade ){  //verifica se as horas colocadas no certifado é maior que o permitido por item
+            $data['chCertificate'] = $activity->CHAtividade;   //caso seja maior, é colocado somente a hora máxima de uma atividade
+        }
+
+        if (isset($data['image'])){
+        
+            if($request->hasFile('image') && $request->file('image')->isValid() ){
+                
+                $date = date('Y-m-d-H-i');
+
+                $name = $person->id.'-'.kebab_case($date);
+                //dd($name);
+                $extension = $request->image->extension();
+                $nameFile  = "{$name}.{$extension}";
+
+                $data['image'] = $nameFile;
+                $upload = $request->image->storeAs('certificates', $nameFile);
+
+                if(!$upload)
+                    return redirect()->back()->with('error', 'Falha ao atualizar a imagem do certificado!');
+
+            }  
+        } 
+        
+        $update = $certificate->certificateUpdate($data);
+
+        return redirect()->route('coordinator.certificates', ['pending', ''])->with('success', 'O Certificado foi atualizado com sucesso!');
+
+    }
+    public function certificateStore(Request $request, Certificate $certificate){
+
+        $data = $request->all();
+
+        $activityData = $data['activity_id'];
 
         $user = auth()->user();
 
@@ -148,15 +210,12 @@ class CertificateController extends Controller
         if($data['chCertificate'] > $activity->CHAtividade ){  //verifica se as horas colocadas no certifado é maior que o permitido por item
             $data['chCertificate'] = $activity->CHAtividade;   //caso seja maior, é colocado somente a hora máxima de uma atividade
         }
-
-        // $certificate = new Certificate;
         
         if($request->hasFile('image') && $request->file('image')->isValid() ){
             
             $date = date('Y-m-d-H-i');
 
             $name = $person->id.'-'.kebab_case($date);
-            //dd($name);
             $extension = $request->image->extension();
             $nameFile  = "{$name}.{$extension}";
 
@@ -165,14 +224,13 @@ class CertificateController extends Controller
 
             if(!$upload)
                 return redirect()->back()->with('error', 'Falha ao carregar a imagem do certificado!');
-
         }   
         
         $data['certificateValided'] = 1;  //Já aceita o certificado automáticamente ao fazer o UPLOAD
 
         $update = $certificate->certificateNew($data);
 
-        return redirect()->route('coordinator.certificates', ['accepted', ''])->with('success', 'Certificado carregado com sucesso!');
+        return redirect()->route('coordinator.certificates', ['accepted', ''])->with('success', 'Certificado foi cadastrado com sucesso!');
 
     }
     public function attestationReport($id){
@@ -195,12 +253,9 @@ class CertificateController extends Controller
         }
     
         $certificates = Certificate::where('person_id',$student->person->id)->with(['activity', 'person'])->orderby('description')->get();        
-
         $activities = [];
-        
         $personActivities = Certificate::where('certificateValided', 1)->orderby('activity_id') 
                                                                        ->get();
-                 
         $count = 0;
         $lastId = 0;
         $color = '#D8D8D8';
@@ -224,32 +279,23 @@ class CertificateController extends Controller
         $date = date('Y-m-d');
         $date = strftime("%d de %B de %Y", strtotime($date));
 
-        
         $pdf = App::make('dompdf.wrapper');
         // $pdf->loadHTML('');
         $pdf->loadView('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
         
         return $pdf->stream();
-
-
         // $pdf = PDF::loadView('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
         // return $pdf->download('coordinator.reports.attestationReport');
-
-
         return view('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
     }
 
     public function printAttestation(){
-        
         $pdf = App::make('dompdf.wrapper');
         // $pdf->loadView('coordinator.reports.attestationReport');
         $pdf->loadView('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
         return $pdf->stream();
-
-
         // $pdf = PDF::loadView('coordinator.reports.attestationReport', compact(['id','coordinator', 'student', 'certificates', 'activities', 'idActivity', 'count','soum', 'color', 'lastKey', 'date']));
         // return $pdf->download('coordinator.reports.attestationReport');
-
     }
     public function listCertificates($status, $group="", $id = 0){
         if ($status == 'pending'){
@@ -261,8 +307,6 @@ class CertificateController extends Controller
         }else{
             return redirect()->back()->with('error', 'Este local não existe no sistema!');
         }
-
-        // dd($valided);
 
         $user = auth()->user();       
 
@@ -286,7 +330,6 @@ class CertificateController extends Controller
 
         if ($group == "" and $id == 0){
 
-
             if ($valided == 2) {
                 $sql = "SELECT C.id as 'cId', C.*, A.id as 'actId', A.descricao, P.*, R.description as 'reason' FROM certificates as C
                 INNER JOIN people as P on P.id = C.person_id
@@ -309,8 +352,6 @@ class CertificateController extends Controller
                 
                 ORDER BY C.activity_id";
             }            
-
-            // dd($sql);
 
             $certificates = DB::select(
                 DB::raw($sql)
@@ -355,14 +396,12 @@ class CertificateController extends Controller
             ->get();  
         }
 
-        // dd($certificates);
         //Para poder obter os ids das atividades que já possuem certificados (sem repetição)
         $activities = [];
+        
         foreach ($certificates as $certificate){
-            // dd($certificate->activity_id);
             $activities[$certificate->activity_id] = $certificate->descricao;
         }
-        // dd($activities);
 
         $count = 0;
         $soum  = 0;

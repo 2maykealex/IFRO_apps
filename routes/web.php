@@ -5,7 +5,9 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Site', 'pre
     $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('site.certificates'); 
     $this->get('certificates/{status}/{id}', 'CertificateController@listCertificates')->name('site.certificates'); 
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('site.certificate.store');
+    $this->post('certificate-update', 'CertificateController@certificateUpdate')->name('site.certificate.update');
     $this->get('certificate-upload', 'CertificateController@upload')->name('site.certificate.upload'); 
+    $this->get('certificate-upload/{id}', 'CertificateController@upload')->name('site.certificate.upload');  
     
     $this->get('/', 'SiteController@home')->name('site.home');    
 
@@ -26,7 +28,10 @@ Route::group(['middleware' => ['auth', 'authroute'], 'namespace' => 'Coordinator
     $this->get('certificates/{status}', 'CertificateController@listCertificates')->name('coordinator.certificates');        
 
     $this->post('certificate-store', 'CertificateController@certificateStore')->name('coordinator.certificate.store');     
+    $this->post('certificate-update', 'CertificateController@certificateUpdate')->name('coordinator.certificate.update');     
     $this->get('certificate-upload', 'CertificateController@upload')->name('coordinator.certificate.upload');  
+    $this->get('certificate-upload/{id}', 'CertificateController@upload')->name('coordinator.certificate.upload');  
+    
 
     $this->post('storeImport', 'StudentController@importExcelStore')->name('coordinator.student.import'); //ajustar essas rotas
     $this->get('import-students', 'StudentController@importExcel')->name('coordinator.import.students');
